@@ -16,3 +16,8 @@ and faint secondary pencil strokes. Dragging adjusts its width from 208–320px
 Home/End select bounds, and double-click restores the default. The current-lesson
 boat marker has an oar and no rectangular background; the path line leaves a
 small gap around it.
+
+Home entry now server-renders a full-screen background matching the intro until
+saved progress is hydrated. The sidebar and workspace mount only after the home
+view can choose first-visit intro, explicit #intro replay, or the returning
+learner's path. This prevents the workspace flashing before the landing.

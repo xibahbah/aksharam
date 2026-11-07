@@ -28,7 +28,7 @@ const isActive = (path: string, n: (typeof nav)[number]) =>
   strip(path) === n.href || n.also.includes(strip(path));
 function Layout({ children }: { children: React.ReactNode }) {
   const path = usePathname();
-  const { progress, error, dismissError } = useProgress();
+  const { ready, progress, error, dismissError } = useProgress();
   const total = progress.introduced.length;
   const main = useRef<HTMLElement>(null);
   const departure = useRef<DOMRect | null>(null);
@@ -44,6 +44,12 @@ function Layout({ children }: { children: React.ReactNode }) {
     ], { duration: 480, easing: ease });
     return () => animation.cancel();
   }, [path]);
+  // The server cannot know whether saved progress or #intro will open the
+  // landing. Hold the entire home shell until that decision is available,
+  // rather than painting navigation underneath a page-level loading message.
+  if (!ready && strip(path) === "/") return <main
+    style={{ position: "fixed", inset: 0, background: "#1a1a1a" }}
+  ><span role="status" aria-label="Loading Aksharam" /></main>;
   return (
     <div className="app-shell" onClickCapture={event => {
       const link = (event.target as Element).closest?.("a.deck-card, a.learn-mode, .dashboard-study a");
