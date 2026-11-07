@@ -10,6 +10,7 @@ import { motionAllowed, ease } from "./motion";
 import { Bloom } from "./bloom";
 import { StudyPet } from "./study-pet";
 import { publicAssetPath } from "@/lib/paths";
+import { SidebarResize } from "./sidebar-resize";
 // Four destinations. Lesson and practice screens highlight their parent tab.
 const nav = [
   { href: "/", name: "Learn", icon: BookOpen, also: ["/learn"] },
@@ -51,7 +52,7 @@ function Layout({ children }: { children: React.ReactNode }) {
       <a className="skip-link" href="#main">
         Skip to content
       </a>
-      <aside className="sidebar">
+      <aside className="sidebar" id="workspace-sidebar">
         <Link href="/" className="brand">
           <span className="brand-icon"><Bloom /></span>
           <span>
@@ -84,6 +85,7 @@ function Layout({ children }: { children: React.ReactNode }) {
           <p className="sidebar-progress">{total} letters learned</p>
         </div>
       </aside>
+      <SidebarResize />
       <div className="content-shell">
         <div className="mobile-header">
           <Link href="/" className="mobile-brand">

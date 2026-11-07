@@ -279,7 +279,7 @@ function Path() {
             );
             const body = (
               <>
-                <div className="deck-card-top">{state === "current" && <svg className="river-boat" viewBox="0 0 80 36" aria-hidden="true"><path d="M3 10 Q14 30 37 26 Q57 33 77 4 Q70 29 52 32 Q20 40 3 10Z" /></svg>}<span className="unit-index">{String(i + 1).padStart(2, "0")}</span>
+                <div className="deck-card-top">{state === "current" && <svg className="river-boat" viewBox="0 0 80 52" role="img" aria-label="Current lesson"><path d="M3 17 Q23 32 49 26 Q64 23 77 10 Q68 39 43 41 Q16 42 3 17Z" /><path d="M43 8 L61 40" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" /></svg>}<span className="unit-index">{String(i + 1).padStart(2, "0")}</span>
                   {glyphs}
                   {state === "done" ? (
                     <Check size={19} aria-label="Done" />

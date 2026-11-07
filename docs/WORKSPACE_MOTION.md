@@ -9,3 +9,10 @@ Motion includes a sliding active-navigation surface, route entrances, lesson ent
 No instructional stroke-order drawing or automatic outline morph between different Malayalam letters is provided: those require verified stroke and correspondence data, rather than invented pedagogical animation. Existing phonetic explanations remain unchanged.
 
 Validation: full unit/interaction suite; lint, TypeScript via production build, static-route/asset export checks; desktop browser checks of lesson retry, completion and next-unit progression, practice availability, flashcard reveal, reference dialog, syllable builder, and dark/light themes. Browser testing uses localhost progress, never production learner records.
+
+The desktop sidebar now has a draggable hand-drawn divider with uneven curves
+and faint secondary pencil strokes. Dragging adjusts its width from 208–320px
+(with a viewport-based cap); the preference is stored locally. Arrow keys resize,
+Home/End select bounds, and double-click restores the default. The current-lesson
+boat marker has an oar and no rectangular background; the path line leaves a
+small gap around it.
