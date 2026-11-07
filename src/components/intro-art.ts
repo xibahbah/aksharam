@@ -33,13 +33,6 @@ export const FINAL_FLOWER = [
   scaleOutline(LETTER_A, 1.06),
 ];
 
-// The same unequal lobes grow throughout; no regular radial flower keyframe.
-export function bloomPhase(scale: number, lean: number, stretch: number) {
-  return ASYMMETRIC_FLOWER.replace(/(-?\d*\.?\d+)\s+(-?\d*\.?\d+)/g, (_, x, y) => {
-    const px = Number(x), py = Number(y);
-    return `${((px + py * lean) * scale).toFixed(3)} ${(py * stretch * scale).toFixed(3)}`;
-  });
-}
 export function coloredSeed(radius: number) {
   const radii = [1.08, .78, 1.02, .83, 1.13, .88, .92, .72];
   let d = `M ${polar(radius * radii[0], -90)}`;

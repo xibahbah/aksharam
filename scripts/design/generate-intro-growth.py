@@ -90,7 +90,7 @@ def simplify(points, tolerance=.85):
     return points[keep]
 
 frames=[]
-for t in np.linspace(0,1,121):
+for t in np.linspace(0,1,241):
     # A single planar surface. Concavities open by moving the boundary, not by
     # passing control points through one another. Small details arrive last.
     f=gaussian_filter(pose(t), .7)

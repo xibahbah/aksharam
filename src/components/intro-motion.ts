@@ -1,6 +1,6 @@
 import { gsap } from "gsap";
 import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
-import { BOAT, LEFT_FIGURE, RIGHT_FIGURE, FINAL_FLOWER, star, bloomPhase, coloredSeed } from "./intro-art";
+import { BOAT, LEFT_FIGURE, RIGHT_FIGURE, FINAL_FLOWER, star, coloredSeed } from "./intro-art";
 
 import { GROWTH_FRAMES } from "./intro-growth-frames";
 
@@ -23,17 +23,17 @@ export function createIntroTimeline(el: HTMLElement) {
   });
   master.fromTo(q("[data-scene]"), { opacity: 0, y: 35 }, { opacity: 1, y: 0, duration: .38, ease: "power3.out" }, PRELUDE_DURATION);
   const tl = gsap.timeline({ defaults: { ease: "power3.inOut" } });
-  tl.addLabel("seed", 0).addLabel("nested", 1.5).addLabel("unfold", 1.9).addLabel("settled", 4.2);
+  tl.addLabel("seed", 0).addLabel("nested", 1.5).addLabel("unfold", 1.65).addLabel("settled", 4.2);
   // White geometry is a predesigned sequence of planar boundary contours.
   // No point matching, rotation, or interpolation across concave limbs.
   let lastFrame = "";
   const renderWhite = () => {
     const time = tl.time();
-    const p = Math.max(0, Math.min(1, (time - 1.9) / 2.15));
+    const p = Math.max(0, Math.min(1, (time - 1.65) / 2.4));
     let paths: string[];
     let key: string;
-    if (time < 1.9) {
-      const swell = gsap.parseEase("power3.inOut")(Math.max(0, Math.min(1, (time - .35) / 1.05)));
+    if (time < 1.65) {
+      const swell = gsap.parseEase("power3.inOut")(Math.max(0, Math.min(1, (time - .35) / 1.3)));
       const radius = 86 + 194 * swell;
       paths = [star(radius, 600, 410), "", ""];
       key = `star-${radius.toFixed(3)}`;
@@ -59,25 +59,21 @@ export function createIntroTimeline(el: HTMLElement) {
       attr: { d: coloredSeed(radius) }, duration: .78, ease: "power3.out",
     }, .65 + i * .12);
   });
-  // Keep the flower evolving through the entire figure reveal: pointed seed,
-  // unequal leaning lobes, asymmetric bloom, then a legible letter at its heart.
+  // One uninterrupted interpolation: no intermediate target at which each
+  // layer brakes to zero and then accelerates again.
   petals.slice(0, 3).forEach((petal, i) => {
     tl.to(petal, {
-      morphSVG: { shape: bloomPhase([1.6, 1.15, .72][i], -.24 + i * .08, .82 + i * .08), shapeIndex: "auto" },
-      duration: .8, ease: "sine.inOut",
-    }, 1.72 + i * .07);
-    tl.to(petal, {
       morphSVG: { shape: FINAL_FLOWER[i], shapeIndex: "auto" },
-      duration: 1.45, ease: "power2.inOut",
-    }, 2.52 + i * .07);
+      duration: 2.5, ease: "sine.inOut",
+    }, 1.48 + i * .06);
   });
   tl.to(petals[3], {
     morphSVG: { shape: FINAL_FLOWER[3], shapeIndex: "auto" },
     duration: 1.15, ease: "power2.inOut",
   }, 3.02);
-  tl.to(q("[data-flower-position]"), { x: -30, y: 0, duration: 2.15 }, 1.9);
+  tl.to(q("[data-flower-position]"), { x: -30, y: 0, duration: 2.4, ease: "sine.inOut" }, 1.65);
   tl.fromTo(q("[data-caption]"), { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: .6, ease: "power2.out" }, 4.2);
-  tl.fromTo(q("[data-orbit]"), { opacity: 0 }, { opacity: .65, duration: .5 }, 4.1);
+  tl.fromTo(q("[data-orbit]"), { opacity: 0 }, { opacity: 1, duration: .5 }, 4.1);
   master.add(tl, PRELUDE_DURATION);
   tl.timeScale(MORPH_SPEED);
   // The child update callback owns silhouette growth, including seek/replay.

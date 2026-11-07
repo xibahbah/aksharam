@@ -74,17 +74,16 @@ export function Intro({ onDone }: { onDone: () => void }) {
       if (!context.conditions?.reduce) void (document.fonts?.ready ?? Promise.resolve()).then(() => {
         if (!active) return;
         context.add(() => {
-          const track = el.querySelector<SVGPathElement>("[data-track]");
-          const text = el.querySelector<SVGTextElement>("[data-orbit] text");
-          const copies = el.querySelectorAll<SVGTextPathElement>("[data-orbit-copy]");
-          if (!track?.getTotalLength || !text?.getComputedTextLength) return;
-          const length = track.getTotalLength();
-          const fits = Math.max(1, Math.floor(length / (text.getComputedTextLength() + 14)));
-          const spacing = length / fits;
-          const state = { offset: 0 };
-          const place = () => copies.forEach((copy, i) => copy.setAttribute("startOffset", String(state.offset + (i - 1) * spacing)));
-          place();
-          gsap.to(state, { offset: spacing, duration: 24 / fits, ease: "none", repeat: -1, onUpdate: place });
+          el.querySelectorAll<SVGGElement>("[data-wave]").forEach((wave, index) => {
+            const text = wave.querySelector<SVGTextElement>("text");
+            const copies = wave.querySelectorAll<SVGTextPathElement>("[data-orbit-copy]");
+            if (!text?.getComputedTextLength) return;
+            const spacing = text.getComputedTextLength() + 48;
+            const state = { offset: 0 };
+            const place = () => copies.forEach((copy, i) => copy.setAttribute("startOffset", String(state.offset + (i - 1) * spacing)));
+            place();
+            gsap.to(state, { offset: spacing, duration: spacing / (index ? 54 : 72), ease: "none", repeat: -1, onUpdate: place });
+          });
         });
       });
       return () => { active = false; timeline.current = null; };
@@ -109,10 +108,17 @@ export function Intro({ onDone }: { onDone: () => void }) {
       </div>
       {["a", "b"].map((cross, i) => <svg key={cross} data-cross={cross} className={`${styles.cross} ${i ? styles.crossB : styles.crossA}`} viewBox="-40 -40 80 80" aria-hidden="true"><path d={star(36)} /></svg>)}
       <div className={styles.scene} data-scene>
-        <svg className={styles.art} viewBox="0 0 1200 820" aria-hidden="true" focusable="false">
-          <defs><path id={orbitId} data-track d="M 215 25 H 985 A 150 150 0 0 1 1135 175 V 650 A 150 150 0 0 1 985 800 H 215 A 150 150 0 0 1 65 650 V 175 A 150 150 0 0 1 215 25 Z" /></defs>
+        <svg className={styles.art} viewBox="0 0 1200 1040" aria-hidden="true" focusable="false">
+          <defs>
+            <path id={`${orbitId}-learn`} d="M -600 855 C -300 785 -100 785 150 855 S 600 935 900 855 S 1350 785 1800 855" />
+            <path id={`${orbitId}-poem`} d="M -600 950 C -300 880 -100 880 150 950 S 600 1030 900 950 S 1350 880 1800 950" />
+          </defs>
           <g data-orbit className={styles.orbit} opacity="0">
-            {Array.from({ length: 12 }, (_, i) => <text key={i}><textPath href={`#${orbitId}`} data-orbit-copy startOffset={i * 470} lang="ml">അക്ഷരം • LEARN TO READ MALAYALAM •</textPath></text>)}
+            <g data-wave>{Array.from({ length: 9 }, (_, i) => <text key={i}><textPath href={`#${orbitId}-learn`} data-orbit-copy startOffset={(i - 1) * 650} lang="en">LEARN TO READ MALAYALAM •</textPath></text>)}</g>
+            <g data-wave className={styles.poem}>
+              <title>കുമാരനാശാൻ — വീണ പൂവ് (1907)</title>
+              {Array.from({ length: 5 }, (_, i) => <text key={i}><textPath href={`#${orbitId}-poem`} data-orbit-copy startOffset={(i - 1) * 1400} lang="ml">ഹാ! പുഷ്പമേ, അധികതുംഗപദത്തിലെത്ര ശോഭിച്ചിരുന്നിതൊരു രാജ്ഞികണക്കയേ നീ •</textPath></text>)}
+            </g>
           </g>
           <g fill={CREAM}>
             {[0, 1, 2].map(i => <path key={i} data-body d={star(86, 600, 410)} />)}
@@ -126,8 +132,8 @@ export function Intro({ onDone }: { onDone: () => void }) {
       </div>
       <div className={styles.caption}>
         <div data-caption><h1 id={titleId}>A new world, one letter at a time.</h1><p className={styles.description}>Learn to read Malayalam.</p></div>
-        <button ref={start} className={styles.start} onClick={finish}>Start <span aria-hidden="true">↗</span></button>
       </div>
+        <button ref={start} className={styles.start} onClick={finish}>Start <span aria-hidden="true">↗</span></button>
       {process.env.NODE_ENV === "development" && <label className={styles.scrubber}>
         Motion study
         <input aria-label="Animation progress" type="range" min="0" max={INTRO_DURATION} step="0.01" defaultValue="0" onChange={(event) => timeline.current?.pause().time(Number(event.target.value))} />
