@@ -7,7 +7,6 @@ export const BOAT = "M 89 548  C 129 578 139 638 194 675  C 260 717 337 711 397 
 
 export const CREAM = "#f5f3dc";
 export const COLORS = ["#b6322b", "#f16559", "#efb900", CREAM];
-export const FLOWER_SCALES = [1, .77, .56, .375];
 const polar = (radius: number, degrees: number, cx = 0, cy = 0) => {
   const angle = degrees * Math.PI / 180;
   return `${(cx + radius * Math.cos(angle)).toFixed(3)} ${(cy + radius * Math.sin(angle)).toFixed(3)}`;
@@ -22,14 +21,6 @@ export function star(radius: number, cx = 0, cy = 0) {
   }
   return `${d} Z`;
 }
-export function flower(scale: number) {
-  const r = 90.341 * scale;
-  let d = `M ${polar(r, -120)}`;
-  for (let i = 1; i <= 6; i++)
-    d += ` A ${48 * scale} ${48 * scale} 0 0 1 ${polar(r, -120 + i * 60)}`;
-  return `${d} Z`;
-}
-
 // These paths use only coordinate commands (no arc flags).
 export const scaleOutline = (d: string, scale: number) =>
   d.replace(/-?\d*\.?\d+/g, n => String(Number((Number(n) * scale).toFixed(3))));
@@ -41,3 +32,20 @@ export const FINAL_FLOWER = [
   scaleOutline(GOLD_CUSHION, .86),
   scaleOutline(LETTER_A, 1.06),
 ];
+
+// The same unequal lobes grow throughout; no regular radial flower keyframe.
+export function bloomPhase(scale: number, lean: number, stretch: number) {
+  return ASYMMETRIC_FLOWER.replace(/(-?\d*\.?\d+)\s+(-?\d*\.?\d+)/g, (_, x, y) => {
+    const px = Number(x), py = Number(y);
+    return `${((px + py * lean) * scale).toFixed(3)} ${(py * stretch * scale).toFixed(3)}`;
+  });
+}
+export function coloredSeed(radius: number) {
+  const radii = [1.08, .78, 1.02, .83, 1.13, .88, .92, .72];
+  let d = `M ${polar(radius * radii[0], -90)}`;
+  for (let i = 0; i < 8; i++) {
+    const angle = -90 + i * 45;
+    d += ` Q ${polar(radius * .38, angle + 22.5)} ${polar(radius * radii[(i + 1) % 8], angle + 45)}`;
+  }
+  return `${d} Z`;
+}

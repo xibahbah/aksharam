@@ -1,16 +1,27 @@
 import { gsap } from "gsap";
 import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
-import { BOAT, LEFT_FIGURE, RIGHT_FIGURE, FINAL_FLOWER, star, flower } from "./intro-art";
+import { BOAT, LEFT_FIGURE, RIGHT_FIGURE, FINAL_FLOWER, star, bloomPhase, coloredSeed } from "./intro-art";
 
 import { GROWTH_FRAMES } from "./intro-growth-frames";
 
 gsap.registerPlugin(MorphSVGPlugin);
-export const INTRO_DURATION = 4.8;
+export const PRELUDE_DURATION = 1.65;
+const MORPH_SPEED = 1.15;
+export const INTRO_DURATION = PRELUDE_DURATION + 4.8 / MORPH_SPEED;
 
 export function createIntroTimeline(el: HTMLElement) {
   const q = gsap.utils.selector(el);
   const bodies = q("[data-body]");
   const petals = q("[data-petal]");
+  const master = gsap.timeline();
+  master.fromTo(q("[data-word]"), { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: .28, stagger: .13, ease: "power2.out" }, 0);
+  master.fromTo(q("[data-words]"), { opacity: 1 }, { opacity: 0, duration: .2 }, 1.32);
+  ["a", "b"].forEach((name, i) => {
+    master.fromTo(q(`[data-cross='${name}']`),
+      { x: () => (i ? 1.12 : -.2) * window.innerWidth, rotation: i ? 20 : -30, opacity: 1 },
+      { x: () => (i ? -.2 : 1.12) * window.innerWidth, rotation: i ? -170 : 160, duration: 1.52, ease: "power1.inOut" }, i * .04);
+  });
+  master.fromTo(q("[data-scene]"), { opacity: 0, y: 35 }, { opacity: 1, y: 0, duration: .38, ease: "power3.out" }, PRELUDE_DURATION);
   const tl = gsap.timeline({ defaults: { ease: "power3.inOut" } });
   tl.addLabel("seed", 0).addLabel("nested", 1.5).addLabel("unfold", 1.9).addLabel("settled", 4.2);
   // White geometry is a predesigned sequence of planar boundary contours.
@@ -45,14 +56,14 @@ export function createIntroTimeline(el: HTMLElement) {
   renderWhite();
   [174, 115, 69].forEach((radius, i) => {
     tl.fromTo(petals[i], { attr: { d: star(.01) } }, {
-      attr: { d: star(radius) }, duration: .78, ease: "power3.out",
+      attr: { d: coloredSeed(radius) }, duration: .78, ease: "power3.out",
     }, .65 + i * .12);
   });
   // Keep the flower evolving through the entire figure reveal: pointed seed,
-  // open rounded petals, asymmetric bloom, then a legible letter at its heart.
+  // unequal leaning lobes, asymmetric bloom, then a legible letter at its heart.
   petals.slice(0, 3).forEach((petal, i) => {
     tl.to(petal, {
-      morphSVG: { shape: flower([1.65, 1.21, .77][i]), shapeIndex: "auto" },
+      morphSVG: { shape: bloomPhase([1.6, 1.15, .72][i], -.24 + i * .08, .82 + i * .08), shapeIndex: "auto" },
       duration: .8, ease: "sine.inOut",
     }, 1.72 + i * .07);
     tl.to(petal, {
@@ -66,5 +77,10 @@ export function createIntroTimeline(el: HTMLElement) {
   }, 3.02);
   tl.to(q("[data-flower-position]"), { x: -30, y: 0, duration: 2.15 }, 1.9);
   tl.fromTo(q("[data-caption]"), { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: .6, ease: "power2.out" }, 4.2);
-  return tl;
+  tl.fromTo(q("[data-orbit]"), { opacity: 0 }, { opacity: .65, duration: .5 }, 4.1);
+  master.add(tl, PRELUDE_DURATION);
+  tl.timeScale(MORPH_SPEED);
+  // The child update callback owns silhouette growth, including seek/replay.
+  master.eventCallback("onUpdate", renderWhite);
+  return master;
 }

@@ -19,6 +19,8 @@ describe("landing accessibility", () => {
     [LEFT_FIGURE, RIGHT_FIGURE, BOAT].forEach((path, i) => {
       expect(bodies[i]).toHaveAttribute("d", path);
     });
+    expect(container.querySelector("[data-words]")).toHaveStyle({ opacity: "0" });
+    expect(container.querySelector("[data-scene]")).toHaveStyle({ opacity: "1" });
     fireEvent.click(screen.getByRole("button", { name: "Start" }));
     await waitFor(() => expect(onDone).toHaveBeenCalledTimes(1));
   });
@@ -27,12 +29,17 @@ describe("landing accessibility", () => {
     const { container } = render(<Intro onDone={() => undefined} />);
     const bodies = container.querySelectorAll("[data-body]");
     expect(bodies[0]).toHaveAttribute("d", star(86, 600, 410));
+    expect(screen.getByText("Letters")).toBeInTheDocument();
+    expect(container.querySelectorAll("[data-cross]")).toHaveLength(2);
+    expect(container.querySelector("[data-scene]")).toHaveStyle({ opacity: "0" });
     fireEvent.click(screen.getByRole("button", { name: /Skip animation/ }));
     [LEFT_FIGURE, RIGHT_FIGURE, BOAT].forEach((path, i) => {
       expect(bodies[i]).toHaveAttribute("d", path);
     });
     fireEvent.click(screen.getByRole("button", { name: /Replay/ }));
     expect(bodies[0]).not.toHaveAttribute("d", LEFT_FIGURE);
+    expect(container.querySelector("[data-words]")).toHaveStyle({ opacity: "1" });
+    expect(container.querySelector("[data-scene]")).toHaveStyle({ opacity: "0" });
   });
 
   it("isolates the background, wraps keyboard focus and restores it on unmount", () => {

@@ -5,7 +5,7 @@
   background: #1a1a1a;
   color: #f5f3dc;
   font-family: "DM Sans Variable", sans-serif;
-  overflow: auto;
+  overflow: hidden;
   transition: opacity .5s ease, transform .5s cubic-bezier(.22, 1, .36, 1);
 }
 .stage:focus { outline: none; }
@@ -26,3 +26,12 @@
 .scrubber { position: absolute; bottom: 25px; left: 30px; display: grid; gap: 7px; font-size: 10px; color: #f5f3dc80; }
 .scrubber input { width: 160px; accent-color: #f5f3dc; }
 @media (prefers-reduced-motion: reduce) { .stage, .start { transition: none; } }
+
+.words { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 38px; font-family: var(--font-baloo), sans-serif; font-size: clamp(26px, 4.5vw, 60px); pointer-events: none; }
+.words span { opacity: 0; }
+.words span[lang="en"] { text-transform: uppercase; letter-spacing: .04em; }
+.cross { position: absolute; left: 0; width: 100px; fill: #f5f3dc; pointer-events: none; transform: translateX(-200px); }
+.crossA { top: 26%; }
+.crossB { top: 66%; }
+
+.orbit { fill: #f5f3dc; font-family: var(--font-baloo), "Noto Sans Malayalam Variable", sans-serif; font-size: 18px; }

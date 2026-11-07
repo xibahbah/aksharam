@@ -12,6 +12,7 @@ export function Intro({ onDone }: { onDone: () => void }) {
   const exitTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [leaving, setLeaving] = useState(false);
   const titleId = useId();
+  const orbitId = useId();
 
   const finish = useCallback(() => {
     if (exitTimer.current !== null) return;
@@ -69,7 +70,24 @@ export function Intro({ onDone }: { onDone: () => void }) {
       const tl = createIntroTimeline(el);
       timeline.current = tl;
       if (context.conditions?.reduce) tl.progress(1).pause();
-      return () => { timeline.current = null; };
+      let active = true;
+      if (!context.conditions?.reduce) void (document.fonts?.ready ?? Promise.resolve()).then(() => {
+        if (!active) return;
+        context.add(() => {
+          const track = el.querySelector<SVGPathElement>("[data-track]");
+          const text = el.querySelector<SVGTextElement>("[data-orbit] text");
+          const copies = el.querySelectorAll<SVGTextPathElement>("[data-orbit-copy]");
+          if (!track?.getTotalLength || !text?.getComputedTextLength) return;
+          const length = track.getTotalLength();
+          const fits = Math.max(1, Math.floor(length / (text.getComputedTextLength() + 14)));
+          const spacing = length / fits;
+          const state = { offset: 0 };
+          const place = () => copies.forEach((copy, i) => copy.setAttribute("startOffset", String(state.offset + (i - 1) * spacing)));
+          place();
+          gsap.to(state, { offset: spacing, duration: 24 / fits, ease: "none", repeat: -1, onUpdate: place });
+        });
+      });
+      return () => { active = false; timeline.current = null; };
     });
     return () => media.revert();
   }, []);
@@ -86,8 +104,16 @@ export function Intro({ onDone }: { onDone: () => void }) {
           <button className={styles.textButton} onClick={() => timeline.current?.progress(1).pause()}>Skip animation ↗</button>
         </div>
       </header>
-      <div className={styles.scene}>
+      <div className={styles.words} data-words aria-hidden="true">
+        {["Letters", "Sounds", "Words", "അക്ഷരം"].map(word => <span key={word} data-word lang={word === "അക്ഷരം" ? "ml" : "en"}>{word}</span>)}
+      </div>
+      {["a", "b"].map((cross, i) => <svg key={cross} data-cross={cross} className={`${styles.cross} ${i ? styles.crossB : styles.crossA}`} viewBox="-40 -40 80 80" aria-hidden="true"><path d={star(36)} /></svg>)}
+      <div className={styles.scene} data-scene>
         <svg className={styles.art} viewBox="0 0 1200 820" aria-hidden="true" focusable="false">
+          <defs><path id={orbitId} data-track d="M 215 25 H 985 A 150 150 0 0 1 1135 175 V 650 A 150 150 0 0 1 985 800 H 215 A 150 150 0 0 1 65 650 V 175 A 150 150 0 0 1 215 25 Z" /></defs>
+          <g data-orbit className={styles.orbit} opacity="0">
+            {Array.from({ length: 12 }, (_, i) => <text key={i}><textPath href={`#${orbitId}`} data-orbit-copy startOffset={i * 470} lang="ml">അക്ഷരം • LEARN TO READ MALAYALAM •</textPath></text>)}
+          </g>
           <g fill={CREAM}>
             {[0, 1, 2].map(i => <path key={i} data-body d={star(86, 600, 410)} />)}
           </g>
