@@ -1,0 +1,14 @@
+{
+  "idle": 6000,
+  "cheer": 2000,
+  "oops": 2600,
+  "wave": 2200,
+  "sleepy": 2200,
+  "proud": 2200,
+  "determined": 2200,
+  "relieved": 2200,
+  "surprised": 2200,
+  "thinking": 2200,
+  "puzzled": 2200,
+  "stretch": 2200
+}

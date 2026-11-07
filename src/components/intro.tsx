@@ -96,18 +96,28 @@ export function Intro({ onDone }: { onDone: () => void }) {
       timeline.current = tl;
       if (context.conditions?.reduce) tl.progress(1).pause();
       let active = true;
-      if (!context.conditions?.reduce) void (document.fonts?.ready ?? Promise.resolve()).then(() => {
+      void (document.fonts?.ready ?? Promise.resolve()).then(() => {
         if (!active) return;
         context.add(() => {
           el.querySelectorAll<SVGGElement>("[data-wave]").forEach((wave, index) => {
             const text = wave.querySelector<SVGTextElement>("text");
             const copies = wave.querySelectorAll<SVGTextPathElement>("[data-orbit-copy]");
             if (!text?.getComputedTextLength) return;
-            const spacing = text.getComputedTextLength() + 48;
+            // A textPath may report only its laid-out/on-path glyphs. Measure
+            // the complete string without a path so off-path copies cannot
+            // collapse to tiny widths and pile on top of one another.
+            const measure = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            measure.textContent = copies[0]?.textContent ?? "";
+            measure.setAttribute("visibility", "hidden");
+            wave.appendChild(measure);
+            const length = measure.getComputedTextLength();
+            measure.remove();
+            if (length <= 0) return; // Retain conservative initial spacing.
+            const spacing = length + 64;
             const state = { offset: 0 };
             const place = () => copies.forEach((copy, i) => copy.setAttribute("startOffset", String(state.offset + (i - 1) * spacing)));
             place();
-            gsap.to(state, { offset: spacing, duration: spacing / (index ? 54 : 72), ease: "none", repeat: -1, onUpdate: place });
+            if (!context.conditions?.reduce) gsap.to(state, { offset: spacing, duration: spacing / (index ? 54 : 72), ease: "none", repeat: -1, onUpdate: place });
           });
         });
       });
