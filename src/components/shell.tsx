@@ -31,9 +31,9 @@ function Layout({ children }: { children: React.ReactNode }) {
   const departure = useRef<DOMRect | null>(null);
   useLayoutEffect(() => {
     if (window.scrollY > 0) window.scrollTo(0, 0);
-    const element = main.current, from = departure.current;
+    const element = main.current?.firstElementChild as HTMLElement | null, from = departure.current;
     departure.current = null;
-    if (!element || !from || !motionAllowed() || !element.animate) return;
+    if (!element || element.getAttribute("role") === "dialog" || !from || !motionAllowed() || !element.animate) return;
     const to = element.getBoundingClientRect();
     const animation = element.animate([
       { opacity: .35, transformOrigin: "50% 15%", transform: `translateY(${Math.max(-45, Math.min(45, from.top - to.top))}px) scale(.96)` },
