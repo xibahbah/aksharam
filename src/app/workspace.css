@@ -173,3 +173,72 @@
   .dashboard-study .goal-inline { margin-top: 24px; padding-top: 18px; gap: 12px; }
   .dashboard-study { padding-top: 30px; padding-bottom: 28px; }
 }
+
+/* Quiet ink rules: different curves, never a repeated roughness filter. */
+@media (min-width: 900px) {
+  .app-shell {
+    --ink-rule-1: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20400%2012%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20d%3D%22M2%206%20C68%202%20125%209%20185%205%20S310%208%20398%204%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.2%22%20stroke-linecap%3D%22round%22/%3E%3C/svg%3E");
+    --ink-rule-2: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20400%2012%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20d%3D%22M2%204%20C80%208%20118%201%20204%206%20S330%203%20398%206%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.2%22%20stroke-linecap%3D%22round%22/%3E%3C/svg%3E");
+    --ink-rule-3: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20400%2012%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20d%3D%22M2%207%20C55%203%20141%205%20211%204%20S335%209%20398%203%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.2%22%20stroke-linecap%3D%22round%22/%3E%3C/svg%3E");
+    --ink-upright: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2012%20800%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20d%3D%22M6%202%20C3%20116%209%20180%205%20280%20S8%20425%206%20510%20S3%20690%206%20798%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.2%22%20stroke-linecap%3D%22round%22/%3E%3C/svg%3E");
+  }
+  .sidebar { border-right: 0; }
+  .sidebar::after { content: ""; position: absolute; right: -4px; top: 18px; bottom: 18px; width: 10px; background: var(--muted); opacity: .32; mask: var(--ink-upright) center / 100% 100% no-repeat; pointer-events: none; }
+  .nav-indicator { border-radius: 19px 14px 21px 15px / 15px 20px 14px 19px; }
+  :is(.learn-mode.panel, .settings-panel, .builder-disclosure, .reference-intro, .reference-notes, .results-breakdown, .answer-review, .goal-inline) { position: relative; border: 0; --ink-rule: var(--ink-rule-1); }
+  :is(.learn-mode.panel, .settings-panel):nth-child(2n) { --ink-rule: var(--ink-rule-2); }
+  :is(.learn-mode.panel, .settings-panel):nth-child(3n), .builder-disclosure, .answer-review { --ink-rule: var(--ink-rule-3); }
+  :is(.learn-mode.panel, .settings-panel, .builder-disclosure, .reference-intro)::after,
+  :is(.reference-notes, .results-breakdown, .answer-review, .goal-inline)::before { content: ""; position: absolute; left: 0; right: 0; height: 9px; background: var(--muted); opacity: .28; mask: var(--ink-rule) center / 100% 100% no-repeat; pointer-events: none; }
+  :is(.learn-mode.panel, .settings-panel, .builder-disclosure, .reference-intro)::after { bottom: -4px; }
+  :is(.reference-notes, .results-breakdown, .answer-review, .goal-inline)::before { top: -4px; }
+  .learning-river .deck-card { border: 0; }
+  .learning-river .deck-card::after { content: ""; position: absolute; left: -4px; top: 0; bottom: 0; width: 8px; background: var(--muted); opacity: .3; mask: var(--ink-upright) center / 100% 100% no-repeat; pointer-events: none; }
+  .learning-river .deck-card:nth-child(even)::after { transform: scaleX(-1); }
+  .learning-river .deck-card[aria-current=step]::after { background: var(--coral); opacity: .7; }
+  .river-boat { z-index: 1; }
+  .dashboard-study, .reading-card, .quiz-panel, .flashcard .card-face { border-color: transparent; border-radius: 24px 30px 22px 28px / 28px 22px 30px 24px; }
+  .answer-option { border-radius: 13px 17px 12px 16px; }
+  .answer-option:nth-child(even) { border-radius: 17px 12px 16px 13px; }
+  .content-shell main { padding-top: 28px; padding-bottom: 28px; }
+  .page-heading { margin-bottom: 24px; }
+  .heading-title h1 { font-size: clamp(34px, 3vw, 44px); }
+  .page-heading p { margin-top: 8px; }
+  .learn-mode.panel { min-height: 112px; padding: 18px 20px; }
+  .learn-mode strong { font-size: 22px; }
+  .setup-panel h2 { font-size: 24px; margin-bottom: 14px; }
+  .setup-panel .select-field, .type-options { margin-top: 12px; }
+  .setup-icon { width: 34px; height: 34px; margin-bottom: 8px; }
+  .setup-panel .wide { margin-top: 16px; }
+  .type-options { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  .type-options legend { margin-bottom: 12px; }
+  .type-options label { margin: 0; padding: 10px 0; align-items: flex-start; }
+  .empty-state { min-height: 240px; border: 0; padding: 24px; }
+  .empty-state h2 { font-size: 28px; }
+  .results-header { padding: 16px 24px; }
+  .results-header > .bloom { width: 64px; height: 64px; margin-bottom: 10px; }
+  .results-header h2 { font-size: 30px; margin: 8px 0; }
+  .results-header .result-score { font-size: 44px; margin: 8px 0; }
+  .results-header .button-row { margin-top: 16px; }
+  .results-breakdown, .answer-review { padding: 20px 0; }
+  .content-shell main:has(.study-layout) { padding-top: 20px; padding-bottom: 16px; }
+  main:has(.study-layout) .page-heading { margin-bottom: 16px; }
+  .flashcard { min-height: 220px; }
+  .flashcard .card-face { padding: 16px 22px; }
+  .flashcard .card-center { padding: 8px 0; gap: 6px; }
+  .flashcard .card-glyph { font-size: 82px; line-height: 1.35; }
+  .flashcard .roman-large { font-size: 36px; line-height: 1.25; }
+  .flashcard .pronunciation, .flashcard .card-note { line-height: 1.5; margin: 0; }
+  .study-meta .bookmark-button { min-height: 32px; padding: 4px 0; }
+  .study-main .keyboard-guide { font-size: 11px; }
+  .study-toolbar { margin-bottom: 12px; }
+  .study-meta { margin-bottom: 8px; }
+  .card-controls { margin-top: 12px; }
+  .rating-area { margin-top: 10px; }
+  .rating { padding: 10px 12px; }
+  .study-main > .checkbox-label { margin-top: 12px; }
+  .keyboard-guide { margin-top: 8px; }
+  .settings-grid { gap: 40px; }
+  .settings-col { gap: 24px; }
+  .settings-panel { padding-bottom: 20px; }
+}
