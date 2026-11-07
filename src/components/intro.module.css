@@ -21,12 +21,19 @@
 .stage h1 { font-family: var(--font-baloo), sans-serif; font-size: clamp(28px, 2.2vw, 34px); font-weight: 400; line-height: 1.12; margin: 0; color: #f5f3dc; }
 .stage h1 span { display: block; }
 .description { font-size: 13px; line-height: 1.6; opacity: .55; margin: 18px 0 0; }
-.start { position: absolute; right: 40px; top: 41%; min-width: 180px; min-height: 76px; display: inline-flex; gap: 36px; align-items: center; justify-content: space-between; padding: 18px 28px; border: 1px solid #f5f3dc80; border-radius: 100px; color: #f5f3dc; background: transparent; cursor: pointer; font: inherit; font-size: 26px; transition: color .2s, background .2s; }
-.start:hover { color: #1a1a1a; background: #f5f3dc; }
+.start { position: absolute; right: 40px; top: 41%; width: 220px; min-height: 88px; display: inline-flex; gap: 28px; align-items: center; justify-content: space-between; padding: 18px 32px; border: 0; border-radius: 100px; color: #f5f3dc; background: transparent; cursor: pointer; font-family: var(--font-baloo), sans-serif; font-weight: 400; font-size: 32px; line-height: 1; transition: color .2s; }
+.startOutline { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; fill: transparent; stroke: #f5f3dc; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; opacity: .65; transition: fill .2s, opacity .2s; }
+.startOutline path { vector-effect: non-scaling-stroke; }
+.startOutline .startPencil { fill: none; opacity: .28; stroke-width: .8; }
+.startLabel { position: relative; padding-top: 4px; }
+.startArrow { position: relative; width: 36px; height: 36px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; transition: transform .25s ease; }
+.start:hover { color: #1a1a1a; }
+.start:hover .startOutline { fill: #f5f3dc; opacity: 1; }
+.start:hover .startArrow { transform: translate(2px, -2px); }
 .start:focus-visible, .textButton:focus-visible { outline: 2px solid #f5f3dc; outline-offset: 5px; }
 .scrubber { position: absolute; top: 65%; left: 40px; display: grid; gap: 7px; font-size: 10px; color: #f5f3dc80; }
 .scrubber input { width: 160px; accent-color: #f5f3dc; }
-@media (prefers-reduced-motion: reduce) { .stage, .start { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .stage, .start, .startOutline, .startArrow { transition: none; } .start:hover .startArrow { transform: none; } }
 
 .words { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 38px; font-family: var(--font-baloo), sans-serif; font-size: clamp(26px, 4.5vw, 60px); pointer-events: none; }
 .words span { opacity: 0; }

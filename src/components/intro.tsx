@@ -170,7 +170,16 @@ export function Intro({ onDone }: { onDone: () => void }) {
       <div className={styles.caption}>
         <div data-caption><h1 id={titleId}><span>A script to </span><span>fall in </span><span>love with.</span></h1><p className={styles.description}>Discover the beauty<br />in every curve.</p></div>
       </div>
-        <button ref={start} data-caption className={styles.start} onClick={finish}>Start <span aria-hidden="true">↗</span></button>
+        <button ref={start} data-caption className={styles.start} onClick={finish}>
+          <svg className={styles.startOutline} viewBox="0 0 240 96" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M51 7 C88 4 150 9 190 6 C216 5 233 24 233 47 C235 70 217 88 191 89 C148 92 88 86 49 90 C23 92 7 73 7 49 C6 25 25 7 51 7Z" />
+            <path className={styles.startPencil} d="M22 24 Q33 9 58 10 M183 86 Q215 89 226 66" />
+          </svg>
+          <span className={styles.startLabel}>Start</span>
+          <svg className={styles.startArrow} viewBox="0 0 40 40" aria-hidden="true">
+            <path d="M7 33 Q18 23 31 9 M20 9 Q27 10 32 7 Q31 14 31 20" />
+          </svg>
+        </button>
       {process.env.NODE_ENV === "development" && <label className={styles.scrubber}>
         Motion study
         <input aria-label="Animation progress" type="range" min="0" max={INTRO_DURATION} step="0.01" defaultValue="0" onChange={(event) => timeline.current?.pause().time(Number(event.target.value))} />
