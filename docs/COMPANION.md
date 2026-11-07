@@ -60,3 +60,18 @@ Generation prompt set (built-in tool):
 
 Sidebar motion now plays once per hover and settles back to a straight line,
 rather than looping for as long as the pointer stays over the sidebar.
+
+### Repeated nap/wake playback fix
+
+The website now plays the existing PNG frames on one persistent canvas instead
+of replacing transparent GIF elements. It loads an entire sequence before its
+first paint, retains the outgoing drawing during loading, and cancels obsolete
+frame timers and load callbacks when a new sequence takes over. A one-shot
+sequence holds its final frame. Sleep phase timers begin when the actual frames
+are ready; callbacks identify their mood so an older sequence cannot advance a
+new sleep phase. Downloadable GIFs remain available.
+
+After regenerating GIFs/PNGs, run `python3 scripts/build-frame-manifest.py` to
+refresh `src/lib/companion-frames.json`, the playback timing manifest. Regression
+coverage includes ten complete nap/wake cycles, repeated clicks during transitions,
+retaining the canvas, and superseded slow loads.

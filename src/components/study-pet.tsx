@@ -1,45 +1,14 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { publicAssetPath } from "@/lib/paths";
+import { PetAnimation, type AnimationMood } from "./pet-animation";
 import { companionAnswer, companionScenes, type CompanionMood, type AnswerRun } from "@/lib/companion";
 import durations from "../../public/companion/v3/timing.json";
 import sleepDurations from "../../public/companion/sleep-v1/timing.json";
 type SleepPhase = "awake" | "settling" | "sleeping" | "waking";
-type AnimationMood = CompanionMood | Exclude<SleepPhase, "awake">;
-const sleepMood = (mood: AnimationMood) => mood === "settling" || mood === "sleeping" || mood === "waking";
-const animationPath = (mood: AnimationMood) => publicAssetPath(`/companion/${sleepMood(mood) ? "sleep-v1" : "v3"}/${mood}.gif`);
 export type PetReaction = "cheer" | "oops";
 export function reactPet(reaction: PetReaction) {
   window.dispatchEvent(new CustomEvent("aksharam:pet", { detail: reaction }));
-}
-// Keep the outgoing drawing painted until the replacement has decoded.
-// Stable keys preserve the incoming GIF's DOM node when it becomes visible.
-function PetAnimation({ mood, serial, onReady }: { mood: AnimationMood; serial: number; onReady?: () => void }) {
-  const requested = { id: `${serial}-${mood}`, src: animationPath(mood) };
-  const [visible, setVisible] = useState({ id: "still", src: publicAssetPath("/companion/v3/still.png") });
-  useEffect(() => {
-    const scenes: AnimationMood[] = [...Object.keys(companionScenes) as CompanionMood[], "settling", "sleeping", "waking"];
-    const images = scenes.map(scene => {
-      const image = new Image();
-      image.src = animationPath(scene);
-      return image;
-    });
-    return () => { images.forEach(image => { image.onload = null; }); };
-  }, []);
-  const frames = visible.id === requested.id ? [visible] : [visible, requested];
-  return <span className="pet-animation">
-    {frames.map(frame => <picture key={frame.id} style={{ visibility: frame.id === visible.id ? "visible" : "hidden" }}>
-      <source media="(prefers-reduced-motion: reduce)" srcSet={publicAssetPath(`/companion/${mood === "sleeping" || mood === "settling" ? "sleep-v1" : "v3"}/still.png`)} />
-      <img src={frame.src} width="128" height="128" alt="" onLoad={async event => {
-        const image = event.currentTarget;
-        if (frame.id === visible.id) return;
-        try { await image.decode?.(); } catch { return; }
-        // A newer request or unmount can supersede a slow decode.
-        if (image.isConnected) { setVisible(frame); onReady?.(); }
-      }} />
-    </picture>)}
-  </span>;
 }
 export function StudyPet() {
   const path = usePathname();
@@ -104,7 +73,8 @@ export function StudyPet() {
     setSleepPhase("waking");
   };
   // Start phase timers only once the new drawing is decoded and visible.
-  const sleepReady = () => {
+  const sleepReady = (renderedMood: AnimationMood) => {
+    if (renderedMood !== sleepPhase) return;
     if (sleepPhase !== "settling" && sleepPhase !== "waking") return;
     if (timer.current) clearTimeout(timer.current);
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

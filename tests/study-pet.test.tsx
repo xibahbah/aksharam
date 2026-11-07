@@ -1,8 +1,13 @@
+/* eslint-disable @next/next/no-img-element -- Test double exposes explicit image-ready events. */
 import React from "react";
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, expect, it, vi } from "vitest";
 import { StudyPet, reactPet } from "@/components/study-pet";
 import { companionAnswer, type AnswerRun } from "@/lib/companion";
+vi.mock('@/components/pet-animation',()=>({
+ PetAnimation:({mood,onReady}:{mood:string;onReady:(mood:string)=>void}) =>
+  <img alt="" src={`/${mood}.gif`} onLoad={()=>onReady(mood)}/>,
+}));
 afterEach(() => vi.useRealTimers());
 it("finishes gestures, queues recovery without taking focus, and naps", async () => {
  vi.useFakeTimers();
@@ -46,37 +51,6 @@ it("exposes all twelve reaction previews without changing answer history",()=>{
  fireEvent.click(screen.getByText('Thinking'));
  expect(screen.getByRole('status')).toHaveTextContent('curve');
 });
-it("keeps the old drawing until the next GIF decodes, without remounting it", async () => {
- const {container}=render(<StudyPet/>);
- const image=(name:string)=>container.querySelector<HTMLImageElement>(`img[src$="/${name}"]`)!;
- const idle=image('idle.gif');
- await act(async()=>{fireEvent.load(idle);});
- expect(idle.parentElement).toHaveStyle({visibility:'visible'});
- act(()=>reactPet('oops'));
- const incoming=image('oops.gif');
- let finish!:()=>void;
- incoming.decode=()=>new Promise<void>(resolve=>{finish=resolve;});
- await act(async()=>{fireEvent.load(incoming);});
- expect(idle.isConnected).toBe(true);
- expect(idle.parentElement).toHaveStyle({visibility:'visible'});
- expect(incoming.parentElement).toHaveStyle({visibility:'hidden'});
- await act(async()=>finish());
- expect(image('oops.gif')).toBe(incoming);
- expect(incoming.parentElement).toHaveStyle({visibility:'visible'});
- expect(idle.isConnected).toBe(false);
-});
-it("retains the current drawing when an incoming image fails", async()=>{
- const {container}=render(<StudyPet/>);
- const idle=container.querySelector<HTMLImageElement>('img[src$="/idle.gif"]')!;
- await act(async()=>{fireEvent.load(idle);});
- act(()=>reactPet('oops'));
- const incoming=container.querySelector<HTMLImageElement>('img[src$="/oops.gif"]')!;
- incoming.decode=()=>Promise.reject(new Error('decode failed'));
- await act(async()=>{fireEvent.load(incoming);});
- expect(idle.parentElement).toHaveStyle({visibility:'visible'});
- expect(incoming.parentElement).toHaveStyle({visibility:'hidden'});
-});
-
 it("waits for an active reaction to finish before settling down",()=>{
  vi.useFakeTimers();
  render(<StudyPet/>);
