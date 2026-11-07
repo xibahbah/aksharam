@@ -21,3 +21,7 @@ Home entry now server-renders a full-screen background matching the intro until
 saved progress is hydrated. The sidebar and workspace mount only after the home
 view can choose first-visit intro, explicit #intro replay, or the returning
 learner's path. This prevents the workspace flashing before the landing.
+
+Hovering the desktop sidebar or its divider gently morphs the divider's ink
+curve and drifts the faint pencil strokes. The shortened, centered drag target
+stays fixed. Dragging suspends the effect; reduced-motion preferences disable it.
