@@ -172,13 +172,10 @@ export function Intro({ onDone }: { onDone: () => void }) {
       </div>
         <button ref={start} data-caption className={styles.start} onClick={finish}>
           <svg className={styles.startOutline} viewBox="0 0 240 96" preserveAspectRatio="none" aria-hidden="true">
-            <path d="M51 7 C88 4 150 9 190 6 C216 5 233 24 233 47 C235 70 217 88 191 89 C148 92 88 86 49 90 C23 92 7 73 7 49 C6 25 25 7 51 7Z" />
-            <path className={styles.startPencil} d="M22 24 Q33 9 58 10 M183 86 Q215 89 226 66" />
+            <path d="M48 1 C96 1 144 1 192 1 C218 1 239 22 239 48 C239 74 218 95 192 95 C144 95 96 95 48 95 C22 95 1 74 1 48 C1 22 22 1 48 1Z" />
           </svg>
           <span className={styles.startLabel}>Start</span>
-          <svg className={styles.startArrow} viewBox="0 0 40 40" aria-hidden="true">
-            <path d="M7 33 Q18 23 31 9 M20 9 Q27 10 32 7 Q31 14 31 20" />
-          </svg>
+          <span className={styles.startLabel} aria-hidden="true">↗</span>
         </button>
       {process.env.NODE_ENV === "development" && <label className={styles.scrubber}>
         Motion study
