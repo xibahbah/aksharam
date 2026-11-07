@@ -1,0 +1,75 @@
+# ============================================================
+# Design guideline — design-guideline.yaml
+# Source: visual reference studied 2026-11-07 (a portfolio site's opening),
+#         its stylesheet (exact colours/easing) and screen recordings.
+# Applied to: Aksharam opening animation; available for the UI redesign.
+# ============================================================
+name: "Aksharam — opening language"
+version: "1.0"
+
+colors:
+  charcoal: "#1a1a1a"   # main background of the opening and dark sections
+  cream: "#f5f8e2"      # shapes, stars, big type; light-section background
+  coral: "#ee5f5a"      # the one accent: the arch card, primary buttons
+  mustard: "#edb200"    # rare highlight only
+  white: "#ffffff"
+
+color_rules:
+  - context: "opening"
+    rule: >
+      Charcoal background, cream shapes and type, coral reserved for the
+      single focal object (the arch card) and the primary button.
+    allowed: ["charcoal", "cream", "coral"]
+  - context: "accent"
+    rule: >
+      Coral appears once per screen. Mustard is an optional small highlight,
+      never next to coral.
+    forbidden: ["coral as background of large areas", "gradients", "shadows"]
+
+typography:
+  display_font: "Baloo Chettan"          # replaces the reference's paid display face
+  display_font_web: "var(--font-baloo), 'Noto Sans Malayalam Variable', sans-serif"
+  display_license: "SIL OFL 1.1 (Ek Type) — src/fonts/BalooChettan-OFL.txt"
+  body_font: "Noto Sans Malayalam Variable"
+  rules:
+    - "Display words are uppercase Latin with wide tracking, or Malayalam."
+    - "Never letter-space Malayalam: it breaks conjuncts apart."
+    - "One rounded family per screen; no serif on the opening."
+
+motion:
+  ease_out: "cubic-bezier(0.22, 1, 0.36, 1)"  # easeOutQuint; GSAP ≈ power4.out
+  ease_standard: "cubic-bezier(0.4, 0, 0.2, 1)"
+  beat: "0.45–0.5 s between stages, stages overlap slightly"
+  springs: "pops overshoot ~12% then settle (back.out / 0 → 1.12 → 1)"
+  reduced_motion: "show the final frame, no movement"
+
+brand_accents:
+  - type: "shape"
+    description: >
+      Eight-point star with concave curved sides and slightly rounded tips,
+      cream, flat, no outline. Used as loader, crossing motif and small
+      ornaments around the focal object (3 at most once settled).
+  - type: "shape"
+    description: >
+      Arch card: tall rectangle with a semicircular top, solid coral, thin
+      cream inner rule at ~55% opacity. Holds one large letter.
+  - type: "pattern"
+    description: >
+      Text orbit: one phrase on a rounded-rectangle track around the focal
+      object, flowing slowly and seamlessly. Sits behind the focal object.
+
+layout_patterns:
+  - name: "opening"
+    description: >
+      Full-screen charcoal. Focal arch card centred at about 52% of the
+      height, occupying ~60% of it; text orbit around it; Start button
+      (coral pill) below; skip hint top-right.
+    css_class: "intro"
+
+extraction_notes: |
+  Confirmed: colours and easing from the reference stylesheet; layout and
+  rhythm from screen recordings. The reference's display fonts are paid
+  commercial fonts and its illustrations/logo are not reused; Baloo Chettan
+  (OFL) is used instead, and the focal object is Aksharam's own letter card.
+  Not used: the reference's teal (#9bd4d7) belongs to a third-party award
+  badge, not the brand.

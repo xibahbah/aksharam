@@ -3,6 +3,14 @@ import { Shell } from "@/components/shell";
 import "./globals.css";
 import { appearanceScript } from "@/lib/appearance";
 import { BASE_PATH } from "@/lib/paths";
+import localFont from "next/font/local";
+
+// Rounded display face with Latin and Malayalam (SIL OFL, see src/fonts).
+const baloo = localFont({
+  src: "../fonts/BalooChettan-Regular.woff2",
+  variable: "--font-baloo",
+  display: "swap",
+});
 export const metadata: Metadata = {
   title: {
     default: "Aksharam · Read Malayalam",
@@ -26,7 +34,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={baloo.variable} suppressHydrationWarning>
       <head>
         <script
           id="appearance-init"
