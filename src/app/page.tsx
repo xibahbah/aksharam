@@ -136,6 +136,23 @@ function Welcome() {
             </div>
           </>
         )}
+        <div className="button-row">
+          {step > 0 && (
+            <button
+              className="button secondary"
+              onClick={() => setStep(step - 1)}
+            >
+              Back
+            </button>
+          )}
+          <Link
+            className="text-link"
+            href="/learn"
+            onClick={() => profile({ onboarded: true })}
+          >
+            Skip and start lesson 1
+          </Link>
+        </div>
         <p className="muted">
           Step {step + 1} of 3 · No account needed. Progress stays in this
           browser.
@@ -173,6 +190,18 @@ function Path() {
   const next = nextAction(progress, at);
   const { title, detail } = describe(next);
   const states = unitStates(progress);
+  const [showAll, setShowAll] = useState(false);
+  const currentIndex = Math.max(
+    0,
+    units.findIndex((u) => states[u.id] === "current"),
+  );
+  const coreDone = units
+    .slice(0, coreUnitCount)
+    .filter((u) => states[u.id] === "done").length;
+  // Done units, the current one and the next two; the rest on request.
+  const visible = units.filter(
+    (u, i) => showAll || states[u.id] !== "locked" || i <= currentIndex + 2,
+  );
   const goal = progress.preferences.dailyGoal;
   const today = xpToday(progress, at);
   const days = currentStreak(progress, at);
@@ -253,12 +282,16 @@ function Path() {
       <section className="alphabet-section" aria-label="Learning path">
         <div className="section-header">
           <h2>Your path</h2>
+          <span className="muted">
+            {coreDone} of {coreUnitCount} units done
+          </span>
           <Link href="/reference">
             Alphabet <ArrowRight size={16} />
           </Link>
         </div>
         <div className="deck-grid">
-          {units.map((u, i) => {
+          {visible.map((u) => {
+            const i = units.indexOf(u);
             const state = states[u.id];
             const taught = u.items.filter((l) =>
               progress.introduced.includes(l.id),
@@ -304,6 +337,15 @@ function Path() {
             );
           })}
         </div>
+        {visible.length < units.length || showAll ? (
+          <button
+            className="button secondary"
+            onClick={() => setShowAll(!showAll)}
+            aria-expanded={showAll}
+          >
+            {showAll ? "Show fewer units" : `Show all ${units.length} units`}
+          </button>
+        ) : null}
         <p className="muted">
           {coreUnitCount} core units. Extra units cover rare and historic forms.
         </p>

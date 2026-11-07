@@ -1,5 +1,5 @@
 "use client";
-import { useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { Check, ArrowRight, X } from "lucide-react";
 import { almostCorrect, isCorrect, type Question } from "@/lib/quiz";
 import { AudioButton } from "./audio-button";
@@ -59,9 +59,32 @@ export function QuizQuestion({
   }
   function submit(value: string) {
     if (response !== null) return;
+    const right = isCorrect(question, value);
     setResponse(value);
-    onAnswer(value, isCorrect(question, value));
+    onAnswer(value, right);
+    // A short tap for right, a double buzz for wrong (phones that support it).
+    navigator.vibrate?.(right ? 12 : [20, 60, 20]);
   }
+  // Keyboard: 1–4 or A–D picks an option (not while typing an answer).
+  useEffect(() => {
+    if (question.type === "typing" || response !== null) return;
+    const key = (e: KeyboardEvent) => {
+      if (
+        e.target instanceof HTMLElement &&
+        e.target.matches("input,textarea,select")
+      )
+        return;
+      const i =
+        "1234".indexOf(e.key) + 1 || "abcd".indexOf(e.key.toLowerCase()) + 1;
+      const option = question.options[i - 1];
+      if (i && option) {
+        e.preventDefault();
+        submit(option.id);
+      }
+    };
+    window.addEventListener("keydown", key);
+    return () => window.removeEventListener("keydown", key);
+  });
   return (
     <div
       className={`quiz-panel panel${response !== null ? " quiz-answered" : ""}`}

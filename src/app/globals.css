@@ -2536,3 +2536,13 @@ button.learn-mode:hover {
 .milestone-list li:not([data-earned]) {
   opacity: 0.55;
 }
+
+/* Anchor jumps glide, unless the visitor prefers less motion. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+.alphabet-section > .button.secondary {
+  margin-top: 16px;
+}

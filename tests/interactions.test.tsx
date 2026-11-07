@@ -55,6 +55,26 @@ describe("learning interactions", () => {
     await userEvent.click(screen.getByRole("button", { name: /Continue/ }));
     expect(next).toHaveBeenCalledOnce();
   });
+  it("answers a choice question with the number keys", async () => {
+    const answer = vi.fn();
+    const q = makeQuestion(letters[0], "recognition", () => 0.5);
+    render(
+      <QuizQuestion
+        question={q}
+        onAnswer={answer}
+        onNext={vi.fn()}
+        number={1}
+        total={1}
+      />,
+    );
+    fireEvent.keyDown(window, { key: "2" });
+    expect(answer).toHaveBeenCalledWith(
+      q.options[1].id,
+      q.options[1].id === q.letter.id,
+    );
+    fireEvent.keyDown(window, { key: "1" });
+    expect(answer).toHaveBeenCalledOnce();
+  });
   it("keeps incorrect typed-answer feedback available and supports keyboard continuation", async () => {
     const answer = vi.fn();
     const next = vi.fn();
