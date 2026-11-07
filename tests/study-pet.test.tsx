@@ -11,10 +11,15 @@ it("reacts to answers without taking focus, resets, and can be quieted", () => {
   act(() => reactPet("oops"));
   expect(screen.getByRole("status")).toHaveTextContent("Tricky letter");
   expect(next).toHaveFocus();
+  act(() => reactPet("cheer"));
+  expect(screen.getByRole("status")).toHaveTextContent("Tricky letter");
   act(() => vi.advanceTimersByTime(4300));
   expect(screen.queryByRole("status")).not.toBeInTheDocument();
   fireEvent.click(screen.getByText("Let her nap"));
   act(() => reactPet("cheer"));
   expect(screen.queryByRole("status")).not.toBeInTheDocument();
   expect(screen.getByText("Show companion")).toBeInTheDocument();
+  fireEvent.click(screen.getByText("Show companion"));
+  act(() => reactPet("cheer"));
+  expect(screen.getByRole("status")).not.toHaveTextContent("Tricky letter");
 });
