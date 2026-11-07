@@ -5,6 +5,15 @@ import { CREAM, COLORS, star } from "./intro-art";
 import { createIntroTimeline, INTRO_DURATION } from "./intro-motion";
 import styles from "./intro.module.css";
 
+const WAVE_SLOGANS = [
+  "LET LETTERS BLOOM",
+  "EVERY LETTER, A LITTLE WONDER",
+  "FOLLOW THE LETTERS",
+  "SMALL LETTERS, NEW WORLDS",
+  "FIND YOUR FIRST WORD",
+  "A LITTLE CURIOSITY GOES A LONG WAY",
+].join(" • ") + " •";
+
 export function Intro({ onDone }: { onDone: () => void }) {
   const root = useRef<HTMLDivElement>(null);
   const start = useRef<HTMLButtonElement>(null);
@@ -110,16 +119,17 @@ export function Intro({ onDone }: { onDone: () => void }) {
       <div className={styles.scene} data-scene>
         <svg className={styles.art} viewBox="0 0 1200 1040" aria-hidden="true" focusable="false">
           <defs>
-            <path id={`${orbitId}-learn`} d="M -600 855 C -300 785 -100 785 150 855 S 600 935 900 855 S 1350 785 1800 855" />
-            <path id={`${orbitId}-poem`} d="M -600 950 C -300 880 -100 880 150 950 S 600 1030 900 950 S 1350 880 1800 950" />
+            <path id={`${orbitId}-learn`} d="M -600 828.00 C -580 829.86 -560 833.02 -540 836.60 C -520 840.18 -500 844.14 -480 847.38 C -460 850.62 -440 853.10 -420 854.15 C -400 855.20 -380 854.81 -360 853.13 C -340 851.45 -320 848.50 -300 845.19 C -280 841.88 -260 838.23 -240 835.38 C -220 832.52 -200 830.50 -180 829.99 C -160 829.48 -140 830.49 -120 832.90 C -100 835.32 -80 839.10 -60 843.38 C -40 847.66 -20 852.39 0 856.48 C 20 860.56 40 863.96 60 865.98 C 80 868.01 100 868.65 120 868.04 C 140 867.43 160 865.59 180 863.38 C 200 861.16 220 858.62 240 856.82 C 260 855.02 280 853.99 300 854.38 C 320 854.78 340 856.59 360 859.64 C 380 862.70 400 866.96 420 871.51 C 440 876.07 460 880.86 480 884.76 C 500 888.66 520 891.62 540 892.95 C 560 894.28 580 893.96 600 892.12 C 620 890.29 640 886.97 660 883.05 C 680 879.13 700 874.66 720 870.76 C 740 866.86 760 863.58 780 861.61 C 800 859.65 820 859.03 840 859.64 C 860 860.26 880 862.08 900 864.28 C 920 866.48 940 869.02 960 870.82 C 980 872.62 1000 873.65 1020 873.28 C 1040 872.90 1060 871.09 1080 868.04 C 1100 864.98 1120 860.70 1140 856.08 C 1160 851.47 1180 846.56 1200 842.48 C 1220 838.39 1240 835.17 1260 833.48 C 1280 831.79 1300 831.65 1320 832.90 C 1340 834.16 1360 836.78 1380 839.89 C 1400 842.99 1420 846.52 1440 849.38 C 1460 852.23 1480 854.37 1500 855.09 C 1520 855.81 1540 855.11 1560 853.13 C 1580 851.14 1600 847.89 1620 844.25 C 1640 840.60 1660 836.62 1680 833.38 C 1700 830.14 1720 827.69 1740 826.70 C 1760 825.71 1780 826.19 1800 828.00" />
+            <path id={`${orbitId}-poem`} d="M -600 908.00 C -580 909.86 -560 913.02 -540 916.60 C -520 920.18 -500 924.14 -480 927.38 C -460 930.62 -440 933.10 -420 934.15 C -400 935.20 -380 934.81 -360 933.13 C -340 931.45 -320 928.50 -300 925.19 C -280 921.88 -260 918.23 -240 915.38 C -220 912.52 -200 910.50 -180 909.99 C -160 909.48 -140 910.49 -120 912.90 C -100 915.32 -80 919.10 -60 923.38 C -40 927.66 -20 932.39 0 936.48 C 20 940.56 40 943.96 60 945.98 C 80 948.01 100 948.65 120 948.04 C 140 947.43 160 945.59 180 943.38 C 200 941.16 220 938.62 240 936.82 C 260 935.02 280 933.99 300 934.38 C 320 934.78 340 936.59 360 939.64 C 380 942.70 400 946.96 420 951.51 C 440 956.07 460 960.86 480 964.76 C 500 968.66 520 971.62 540 972.95 C 560 974.28 580 973.96 600 972.12 C 620 970.29 640 966.97 660 963.05 C 680 959.13 700 954.66 720 950.76 C 740 946.86 760 943.58 780 941.61 C 800 939.65 820 939.03 840 939.64 C 860 940.26 880 942.08 900 944.28 C 920 946.48 940 949.02 960 950.82 C 980 952.62 1000 953.65 1020 953.28 C 1040 952.90 1060 951.09 1080 948.04 C 1100 944.98 1120 940.70 1140 936.08 C 1160 931.47 1180 926.56 1200 922.48 C 1220 918.39 1240 915.17 1260 913.48 C 1280 911.79 1300 911.65 1320 912.90 C 1340 914.16 1360 916.78 1380 919.89 C 1400 922.99 1420 926.52 1440 929.38 C 1460 932.23 1480 934.37 1500 935.09 C 1520 935.81 1540 935.11 1560 933.13 C 1580 931.14 1600 927.89 1620 924.25 C 1640 920.60 1660 916.62 1680 913.38 C 1700 910.14 1720 907.69 1740 906.70 C 1760 905.71 1780 906.19 1800 908.00" />
           </defs>
           <g data-orbit className={styles.orbit} opacity="0">
-            <g data-wave>{Array.from({ length: 9 }, (_, i) => <text key={i}><textPath href={`#${orbitId}-learn`} data-orbit-copy startOffset={(i - 1) * 650} lang="en">LEARN TO READ MALAYALAM •</textPath></text>)}</g>
+            <g data-wave>{Array.from({ length: 3 }, (_, i) => <text key={i}><textPath href={`#${orbitId}-learn`} data-orbit-copy startOffset={(i - 1) * 4200} lang="en">{WAVE_SLOGANS}</textPath></text>)}</g>
             <g data-wave className={styles.poem}>
               <title>കുമാരനാശാൻ — വീണ പൂവ് (1907)</title>
               {Array.from({ length: 5 }, (_, i) => <text key={i}><textPath href={`#${orbitId}-poem`} data-orbit-copy startOffset={(i - 1) * 1400} lang="ml">ഹാ! പുഷ്പമേ, അധികതുംഗപദത്തിലെത്ര ശോഭിച്ചിരുന്നിതൊരു രാജ്ഞികണക്കയേ നീ •</textPath></text>)}
             </g>
           </g>
+          <g transform="translate(600 774) scale(1.18) translate(-600 -774)">
           <g fill={CREAM}>
             {[0, 1, 2].map(i => <path key={i} data-body d={star(86, 600, 410)} />)}
           </g>
@@ -128,12 +138,13 @@ export function Intro({ onDone }: { onDone: () => void }) {
               {COLORS.map((color) => <path key={color} data-petal fill={color} d={star(.01)} />)}
             </g>
           </g>
+          </g>
         </svg>
       </div>
       <div className={styles.caption}>
-        <div data-caption><h1 id={titleId}>A new world, one letter at a time.</h1><p className={styles.description}>Learn to read Malayalam.</p></div>
+        <div data-caption><h1 id={titleId}><span>A script to </span><span>fall in </span><span>love with.</span></h1><p className={styles.description}>Discover the beauty<br />in every curve.</p></div>
       </div>
-        <button ref={start} className={styles.start} onClick={finish}>Start <span aria-hidden="true">↗</span></button>
+        <button ref={start} data-caption className={styles.start} onClick={finish}>Start <span aria-hidden="true">↗</span></button>
       {process.env.NODE_ENV === "development" && <label className={styles.scrubber}>
         Motion study
         <input aria-label="Animation progress" type="range" min="0" max={INTRO_DURATION} step="0.01" defaultValue="0" onChange={(event) => timeline.current?.pause().time(Number(event.target.value))} />

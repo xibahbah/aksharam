@@ -10,20 +10,21 @@
 }
 .stage:focus { outline: none; }
 .leaving { opacity: 0; transform: translateY(-24px); pointer-events: none; }
-.header { position: absolute; inset: 28px 40px auto; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-.brand { display: flex; align-items: baseline; gap: 14px; font-family: var(--font-baloo), sans-serif; font-size: 25px; line-height: 1; }
+.header { position: absolute; inset: 48px 40px auto; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.brand { display: flex; align-items: baseline; gap: 14px; font-family: var(--font-baloo), sans-serif; font-size: 27px; line-height: 1; }
 .brand span { font-size: 14px; opacity: .5; }
 .actions { display: flex; gap: 24px; }
 .textButton { background: none; border: 0; color: #f5f3dc; cursor: pointer; font: inherit; font-size: 12px; padding: 10px 0; }
-.scene { position: absolute; inset: 36px 0 125px; min-height: 320px; display: grid; place-items: center; }
+.scene { position: absolute; inset: 107px 205px -37px; min-height: 320px; display: grid; place-items: center; }
 .art { position: absolute; inset: 0; display: block; width: 100%; height: 100%; min-width: 0; min-height: 0; overflow: visible; }
-.caption { position: absolute; bottom: 32px; left: 40px; text-align: left; width: max-content; }
-.stage h1 { font-family: var(--font-baloo), sans-serif; font-size: 26px; font-weight: 400; line-height: 1.2; margin: 0; color: #f5f3dc; }
-.description { font-size: 12px; opacity: .6; margin: 6px 0 12px; }
-.start { position: absolute; right: 40px; bottom: 30px; min-width: 210px; min-height: 76px; display: inline-flex; gap: 36px; align-items: center; justify-content: space-between; padding: 18px 28px; border: 1px solid #f5f3dc80; border-radius: 100px; color: #f5f3dc; background: transparent; cursor: pointer; font: inherit; font-size: 24px; transition: color .2s, background .2s; }
+.caption { position: absolute; top: 37%; left: 40px; text-align: left; width: 205px; }
+.stage h1 { font-family: var(--font-baloo), sans-serif; font-size: clamp(28px, 2.2vw, 34px); font-weight: 400; line-height: 1.12; margin: 0; color: #f5f3dc; }
+.stage h1 span { display: block; }
+.description { font-size: 13px; line-height: 1.6; opacity: .55; margin: 18px 0 0; }
+.start { position: absolute; right: 40px; top: 41%; min-width: 180px; min-height: 76px; display: inline-flex; gap: 36px; align-items: center; justify-content: space-between; padding: 18px 28px; border: 1px solid #f5f3dc80; border-radius: 100px; color: #f5f3dc; background: transparent; cursor: pointer; font: inherit; font-size: 26px; transition: color .2s, background .2s; }
 .start:hover { color: #1a1a1a; background: #f5f3dc; }
 .start:focus-visible, .textButton:focus-visible { outline: 2px solid #f5f3dc; outline-offset: 5px; }
-.scrubber { position: absolute; bottom: 25px; left: 30px; display: grid; gap: 7px; font-size: 10px; color: #f5f3dc80; }
+.scrubber { position: absolute; top: 65%; left: 40px; display: grid; gap: 7px; font-size: 10px; color: #f5f3dc80; }
 .scrubber input { width: 160px; accent-color: #f5f3dc; }
 @media (prefers-reduced-motion: reduce) { .stage, .start { transition: none; } }
 

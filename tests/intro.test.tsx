@@ -15,6 +15,7 @@ describe("landing accessibility", () => {
     const onDone = vi.fn();
     const { container } = render(<Intro onDone={onDone} />);
     expect(container.querySelector("[data-caption]")).toHaveStyle({ opacity: "1" });
+    expect(screen.getByRole("button", { name: "Start" })).toHaveStyle({ opacity: "1" });
     const bodies = container.querySelectorAll("[data-body]");
     [LEFT_FIGURE, RIGHT_FIGURE, BOAT].forEach((path, i) => {
       expect(bodies[i]).toHaveAttribute("d", path);
@@ -29,6 +30,7 @@ describe("landing accessibility", () => {
     const { container } = render(<Intro onDone={() => undefined} />);
     const bodies = container.querySelectorAll("[data-body]");
     expect(bodies[0]).toHaveAttribute("d", star(86, 600, 410));
+    expect(screen.getByRole("button", { name: "Start" })).toHaveStyle({ opacity: "0" });
     expect(screen.getByText("Letters")).toBeInTheDocument();
     expect(container.querySelectorAll("[data-cross]")).toHaveLength(2);
     expect(container.querySelector("[data-scene]")).toHaveStyle({ opacity: "0" });
@@ -36,6 +38,7 @@ describe("landing accessibility", () => {
     [LEFT_FIGURE, RIGHT_FIGURE, BOAT].forEach((path, i) => {
       expect(bodies[i]).toHaveAttribute("d", path);
     });
+    expect(screen.getByRole("button", { name: "Start" })).toHaveStyle({ opacity: "1" });
     fireEvent.click(screen.getByRole("button", { name: /Replay/ }));
     expect(bodies[0]).not.toHaveAttribute("d", LEFT_FIGURE);
     expect(container.querySelector("[data-words]")).toHaveStyle({ opacity: "1" });
