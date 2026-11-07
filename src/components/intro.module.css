@@ -1,103 +1,28 @@
-/* Opening animation. Timing lives in CONFIG (intro.tsx); colours and type
-   follow docs/design-guideline.yaml: charcoal, cream, coral, Baloo Chettan. */
 .stage {
-  --charcoal: #1a1a1a;
-  --cream: #f5f8e2;
-  --coral: #ee5f5a;
   position: fixed;
   inset: 0;
   z-index: 100;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(10px, 2.5vh, 24px);
-  padding: 24px 16px max(24px, env(safe-area-inset-bottom));
-  background: var(--charcoal);
-  color: var(--cream);
-  overflow: hidden;
-  cursor: pointer;
-  font-family: var(--font-baloo), "Noto Sans Malayalam Variable", sans-serif;
-  transition: opacity 0.45s ease;
+  background: #1a1a1a;
+  color: #f5f3dc;
+  font-family: "DM Sans Variable", sans-serif;
+  overflow: auto;
+  transition: opacity .5s ease, transform .5s cubic-bezier(.22, 1, .36, 1);
 }
-.leaving {
-  opacity: 0;
-}
-.art {
-  width: min(100%, 1100px);
-  max-height: calc(100vh - 130px);
-  overflow: visible;
-}
-.cream {
-  fill: var(--cream);
-}
-
-/* 1. Keyword line, laid out in advance so it never shifts as words appear. */
-.words {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 0 clamp(16px, 3.4vw, 48px);
-  padding: 0 16px;
-  font-size: clamp(26px, 5vw, 60px);
-  line-height: 1;
-  pointer-events: none;
-}
-.words span {
-  display: inline-block;
-  opacity: 0;
-}
-.words span[lang="en"] {
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-.cross {
-  position: absolute;
-  left: 0;
-  width: clamp(64px, 9vw, 120px);
-  fill: var(--cream);
-  pointer-events: none;
-  transform: translateX(-200px);
-}
-.crossA {
-  top: 26%;
-}
-.crossB {
-  top: 66%;
-}
-
-.card {
-  fill: var(--coral);
-}
-.cardLine {
-  fill: none;
-  stroke: var(--cream);
-  stroke-opacity: 0.55;
-  stroke-width: 2.5;
-}
-.orbit {
-  fill: var(--cream);
-  font-family: var(--font-baloo), "Noto Sans Malayalam Variable", sans-serif;
-  font-size: 21px;
-}
-
-.stage .start {
-  font-family: var(--font-baloo), sans-serif;
-  font-size: 18px;
-  padding-inline: 34px;
-  border-radius: 999px;
-  background: var(--coral);
-  border-color: var(--coral);
-  color: var(--charcoal);
-  opacity: 0;
-}
-.skip {
-  position: absolute;
-  top: max(16px, env(safe-area-inset-top));
-  right: 16px;
-  font-size: 13px;
-  opacity: 0.55;
-}
+.stage:focus { outline: none; }
+.leaving { opacity: 0; transform: translateY(-24px); pointer-events: none; }
+.header { position: absolute; inset: 28px 40px auto; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.brand { display: flex; align-items: baseline; gap: 14px; font-family: var(--font-baloo), sans-serif; font-size: 25px; line-height: 1; }
+.brand span { font-size: 14px; opacity: .5; }
+.actions { display: flex; gap: 24px; }
+.textButton { background: none; border: 0; color: #f5f3dc; cursor: pointer; font: inherit; font-size: 12px; padding: 10px 0; }
+.scene { position: absolute; inset: 36px 0 125px; min-height: 320px; display: grid; place-items: center; }
+.art { position: absolute; inset: 0; display: block; width: 100%; height: 100%; min-width: 0; min-height: 0; overflow: visible; }
+.caption { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); text-align: center; width: max-content; }
+.stage h1 { font-family: var(--font-baloo), sans-serif; font-size: 26px; font-weight: 400; line-height: 1.2; margin: 0; color: #f5f3dc; }
+.description { font-size: 12px; opacity: .6; margin: 6px 0 12px; }
+.start { display: inline-flex; gap: 36px; align-items: center; justify-content: space-between; padding: 10px 20px; border: 1px solid #f5f3dc80; border-radius: 100px; color: #f5f3dc; background: transparent; cursor: pointer; font: inherit; font-size: 13px; transition: color .2s, background .2s; }
+.start:hover { color: #1a1a1a; background: #f5f3dc; }
+.start:focus-visible, .textButton:focus-visible { outline: 2px solid #f5f3dc; outline-offset: 5px; }
+.scrubber { position: absolute; bottom: 25px; left: 30px; display: grid; gap: 7px; font-size: 10px; color: #f5f3dc80; }
+.scrubber input { width: 160px; accent-color: #f5f3dc; }
+@media (prefers-reduced-motion: reduce) { .stage, .start { transition: none; } }
