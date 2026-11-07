@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { ArrowUpRight } from "lucide-react";
-import { Backwaters, Pookalam } from "./kerala-motifs";
+
 export function ProgressBar({
   value,
   label,
@@ -44,14 +44,12 @@ export function PageHeading({
         <div className="heading-copy">
           {eyebrow && <div className="eyebrow">{eyebrow}</div>}
           <div className="heading-title">
-            <Pookalam className="heading-pookalam" />
             <h1>{title}</h1>
           </div>
           {description && <p>{description}</p>}
         </div>
         {action}
       </div>
-      <Backwaters className="heading-backwaters" />
     </header>
   );
 }

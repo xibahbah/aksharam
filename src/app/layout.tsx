@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Shell } from "@/components/shell";
 import "./globals.css";
+import "./workspace.css";
 import { appearanceScript } from "@/lib/appearance";
 import { BASE_PATH } from "@/lib/paths";
 import localFont from "next/font/local";

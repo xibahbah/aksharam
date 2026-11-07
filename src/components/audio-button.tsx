@@ -91,7 +91,7 @@ export function AudioButton({
   }, [autoPlay, available]);
   if (!available) return null;
   return (
-    <div className="audio-control">
+    <div className={`audio-control ${playing ? "is-playing" : ""}`}>
       <button
         className="audio-button"
         onClick={() => {

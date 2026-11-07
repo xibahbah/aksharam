@@ -26,6 +26,22 @@ export function Intro({ onDone }: { onDone: () => void }) {
   const finish = useCallback(() => {
     if (exitTimer.current !== null) return;
     setLeaving(true);
+    // Carry the flower into the app identity instead of cutting to a new page.
+    const flower = root.current?.querySelector<SVGGElement>("[data-flower-position]");
+    const destination = document.querySelector<HTMLElement>(".sidebar .brand-icon");
+    if (flower && destination && window.innerWidth >= 900 && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const source = flower.getBoundingClientRect(), target = destination.getBoundingClientRect();
+      const box = flower.getBBox();
+      if (source.width && target.width) {
+        const flight = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        flight.setAttribute("viewBox", `${box.x} ${box.y} ${box.width} ${box.height}`);
+        flight.setAttribute("aria-hidden", "true");
+        flower.querySelectorAll("path").forEach(path => flight.appendChild(path.cloneNode(true)));
+        Object.assign(flight.style, { position: "fixed", pointerEvents: "none", zIndex: "200", left: `${source.left}px`, top: `${source.top}px`, width: `${source.width}px`, height: `${source.height}px` });
+        document.body.appendChild(flight);
+        gsap.to(flight, { left: target.left, top: target.top, width: target.width, height: target.height, duration: .48, ease: "power3.inOut", onComplete: () => flight.remove() });
+      }
+    }
     const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
     exitTimer.current = setTimeout(onDone, reduce ? 0 : 500);
   }, [onDone]);
@@ -42,8 +58,8 @@ export function Intro({ onDone }: { onDone: () => void }) {
     while (ancestor.parentElement) {
       for (const node of ancestor.parentElement.children) {
         if (node !== ancestor && node instanceof HTMLElement) {
-          siblings.push({ node, inert: node.inert });
-          node.inert = true;
+          siblings.push({ node, inert: node.hasAttribute("inert") });
+          node.setAttribute("inert", "");
         }
       }
       ancestor = ancestor.parentElement;
@@ -65,7 +81,7 @@ export function Intro({ onDone }: { onDone: () => void }) {
     return () => {
       if (exitTimer.current !== null) clearTimeout(exitTimer.current);
       document.body.style.overflow = oldOverflow;
-      siblings.forEach(({ node, inert }) => { node.inert = inert; });
+      siblings.forEach(({ node, inert }) => { if (inert) node.setAttribute("inert", ""); else node.removeAttribute("inert"); });
       el.removeEventListener("keydown", key);
       if (previousFocus?.isConnected) previousFocus.focus({ preventScroll: true });
     };

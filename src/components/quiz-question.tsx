@@ -2,6 +2,7 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { Check, ArrowRight, X } from "lucide-react";
 import { almostCorrect, isCorrect, type Question } from "@/lib/quiz";
+import { motionAllowed, ease } from "./motion";
 import { AudioButton } from "./audio-button";
 
 /** Every accented character used by the romanizations, for phones without an accent picker. */
@@ -42,8 +43,26 @@ export function QuizQuestion({
   const [typed, setTyped] = useState("");
   const input = useRef<HTMLInputElement>(null);
   const feedbackId = useId();
+  const panel = useRef<HTMLDivElement>(null);
   const correct = response !== null && isCorrect(question, response);
   const almost = response !== null && almostCorrect(question, response);
+  useEffect(() => {
+    if (!correct || !motionAllowed()) return;
+    const from = panel.current?.querySelector(".answer-correct")?.getBoundingClientRect();
+    const to = document.querySelector(".lesson-step .bloom")?.getBoundingClientRect();
+    if (!from || !to || !Element.prototype.animate) return;
+    const petal = document.createElement("span");
+    petal.setAttribute("aria-hidden", "true");
+    Object.assign(petal.style, { position: "fixed", left: `${from.right - 26}px`, top: `${from.top + from.height / 2}px`, width: "14px", height: "22px", background: "var(--coral)", borderRadius: "70% 40% 65% 40%", pointerEvents: "none", zIndex: "50" });
+    document.body.appendChild(petal);
+    const animation = petal.animate([
+      { transform: "translate(0,0) scale(.7)", opacity: 0 },
+      { transform: "translate(0,-20px) scale(1)", opacity: 1, offset: .2 },
+      { transform: `translate(${to.x - from.right + 30}px,${to.y - from.top - from.height / 2}px) scale(.3)`, opacity: 0 },
+    ], { duration: 650, easing: ease });
+    animation.onfinish = () => petal.remove();
+    return () => { animation.cancel(); petal.remove(); };
+  }, [correct]);
   const glyphOptions =
     question.type === "reverse" || question.type === "listen";
   function insert(key: string) {
@@ -86,7 +105,9 @@ export function QuizQuestion({
   });
   return (
     <div
+      ref={panel}
       className={`quiz-panel panel${response !== null ? " quiz-answered" : ""}`}
+      data-feedback={response === null ? undefined : correct ? "correct" : "incorrect"}
     >
       <div className="quiz-kicker">
         <span>

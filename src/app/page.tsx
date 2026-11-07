@@ -7,6 +7,7 @@ import { useProgress } from "@/hooks/use-progress";
 import { currentStreak, needsBackup, xpToday } from "@/lib/habit";
 import { nextAction, unitStates, type NextAction } from "@/lib/lesson";
 import { PageHeading, ProgressBar } from "@/components/ui";
+import { Bloom } from "@/components/bloom";
 import { Intro } from "@/components/intro";
 import type { LearningReason } from "@/types";
 
@@ -212,6 +213,8 @@ function Path() {
         }
       />
       <section className="dashboard-study panel" aria-label="Next lesson">
+        <div className="study-bloom"><Bloom progress={Math.max(1 / 6, Math.min(1, today / goal))} /><span>Your daily bloom</span></div>
+        <span className="eyebrow">A little further, every day</span>
         <div className="review-summary">
           <div>
             <h2>{title}</h2>
@@ -257,7 +260,7 @@ function Path() {
             Alphabet <ArrowRight size={16} />
           </Link>
         </div>
-        <div className="deck-grid">
+        <div className="deck-grid learning-river">
           {visible.map((u) => {
             const i = units.indexOf(u);
             const state = states[u.id];
@@ -271,7 +274,7 @@ function Path() {
             );
             const body = (
               <>
-                <div className="deck-card-top">
+                <div className="deck-card-top">{state === "current" && <svg className="river-boat" viewBox="0 0 80 36" aria-hidden="true"><path d="M3 10 Q14 30 37 26 Q57 33 77 4 Q70 29 52 32 Q20 40 3 10Z" /></svg>}<span className="unit-index">{String(i + 1).padStart(2, "0")}</span>
                   {glyphs}
                   {state === "done" ? (
                     <Check size={19} aria-label="Done" />

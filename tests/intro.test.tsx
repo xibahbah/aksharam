@@ -50,7 +50,7 @@ describe("landing accessibility", () => {
     document.body.append(background);
     background.focus();
     const { unmount } = render(<Intro onDone={() => undefined} />);
-    expect(background.inert).toBe(true);
+    expect(background).toHaveAttribute("inert");
     const start = screen.getByRole("button", { name: "Start" });
     const skip = screen.getByRole("button", { name: /Replay/ });
     start.focus();
@@ -59,7 +59,7 @@ describe("landing accessibility", () => {
     fireEvent.keyDown(skip, { key: "Tab", shiftKey: true });
     expect(start).toHaveFocus();
     unmount();
-    expect(background.inert).toBeFalsy();
+    expect(background).not.toHaveAttribute("inert");
     expect(background).toHaveFocus();
     background.remove();
   });

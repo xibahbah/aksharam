@@ -9,6 +9,7 @@ import type { Letter, Category } from "@/types";
 import { PageHeading } from "@/components/ui";
 import { LetterGrid } from "@/components/letter-grid";
 import { AudioButton } from "@/components/audio-button";
+import { flyGlyph } from "@/components/motion";
 import { SyllableBuilder } from "@/components/syllable-builder";
 import { unitOfLetter, units } from "@/data/curriculum";
 import { strength, strengthNames, unitStates } from "@/lib/lesson";
@@ -55,6 +56,9 @@ function ReferenceView() {
   useEffect(() => {
     if (selected) {
       dialog.current?.showModal();
+      const tile = Array.from(document.querySelectorAll<HTMLElement>("[data-letter-id]")).find(el => el.dataset.letterId === selected.id);
+      const animation = flyGlyph(tile?.querySelector("[lang=ml]") ?? null, dialog.current?.querySelector<HTMLElement>(".detail-glyph") ?? null);
+      return () => { animation?.cancel(); };
     } else dialog.current?.close();
   }, [selected]);
   const query = search.toLocaleLowerCase().normalize("NFC");
@@ -95,7 +99,7 @@ function ReferenceView() {
           </span>
         </div>
       </details>
-      <SyllableBuilder />
+      <details className="builder-disclosure"><summary>Explore the syllable builder <span aria-hidden="true">↗</span></summary><SyllableBuilder /></details>
       <div className="reference-controls">
         <div className="search-box">
           <Search size={19} />

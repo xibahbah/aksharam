@@ -1,4 +1,5 @@
 "use client";
+import { Bloom } from "./bloom";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -197,7 +198,7 @@ function Runner() {
             <h1>{plan.title}</h1>
             {plan.unit?.goal && <span className="muted">{plan.unit.goal}</span>}
           </div>
-          <span className="lesson-step">
+          <span className="lesson-step"><Bloom progress={index / total} />
             {index + 1} / {total}
             {combo >= 3 ? ` · ${combo} in a row!` : ""}
           </span>
@@ -323,7 +324,7 @@ function LessonComplete({
   }
   return (
     <div className="results">
-      <div className="results-header panel">
+      <div className="results-header panel"><Bloom celebrate />
         <h2>{title}</h2>
         {plan.kind === "placement" && !passed && (
           <p>

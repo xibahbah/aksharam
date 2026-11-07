@@ -5,7 +5,9 @@ import { BookOpen, Dumbbell, Grid2X2, UserRound, X } from "lucide-react";
 import { ProgressProvider, useProgress } from "@/hooks/use-progress";
 import { AppearanceProvider } from "@/hooks/use-appearance";
 import { ThemeToggle } from "./appearance";
-import { Backwaters } from "./kerala-motifs";
+import { useLayoutEffect, useRef, type CSSProperties } from "react";
+import { motionAllowed, ease } from "./motion";
+import { Bloom } from "./bloom";
 // Four destinations. Lesson and practice screens highlight their parent tab.
 const nav = [
   { href: "/", name: "Learn", icon: BookOpen, also: ["/learn"] },
@@ -25,16 +27,31 @@ function Layout({ children }: { children: React.ReactNode }) {
   const path = usePathname();
   const { progress, error, dismissError } = useProgress();
   const total = progress.introduced.length;
+  const main = useRef<HTMLElement>(null);
+  const departure = useRef<DOMRect | null>(null);
+  useLayoutEffect(() => {
+    if (window.scrollY > 0) window.scrollTo(0, 0);
+    const element = main.current, from = departure.current;
+    departure.current = null;
+    if (!element || !from || !motionAllowed() || !element.animate) return;
+    const to = element.getBoundingClientRect();
+    const animation = element.animate([
+      { opacity: .35, transformOrigin: "50% 15%", transform: `translateY(${Math.max(-45, Math.min(45, from.top - to.top))}px) scale(.96)` },
+      { opacity: 1, transformOrigin: "50% 15%", transform: "none" },
+    ], { duration: 480, easing: ease });
+    return () => animation.cancel();
+  }, [path]);
   return (
-    <div className="app-shell">
+    <div className="app-shell" onClickCapture={event => {
+      const link = (event.target as Element).closest?.("a.deck-card, a.learn-mode, .dashboard-study a");
+      if (link) departure.current = link.getBoundingClientRect();
+    }}>
       <a className="skip-link" href="#main">
         Skip to content
       </a>
       <aside className="sidebar">
         <Link href="/" className="brand">
-          <span className="brand-icon" lang="ml">
-            അ
-          </span>
+          <span className="brand-icon"><Bloom /></span>
           <span>
             Aksharam
             <span className="brand-sub" lang="ml">
@@ -43,7 +60,8 @@ function Layout({ children }: { children: React.ReactNode }) {
           </span>
         </Link>
 
-        <nav aria-label="Main navigation">
+        <nav aria-label="Main navigation" style={{ "--nav-index": Math.max(0, nav.findIndex(n => isActive(path, n))) } as CSSProperties}>
+          <span className="nav-indicator" aria-hidden="true" />
           {nav.map((n) => (
             <Link
               key={n.href}
@@ -58,7 +76,7 @@ function Layout({ children }: { children: React.ReactNode }) {
           ))}
         </nav>
         <div className="sidebar-bottom">
-          <Backwaters className="sidebar-backwaters" />
+          <span className="sidebar-note">A little, every day.</span>
           <ThemeToggle />
           <p className="sidebar-progress">{total} letters learned</p>
         </div>
@@ -70,7 +88,7 @@ function Layout({ children }: { children: React.ReactNode }) {
           </Link>
           <ThemeToggle />
         </div>
-        <main id="main">
+        <main ref={main} id="main" key={path} className="workspace-page">
           {error && (
             <div className="notice" role="alert">
               {error}

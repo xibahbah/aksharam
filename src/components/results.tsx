@@ -1,3 +1,4 @@
+import { Bloom } from "./bloom";
 import Link from "next/link";
 import { ArrowRight, RotateCcw } from "lucide-react";
 import { categories } from "@/data/alphabet";
@@ -14,7 +15,7 @@ export function Results({
   const incorrect = answers.filter((a) => !a.correct);
   return (
     <div className="results">
-      <div className="results-header panel">
+      <div className="results-header panel"><Bloom celebrate />
         <h2>Test results</h2>
         <div className="result-score">
           {score(answers)}

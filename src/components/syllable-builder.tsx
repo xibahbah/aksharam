@@ -59,7 +59,7 @@ export function SyllableBuilder() {
         </div>
       </div>
       {syllable && (
-        <div className="intro-example" lang="ml" aria-live="polite">
+        <div key={syllable.id} className="intro-example syllable-composition" lang="ml" aria-live="polite">
           <span>
             {base.glyph}
             <small>{base.romanization}</small>
