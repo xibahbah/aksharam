@@ -1,6 +1,6 @@
 import { letters } from "@/data/alphabet";
 import type { Letter } from "@/types";
-export type QuestionType = "recognition" | "reverse" | "typing";
+export type QuestionType = "recognition" | "reverse" | "typing" | "listen";
 export interface Question {
   letter: Letter;
   type: QuestionType;
@@ -49,6 +49,15 @@ export function isCorrect(q: Question, response: string): boolean {
   return q.type === "typing"
     ? normalizeAnswer(response) === normalizeAnswer(q.letter.romanization)
     : response === q.letter.id;
+}
+/** Right letters, wrong accents: "a" for "ā", "n" for "ṇ". Still scored wrong. */
+export function almostCorrect(q: Question, response: string): boolean {
+  if (q.type !== "typing" || isCorrect(q, response)) return false;
+  const bare = (v: string) =>
+    normalizeAnswer(v)
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f’']/g, "");
+  return bare(response) === bare(q.letter.romanization);
 }
 export function score(answers: Answer[]): number {
   return answers.length

@@ -10,6 +10,7 @@ const routes = [
   "",
   "flashcards/",
   "learn/",
+  "practice/",
   "test/",
   "reference/",
   "settings/",
@@ -128,7 +129,9 @@ try {
     const response = await fetch(`${origin}${path}`);
     assert.equal(response.status, 200, `Static request failed: ${path}`);
   }
-  for (const path of ["/", "/learn/", `${BASE_PATH}/does-not-exist/`]) {
+  // Outside-the-project paths only exist when the site has a sub-path.
+  const outside = BASE_PATH ? ["/", "/learn/"] : [];
+  for (const path of [...outside, `${BASE_PATH}/does-not-exist/`]) {
     assert.equal(
       (await fetch(`${origin}${path}`)).status,
       404,

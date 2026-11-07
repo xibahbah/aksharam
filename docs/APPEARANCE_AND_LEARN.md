@@ -8,7 +8,10 @@
 - Semantic tokens cover backgrounds, surfaces, card backs, text, glyphs, borders, input fields, focus, dialogs, selection, hover, progress, feedback, and collection accents. CSS `color-scheme` also themes native controls. Reduced-motion behavior remains unchanged.
 - If storage is blocked, appearance still works in the current tab and Settings reports that it cannot be persisted.
 
-## Learn selection
+## Learn selection (superseded)
+
+> Replaced in November 2026 by the unit path and lesson engine; see
+> [HANDOFF.md](HANDOFF.md). Kept for history.
 
 The Learn page shows actual global counts of new, learned, due, and difficult letters. Choose a mode, collection, and 1–20 letters per session. The initial count uses the existing saved lesson-size preference (5 for a new learner).
 

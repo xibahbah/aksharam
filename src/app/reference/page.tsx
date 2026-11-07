@@ -8,6 +8,9 @@ import type { Letter, Category } from "@/types";
 import { PageHeading } from "@/components/ui";
 import { LetterGrid } from "@/components/letter-grid";
 import { AudioButton } from "@/components/audio-button";
+import { SyllableBuilder } from "@/components/syllable-builder";
+import { unitOfLetter, units } from "@/data/curriculum";
+import { strength, strengthNames, unitStates } from "@/lib/lesson";
 export default function Reference() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState<Category | "all">("all");
@@ -57,6 +60,7 @@ export default function Reference() {
           </span>
         </div>
       </div>
+      <SyllableBuilder />
       <div className="reference-controls">
         <div className="search-box">
           <Search size={19} />
@@ -143,6 +147,7 @@ export default function Reference() {
             <LetterGrid
               letters={filtered.filter((l) => l.category === c.id)}
               onSelect={setSelected}
+              strength={(id) => strength(progress, id)}
             />
           </section>
         ))}
@@ -201,6 +206,9 @@ export default function Reference() {
               {selected.display}
             </span>
             <h2 id="letter-detail-title">{selected.romanization}</h2>
+            <p className="eyebrow">
+              {strengthNames[strength(progress, selected.id)]}
+            </p>
             {selected.approximation && (
               <p className="pronunciation">{selected.approximation}</p>
             )}
@@ -231,13 +239,23 @@ export default function Reference() {
                   ? "Saved for review"
                   : "Save for review"}
               </button>
-              <Link
-                className="button primary"
-                href={`/flashcards?deck=${selected.category}`}
-                onClick={() => setSelected(null)}
-              >
-                Study collection <ArrowRight size={16} />
-              </Link>
+              {(() => {
+                const unit = unitOfLetter[selected.id];
+                const state = unit ? unitStates(progress)[unit.id] : "locked";
+                const label = `${unit?.extra ? "Extra unit" : `Unit ${units.indexOf(unit) + 1}`}: ${unit?.title}`;
+                return state === "locked" ? (
+                  <p className="muted">Taught in {label}.</p>
+                ) : (
+                  <Link
+                    className="button primary"
+                    href={`/learn?mode=unit&unit=${unit.id}`}
+                    onClick={() => setSelected(null)}
+                  >
+                    {state === "done" ? "Practise" : "Learn"} {label}{" "}
+                    <ArrowRight size={16} />
+                  </Link>
+                );
+              })()}
             </div>
             <small className="unicode-note">
               Unicode:{" "}

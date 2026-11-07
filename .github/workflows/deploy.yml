@@ -27,6 +27,13 @@ jobs:
         with:
           node-version: 24
           cache: npm
+      - name: Derive the site path from the repository name
+        # owner.github.io repositories are served from the domain root;
+        # every other repository is served from /<repository-name>/.
+        run: |
+          name="${{ github.event.repository.name }}"
+          if [[ "$name" == *.github.io ]]; then base=""; else base="/$name"; fi
+          echo "NEXT_PUBLIC_BASE_PATH=$base" >> "$GITHUB_ENV"
       - name: Install locked dependencies
         run: npm ci
       - name: Run tests

@@ -1,30 +1,30 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  LayoutDashboard,
-  Layers,
-  BookOpen,
-  ClipboardCheck,
-  Grid2X2,
-  Settings,
-  X,
-} from "lucide-react";
+import { BookOpen, Dumbbell, Grid2X2, UserRound, X } from "lucide-react";
 import { ProgressProvider, useProgress } from "@/hooks/use-progress";
 import { AppearanceProvider } from "@/hooks/use-appearance";
 import { ThemeToggle } from "./appearance";
 import { Backwaters } from "./kerala-motifs";
+// Four destinations. Lesson and practice screens highlight their parent tab.
 const nav = [
-  { href: "/", name: "Overview", icon: LayoutDashboard },
-  { href: "/flashcards", name: "Flashcards", icon: Layers },
-  { href: "/learn", name: "Learn", icon: BookOpen },
-  { href: "/test", name: "Test yourself", icon: ClipboardCheck },
-  { href: "/reference", name: "Alphabet", icon: Grid2X2 },
+  { href: "/", name: "Learn", icon: BookOpen, also: ["/learn"] },
+  {
+    href: "/practice",
+    name: "Practice",
+    icon: Dumbbell,
+    also: ["/flashcards", "/test"],
+  },
+  { href: "/reference", name: "Alphabet", icon: Grid2X2, also: [] },
+  { href: "/settings", name: "Me", icon: UserRound, also: [] },
 ];
+const strip = (p: string) => (p.length > 1 ? p.replace(/\/$/, "") : p);
+const isActive = (path: string, n: (typeof nav)[number]) =>
+  strip(path) === n.href || n.also.includes(strip(path));
 function Layout({ children }: { children: React.ReactNode }) {
   const path = usePathname();
   const { progress, error, dismissError } = useProgress();
-  const total = Object.keys(progress.cards).length;
+  const total = progress.introduced.length;
   return (
     <div className="app-shell">
       <a className="skip-link" href="#main">
@@ -48,26 +48,19 @@ function Layout({ children }: { children: React.ReactNode }) {
             <Link
               key={n.href}
               href={n.href}
-              className={`nav-item ${path === n.href ? "active" : ""}`}
-              aria-current={path === n.href ? "page" : undefined}
+              className={`nav-item ${isActive(path, n) ? "active" : ""}`}
+              aria-current={isActive(path, n) ? "page" : undefined}
             >
               <n.icon size={19} />
               {n.name}
-              {path === n.href && <span className="nav-dot" />}
+              {isActive(path, n) && <span className="nav-dot" />}
             </Link>
           ))}
         </nav>
         <div className="sidebar-bottom">
           <Backwaters className="sidebar-backwaters" />
           <ThemeToggle />
-          <Link
-            href="/settings"
-            className={`nav-item ${path === "/settings" ? "active" : ""}`}
-          >
-            <Settings size={18} />
-            Settings & progress
-          </Link>
-          <p className="sidebar-progress">{total} letters practiced</p>
+          <p className="sidebar-progress">{total} letters learned</p>
         </div>
       </aside>
       <div className="content-shell">
@@ -95,22 +88,13 @@ function Layout({ children }: { children: React.ReactNode }) {
             key={n.href}
             href={n.href}
             aria-label={n.name}
-            aria-current={path === n.href ? "page" : undefined}
-            className={path === n.href ? "active" : ""}
+            aria-current={isActive(path, n) ? "page" : undefined}
+            className={isActive(path, n) ? "active" : ""}
           >
             <n.icon size={20} />
-            <span>{n.name === "Test yourself" ? "Test" : n.name}</span>
+            <span>{n.name}</span>
           </Link>
         ))}
-        <Link
-          href="/settings"
-          aria-label="Settings"
-          aria-current={path === "/settings" ? "page" : undefined}
-          className={path === "/settings" ? "active" : ""}
-        >
-          <Settings size={20} />
-          <span>Settings</span>
-        </Link>
       </nav>
     </div>
   );

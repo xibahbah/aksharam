@@ -1,0 +1,13 @@
+{
+  "name": "Aksharam · Read Malayalam",
+  "short_name": "Aksharam",
+  "description": "Learn to read the Malayalam script in five minutes a day.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f7f1e3",
+  "theme_color": "#1f5a43",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

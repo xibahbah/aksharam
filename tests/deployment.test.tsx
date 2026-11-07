@@ -99,7 +99,9 @@ describe("GitHub project Pages", () => {
       </ProgressProvider>,
     );
     await waitFor(() =>
-      expect(screen.getByTestId("progress")).toHaveTextContent(stored),
+      expect(JSON.parse(screen.getByTestId("progress").textContent!)).toEqual(
+        JSON.parse(stored),
+      ),
     );
     expect(JSON.parse(stored).favorites).toContain(letters[0].id);
     expect(JSON.parse(stored).preferences.dailyGoal).toBe(15);

@@ -1,7 +1,31 @@
 "use client";
-import { useId, useState } from "react";
+import { useId, useRef, useState } from "react";
 import { Check, ArrowRight, X } from "lucide-react";
-import { isCorrect, type Question } from "@/lib/quiz";
+import { almostCorrect, isCorrect, type Question } from "@/lib/quiz";
+import { AudioButton } from "./audio-button";
+
+/** Every accented character used by the romanizations, for phones without an accent picker. */
+export const ACCENT_KEYS = [
+  "ā",
+  "ī",
+  "ū",
+  "ē",
+  "ō",
+  "r̥",
+  "l̥",
+  "ṁ",
+  "ḥ",
+  "ṅ",
+  "ñ",
+  "ṭ",
+  "ḍ",
+  "ṇ",
+  "ś",
+  "ṣ",
+  "ḷ",
+  "ḻ",
+  "ṟ",
+];
 export function QuizQuestion({
   question,
   onAnswer,
@@ -17,8 +41,22 @@ export function QuizQuestion({
 }) {
   const [response, setResponse] = useState<string | null>(null);
   const [typed, setTyped] = useState("");
+  const input = useRef<HTMLInputElement>(null);
   const feedbackId = useId();
   const correct = response !== null && isCorrect(question, response);
+  const almost = response !== null && almostCorrect(question, response);
+  const glyphOptions =
+    question.type === "reverse" || question.type === "listen";
+  function insert(key: string) {
+    const el = input.current;
+    const start = el?.selectionStart ?? typed.length;
+    const end = el?.selectionEnd ?? typed.length;
+    setTyped(typed.slice(0, start) + key + typed.slice(end));
+    requestAnimationFrame(() => {
+      el?.focus();
+      el?.setSelectionRange(start + key.length, start + key.length);
+    });
+  }
   function submit(value: string) {
     if (response !== null) return;
     setResponse(value);
@@ -32,9 +70,11 @@ export function QuizQuestion({
         <span>
           {question.type === "reverse"
             ? "RECALL THE LETTER"
-            : question.type === "typing"
-              ? "RECALL THE SOUND"
-              : "RECOGNIZE THE SOUND"}
+            : question.type === "listen"
+              ? "LISTEN"
+              : question.type === "typing"
+                ? "RECALL THE SOUND"
+                : "RECOGNIZE THE SOUND"}
         </span>
         <span>
           {number} / {total}
@@ -43,20 +83,26 @@ export function QuizQuestion({
       <h2>
         {question.type === "reverse"
           ? "Which letter makes this sound?"
-          : question.type === "typing"
-            ? "How is this written in romanization?"
-            : "What sound does this letter make?"}
+          : question.type === "listen"
+            ? "Which one did you hear?"
+            : question.type === "typing"
+              ? "How is this written in romanization?"
+              : "What sound does this letter make?"}
       </h2>
-      <div
-        className={
-          question.type === "reverse" ? "question-roman" : "question-glyph"
-        }
-        lang={question.type === "reverse" ? "en" : "ml"}
-      >
-        {question.type === "reverse"
-          ? question.letter.romanization
-          : question.letter.display}
-      </div>
+      {question.type === "listen" ? (
+        <AudioButton letter={question.letter} autoPlay />
+      ) : (
+        <div
+          className={
+            question.type === "reverse" ? "question-roman" : "question-glyph"
+          }
+          lang={question.type === "reverse" ? "en" : "ml"}
+        >
+          {question.type === "reverse"
+            ? question.letter.romanization
+            : question.letter.display}
+        </div>
+      )}
       {question.type === "typing" ? (
         <form
           onSubmit={(e) => {
@@ -68,6 +114,7 @@ export function QuizQuestion({
             Your romanization
           </label>
           <input
+            ref={input}
             id="typed-answer"
             autoComplete="off"
             autoCapitalize="off"
@@ -76,9 +123,25 @@ export function QuizQuestion({
             disabled={response !== null}
             required
           />
+          <div
+            className="button-row"
+            role="group"
+            aria-label="Accented letters"
+          >
+            {ACCENT_KEYS.map((key) => (
+              <button
+                key={key}
+                type="button"
+                className="button secondary"
+                disabled={response !== null}
+                onClick={() => insert(key)}
+              >
+                {key}
+              </button>
+            ))}
+          </div>
           <p className="muted">
-            Accents and vowel length matter. Case and outer spaces are ignored;
-            Unicode equivalents are accepted.
+            Accents show vowel length and sound: ā is longer than a.
           </p>
           <button
             className="button primary"
@@ -93,14 +156,14 @@ export function QuizQuestion({
             <button
               key={o.id}
               disabled={response !== null}
-              className={`answer-option ${question.type === "reverse" ? "glyph-option" : ""} ${response !== null && o.id === question.letter.id ? "answer-correct" : ""} ${response === o.id && !correct ? "answer-wrong" : ""}`}
+              className={`answer-option ${glyphOptions ? "glyph-option" : ""} ${response !== null && o.id === question.letter.id ? "answer-correct" : ""} ${response === o.id && !correct ? "answer-wrong" : ""}`}
               onClick={() => submit(o.id)}
             >
               <span className="option-number">
                 {String.fromCharCode(65 + i)}
               </span>
-              <span lang={question.type === "reverse" ? "ml" : "en"}>
-                {question.type === "reverse" ? o.display : o.romanization}
+              <span lang={glyphOptions ? "ml" : "en"}>
+                {glyphOptions ? o.display : o.romanization}
               </span>
               {response !== null && o.id === question.letter.id && (
                 <Check size={20} />
@@ -117,14 +180,19 @@ export function QuizQuestion({
             <div className="answer-feedback-copy" role="status" id={feedbackId}>
               <div className="answer-feedback-result">
                 {correct ? <Check size={21} /> : <X size={21} />}
-                <strong>{correct ? "Correct" : "Incorrect"}</strong>
+                <strong>
+                  {correct ? "Correct" : almost ? "Almost!" : "Not quite"}
+                </strong>
               </div>
               <p>
                 <strong>
                   <span lang="ml">{question.letter.glyph}</span> ·{" "}
                   {question.letter.romanization}
                 </strong>{" "}
-                — {question.letter.note}
+                —{" "}
+                {almost
+                  ? `Right letters, but the accents matter: it is ${question.letter.romanization}.`
+                  : question.letter.note}
               </p>
             </div>
             <button

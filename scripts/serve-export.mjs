@@ -4,7 +4,10 @@ import { resolve, extname, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 
 // A plain file server mounted exactly like GitHub project Pages. No SPA rewrites.
-export const BASE_PATH = "/aksharam";
+const configured = (process.env.NEXT_PUBLIC_BASE_PATH ?? "/aksharam")
+  .trim()
+  .replace(/^\/+|\/+$/g, "");
+export const BASE_PATH = configured ? `/${configured}` : "";
 const root = fileURLToPath(new URL("../out/", import.meta.url));
 const types = {
   ".html": "text/html; charset=utf-8",

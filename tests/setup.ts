@@ -5,3 +5,5 @@ afterEach(() => {
   cleanup();
   window.localStorage.clear();
 });
+// jsdom does not implement scrolling; lessons scroll to the top on restart.
+window.scrollTo = () => undefined;

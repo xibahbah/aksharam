@@ -122,7 +122,7 @@ describe("mobile study controls", () => {
 });
 
 describe("essential mobile navigation", () => {
-  it("provides all six labeled destinations and marks Settings as current", () => {
+  it("provides four labeled destinations and marks Me as current", () => {
     render(
       <Shell>
         <h1>Settings</h1>
@@ -130,20 +130,13 @@ describe("essential mobile navigation", () => {
     );
     const nav = screen.getByRole("navigation", { name: "Mobile navigation" });
     const links = within(nav).getAllByRole("link");
-    expect(links).toHaveLength(6);
-    const destinations = [
-      "/",
-      "/flashcards",
-      "/learn",
-      "/test",
-      "/reference",
-      "/settings",
-    ];
+    expect(links).toHaveLength(4);
+    const destinations = ["/", "/practice", "/reference", "/settings"];
     links.forEach((link, index) => {
       expect(link).toHaveAttribute("href", destinations[index]);
       expect(link).toHaveAccessibleName();
     });
-    expect(within(nav).getByRole("link", { name: "Settings" })).toHaveAttribute(
+    expect(within(nav).getByRole("link", { name: "Me" })).toHaveAttribute(
       "aria-current",
       "page",
     );

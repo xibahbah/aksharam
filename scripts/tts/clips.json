@@ -1,0 +1,3992 @@
+[
+  {
+    "key": "d15",
+    "text": "ക",
+    "label": "ka"
+  },
+  {
+    "key": "d28",
+    "text": "ന",
+    "label": "na"
+  },
+  {
+    "key": "d2e",
+    "text": "മ",
+    "label": "ma"
+  },
+  {
+    "key": "d15-d3e",
+    "text": "കാ",
+    "label": "ā"
+  },
+  {
+    "key": "d28-d3e",
+    "text": "നാ",
+    "label": "nā"
+  },
+  {
+    "key": "d2e-d3e",
+    "text": "മാ",
+    "label": "mā"
+  },
+  {
+    "key": "d24",
+    "text": "ത",
+    "label": "ta"
+  },
+  {
+    "key": "d2a",
+    "text": "പ",
+    "label": "pa"
+  },
+  {
+    "key": "d32",
+    "text": "ല",
+    "label": "la"
+  },
+  {
+    "key": "d15-d3f",
+    "text": "കി",
+    "label": "i"
+  },
+  {
+    "key": "d24-d3f",
+    "text": "തി",
+    "label": "ti"
+  },
+  {
+    "key": "d2a-d3f",
+    "text": "പി",
+    "label": "pi"
+  },
+  {
+    "key": "d32-d3f",
+    "text": "ലി",
+    "label": "li"
+  },
+  {
+    "key": "d28-d3f",
+    "text": "നി",
+    "label": "ni"
+  },
+  {
+    "key": "d2e-d3f",
+    "text": "മി",
+    "label": "mi"
+  },
+  {
+    "key": "d24-d3e",
+    "text": "താ",
+    "label": "tā"
+  },
+  {
+    "key": "d2a-d3e",
+    "text": "പാ",
+    "label": "pā"
+  },
+  {
+    "key": "d32-d3e",
+    "text": "ലാ",
+    "label": "lā"
+  },
+  {
+    "key": "d30",
+    "text": "ര",
+    "label": "ra"
+  },
+  {
+    "key": "d35",
+    "text": "വ",
+    "label": "va"
+  },
+  {
+    "key": "d2f",
+    "text": "യ",
+    "label": "ya"
+  },
+  {
+    "key": "d15-d41",
+    "text": "കു",
+    "label": "u"
+  },
+  {
+    "key": "d30-d41",
+    "text": "രു",
+    "label": "ru"
+  },
+  {
+    "key": "d35-d41",
+    "text": "വു",
+    "label": "vu"
+  },
+  {
+    "key": "d2f-d41",
+    "text": "യു",
+    "label": "yu"
+  },
+  {
+    "key": "d28-d41",
+    "text": "നു",
+    "label": "nu"
+  },
+  {
+    "key": "d2e-d41",
+    "text": "മു",
+    "label": "mu"
+  },
+  {
+    "key": "d24-d41",
+    "text": "തു",
+    "label": "tu"
+  },
+  {
+    "key": "d2a-d41",
+    "text": "പു",
+    "label": "pu"
+  },
+  {
+    "key": "d32-d41",
+    "text": "ലു",
+    "label": "lu"
+  },
+  {
+    "key": "d30-d3e",
+    "text": "രാ",
+    "label": "rā"
+  },
+  {
+    "key": "d30-d3f",
+    "text": "രി",
+    "label": "ri"
+  },
+  {
+    "key": "d35-d3e",
+    "text": "വാ",
+    "label": "vā"
+  },
+  {
+    "key": "d35-d3f",
+    "text": "വി",
+    "label": "vi"
+  },
+  {
+    "key": "d2f-d3e",
+    "text": "യാ",
+    "label": "yā"
+  },
+  {
+    "key": "d2f-d3f",
+    "text": "യി",
+    "label": "yi"
+  },
+  {
+    "key": "d1f",
+    "text": "ട",
+    "label": "ṭa"
+  },
+  {
+    "key": "d23",
+    "text": "ണ",
+    "label": "ṇa"
+  },
+  {
+    "key": "d15-d02",
+    "text": "കം",
+    "label": "ṁ"
+  },
+  {
+    "key": "d15-d4d",
+    "text": "ക്",
+    "label": "∅"
+  },
+  {
+    "key": "d1f-d02",
+    "text": "ടം",
+    "label": "ṭaṁ"
+  },
+  {
+    "key": "d23-d02",
+    "text": "ണം",
+    "label": "ṇaṁ"
+  },
+  {
+    "key": "d28-d02",
+    "text": "നം",
+    "label": "naṁ"
+  },
+  {
+    "key": "d2e-d02",
+    "text": "മം",
+    "label": "maṁ"
+  },
+  {
+    "key": "d24-d02",
+    "text": "തം",
+    "label": "taṁ"
+  },
+  {
+    "key": "d2a-d02",
+    "text": "പം",
+    "label": "paṁ"
+  },
+  {
+    "key": "d32-d02",
+    "text": "ലം",
+    "label": "laṁ"
+  },
+  {
+    "key": "d30-d02",
+    "text": "രം",
+    "label": "raṁ"
+  },
+  {
+    "key": "d35-d02",
+    "text": "വം",
+    "label": "vaṁ"
+  },
+  {
+    "key": "d2f-d02",
+    "text": "യം",
+    "label": "yaṁ"
+  },
+  {
+    "key": "d1f-d3e",
+    "text": "ടാ",
+    "label": "ṭā"
+  },
+  {
+    "key": "d1f-d3f",
+    "text": "ടി",
+    "label": "ṭi"
+  },
+  {
+    "key": "d1f-d41",
+    "text": "ടു",
+    "label": "ṭu"
+  },
+  {
+    "key": "d23-d3e",
+    "text": "ണാ",
+    "label": "ṇā"
+  },
+  {
+    "key": "d23-d3f",
+    "text": "ണി",
+    "label": "ṇi"
+  },
+  {
+    "key": "d23-d41",
+    "text": "ണു",
+    "label": "ṇu"
+  },
+  {
+    "key": "d05",
+    "text": "അ",
+    "label": "a"
+  },
+  {
+    "key": "d06",
+    "text": "ആ",
+    "label": "ā"
+  },
+  {
+    "key": "d07",
+    "text": "ഇ",
+    "label": "i"
+  },
+  {
+    "key": "d08",
+    "text": "ഈ",
+    "label": "ī"
+  },
+  {
+    "key": "d09",
+    "text": "ഉ",
+    "label": "u"
+  },
+  {
+    "key": "d0a",
+    "text": "ഊ",
+    "label": "ū"
+  },
+  {
+    "key": "d15-d40",
+    "text": "കീ",
+    "label": "ī"
+  },
+  {
+    "key": "d15-d42",
+    "text": "കൂ",
+    "label": "ū"
+  },
+  {
+    "key": "d28-d40",
+    "text": "നീ",
+    "label": "nī"
+  },
+  {
+    "key": "d28-d42",
+    "text": "നൂ",
+    "label": "nū"
+  },
+  {
+    "key": "d2e-d40",
+    "text": "മീ",
+    "label": "mī"
+  },
+  {
+    "key": "d2e-d42",
+    "text": "മൂ",
+    "label": "mū"
+  },
+  {
+    "key": "d24-d40",
+    "text": "തീ",
+    "label": "tī"
+  },
+  {
+    "key": "d24-d42",
+    "text": "തൂ",
+    "label": "tū"
+  },
+  {
+    "key": "d2a-d40",
+    "text": "പീ",
+    "label": "pī"
+  },
+  {
+    "key": "d2a-d42",
+    "text": "പൂ",
+    "label": "pū"
+  },
+  {
+    "key": "d32-d40",
+    "text": "ലീ",
+    "label": "lī"
+  },
+  {
+    "key": "d32-d42",
+    "text": "ലൂ",
+    "label": "lū"
+  },
+  {
+    "key": "d30-d40",
+    "text": "രീ",
+    "label": "rī"
+  },
+  {
+    "key": "d30-d42",
+    "text": "രൂ",
+    "label": "rū"
+  },
+  {
+    "key": "d35-d40",
+    "text": "വീ",
+    "label": "vī"
+  },
+  {
+    "key": "d35-d42",
+    "text": "വൂ",
+    "label": "vū"
+  },
+  {
+    "key": "d2f-d40",
+    "text": "യീ",
+    "label": "yī"
+  },
+  {
+    "key": "d2f-d42",
+    "text": "യൂ",
+    "label": "yū"
+  },
+  {
+    "key": "d1f-d40",
+    "text": "ടീ",
+    "label": "ṭī"
+  },
+  {
+    "key": "d1f-d42",
+    "text": "ടൂ",
+    "label": "ṭū"
+  },
+  {
+    "key": "d23-d40",
+    "text": "ണീ",
+    "label": "ṇī"
+  },
+  {
+    "key": "d23-d42",
+    "text": "ണൂ",
+    "label": "ṇū"
+  },
+  {
+    "key": "d38",
+    "text": "സ",
+    "label": "sa"
+  },
+  {
+    "key": "d33",
+    "text": "ള",
+    "label": "ḷa"
+  },
+  {
+    "key": "d1c",
+    "text": "ജ",
+    "label": "ja"
+  },
+  {
+    "key": "d15-d46",
+    "text": "കെ",
+    "label": "e"
+  },
+  {
+    "key": "d38-d46",
+    "text": "സെ",
+    "label": "se"
+  },
+  {
+    "key": "d33-d46",
+    "text": "ളെ",
+    "label": "ḷe"
+  },
+  {
+    "key": "d1c-d46",
+    "text": "ജെ",
+    "label": "je"
+  },
+  {
+    "key": "d28-d46",
+    "text": "നെ",
+    "label": "ne"
+  },
+  {
+    "key": "d2e-d46",
+    "text": "മെ",
+    "label": "me"
+  },
+  {
+    "key": "d24-d46",
+    "text": "തെ",
+    "label": "te"
+  },
+  {
+    "key": "d2a-d46",
+    "text": "പെ",
+    "label": "pe"
+  },
+  {
+    "key": "d32-d46",
+    "text": "ലെ",
+    "label": "le"
+  },
+  {
+    "key": "d30-d46",
+    "text": "രെ",
+    "label": "re"
+  },
+  {
+    "key": "d35-d46",
+    "text": "വെ",
+    "label": "ve"
+  },
+  {
+    "key": "d2f-d46",
+    "text": "യെ",
+    "label": "ye"
+  },
+  {
+    "key": "d1f-d46",
+    "text": "ടെ",
+    "label": "ṭe"
+  },
+  {
+    "key": "d23-d46",
+    "text": "ണെ",
+    "label": "ṇe"
+  },
+  {
+    "key": "d38-d3e",
+    "text": "സാ",
+    "label": "sā"
+  },
+  {
+    "key": "d38-d3f",
+    "text": "സി",
+    "label": "si"
+  },
+  {
+    "key": "d38-d41",
+    "text": "സു",
+    "label": "su"
+  },
+  {
+    "key": "d38-d02",
+    "text": "സം",
+    "label": "saṁ"
+  },
+  {
+    "key": "d38-d40",
+    "text": "സീ",
+    "label": "sī"
+  },
+  {
+    "key": "d38-d42",
+    "text": "സൂ",
+    "label": "sū"
+  },
+  {
+    "key": "d33-d3e",
+    "text": "ളാ",
+    "label": "ḷā"
+  },
+  {
+    "key": "d33-d3f",
+    "text": "ളി",
+    "label": "ḷi"
+  },
+  {
+    "key": "d33-d41",
+    "text": "ളു",
+    "label": "ḷu"
+  },
+  {
+    "key": "d33-d02",
+    "text": "ളം",
+    "label": "ḷaṁ"
+  },
+  {
+    "key": "d33-d40",
+    "text": "ളീ",
+    "label": "ḷī"
+  },
+  {
+    "key": "d33-d42",
+    "text": "ളൂ",
+    "label": "ḷū"
+  },
+  {
+    "key": "d1c-d3e",
+    "text": "ജാ",
+    "label": "jā"
+  },
+  {
+    "key": "d1c-d3f",
+    "text": "ജി",
+    "label": "ji"
+  },
+  {
+    "key": "d1c-d41",
+    "text": "ജു",
+    "label": "ju"
+  },
+  {
+    "key": "d1c-d02",
+    "text": "ജം",
+    "label": "jaṁ"
+  },
+  {
+    "key": "d1c-d40",
+    "text": "ജീ",
+    "label": "jī"
+  },
+  {
+    "key": "d1c-d42",
+    "text": "ജൂ",
+    "label": "jū"
+  },
+  {
+    "key": "d26",
+    "text": "ദ",
+    "label": "da"
+  },
+  {
+    "key": "d1a",
+    "text": "ച",
+    "label": "ca"
+  },
+  {
+    "key": "d17",
+    "text": "ഗ",
+    "label": "ga"
+  },
+  {
+    "key": "d15-d47",
+    "text": "കേ",
+    "label": "ē"
+  },
+  {
+    "key": "d26-d47",
+    "text": "ദേ",
+    "label": "dē"
+  },
+  {
+    "key": "d1a-d47",
+    "text": "ചേ",
+    "label": "cē"
+  },
+  {
+    "key": "d17-d47",
+    "text": "ഗേ",
+    "label": "gē"
+  },
+  {
+    "key": "d28-d47",
+    "text": "നേ",
+    "label": "nē"
+  },
+  {
+    "key": "d2e-d47",
+    "text": "മേ",
+    "label": "mē"
+  },
+  {
+    "key": "d24-d47",
+    "text": "തേ",
+    "label": "tē"
+  },
+  {
+    "key": "d2a-d47",
+    "text": "പേ",
+    "label": "pē"
+  },
+  {
+    "key": "d32-d47",
+    "text": "ലേ",
+    "label": "lē"
+  },
+  {
+    "key": "d30-d47",
+    "text": "രേ",
+    "label": "rē"
+  },
+  {
+    "key": "d35-d47",
+    "text": "വേ",
+    "label": "vē"
+  },
+  {
+    "key": "d2f-d47",
+    "text": "യേ",
+    "label": "yē"
+  },
+  {
+    "key": "d1f-d47",
+    "text": "ടേ",
+    "label": "ṭē"
+  },
+  {
+    "key": "d23-d47",
+    "text": "ണേ",
+    "label": "ṇē"
+  },
+  {
+    "key": "d38-d47",
+    "text": "സേ",
+    "label": "sē"
+  },
+  {
+    "key": "d33-d47",
+    "text": "ളേ",
+    "label": "ḷē"
+  },
+  {
+    "key": "d1c-d47",
+    "text": "ജേ",
+    "label": "jē"
+  },
+  {
+    "key": "d26-d3e",
+    "text": "ദാ",
+    "label": "dā"
+  },
+  {
+    "key": "d26-d3f",
+    "text": "ദി",
+    "label": "di"
+  },
+  {
+    "key": "d26-d41",
+    "text": "ദു",
+    "label": "du"
+  },
+  {
+    "key": "d26-d02",
+    "text": "ദം",
+    "label": "daṁ"
+  },
+  {
+    "key": "d26-d40",
+    "text": "ദീ",
+    "label": "dī"
+  },
+  {
+    "key": "d26-d42",
+    "text": "ദൂ",
+    "label": "dū"
+  },
+  {
+    "key": "d26-d46",
+    "text": "ദെ",
+    "label": "de"
+  },
+  {
+    "key": "d1a-d3e",
+    "text": "ചാ",
+    "label": "cā"
+  },
+  {
+    "key": "d1a-d3f",
+    "text": "ചി",
+    "label": "ci"
+  },
+  {
+    "key": "d1a-d41",
+    "text": "ചു",
+    "label": "cu"
+  },
+  {
+    "key": "d1a-d02",
+    "text": "ചം",
+    "label": "caṁ"
+  },
+  {
+    "key": "d1a-d40",
+    "text": "ചീ",
+    "label": "cī"
+  },
+  {
+    "key": "d1a-d42",
+    "text": "ചൂ",
+    "label": "cū"
+  },
+  {
+    "key": "d1a-d46",
+    "text": "ചെ",
+    "label": "ce"
+  },
+  {
+    "key": "d17-d3e",
+    "text": "ഗാ",
+    "label": "gā"
+  },
+  {
+    "key": "d17-d3f",
+    "text": "ഗി",
+    "label": "gi"
+  },
+  {
+    "key": "d17-d41",
+    "text": "ഗു",
+    "label": "gu"
+  },
+  {
+    "key": "d17-d02",
+    "text": "ഗം",
+    "label": "gaṁ"
+  },
+  {
+    "key": "d17-d40",
+    "text": "ഗീ",
+    "label": "gī"
+  },
+  {
+    "key": "d17-d42",
+    "text": "ഗൂ",
+    "label": "gū"
+  },
+  {
+    "key": "d17-d46",
+    "text": "ഗെ",
+    "label": "ge"
+  },
+  {
+    "key": "d0e",
+    "text": "എ",
+    "label": "e"
+  },
+  {
+    "key": "d0f",
+    "text": "ഏ",
+    "label": "ē"
+  },
+  {
+    "key": "d12",
+    "text": "ഒ",
+    "label": "o"
+  },
+  {
+    "key": "d13",
+    "text": "ഓ",
+    "label": "ō"
+  },
+  {
+    "key": "d36",
+    "text": "ശ",
+    "label": "śa"
+  },
+  {
+    "key": "d37",
+    "text": "ഷ",
+    "label": "ṣa"
+  },
+  {
+    "key": "d39",
+    "text": "ഹ",
+    "label": "ha"
+  },
+  {
+    "key": "d15-d4a",
+    "text": "കൊ",
+    "label": "o"
+  },
+  {
+    "key": "d36-d4a",
+    "text": "ശൊ",
+    "label": "śo"
+  },
+  {
+    "key": "d37-d4a",
+    "text": "ഷൊ",
+    "label": "ṣo"
+  },
+  {
+    "key": "d39-d4a",
+    "text": "ഹൊ",
+    "label": "ho"
+  },
+  {
+    "key": "d28-d4a",
+    "text": "നൊ",
+    "label": "no"
+  },
+  {
+    "key": "d2e-d4a",
+    "text": "മൊ",
+    "label": "mo"
+  },
+  {
+    "key": "d24-d4a",
+    "text": "തൊ",
+    "label": "to"
+  },
+  {
+    "key": "d2a-d4a",
+    "text": "പൊ",
+    "label": "po"
+  },
+  {
+    "key": "d32-d4a",
+    "text": "ലൊ",
+    "label": "lo"
+  },
+  {
+    "key": "d30-d4a",
+    "text": "രൊ",
+    "label": "ro"
+  },
+  {
+    "key": "d35-d4a",
+    "text": "വൊ",
+    "label": "vo"
+  },
+  {
+    "key": "d2f-d4a",
+    "text": "യൊ",
+    "label": "yo"
+  },
+  {
+    "key": "d1f-d4a",
+    "text": "ടൊ",
+    "label": "ṭo"
+  },
+  {
+    "key": "d23-d4a",
+    "text": "ണൊ",
+    "label": "ṇo"
+  },
+  {
+    "key": "d38-d4a",
+    "text": "സൊ",
+    "label": "so"
+  },
+  {
+    "key": "d33-d4a",
+    "text": "ളൊ",
+    "label": "ḷo"
+  },
+  {
+    "key": "d1c-d4a",
+    "text": "ജൊ",
+    "label": "jo"
+  },
+  {
+    "key": "d26-d4a",
+    "text": "ദൊ",
+    "label": "do"
+  },
+  {
+    "key": "d1a-d4a",
+    "text": "ചൊ",
+    "label": "co"
+  },
+  {
+    "key": "d17-d4a",
+    "text": "ഗൊ",
+    "label": "go"
+  },
+  {
+    "key": "d36-d3e",
+    "text": "ശാ",
+    "label": "śā"
+  },
+  {
+    "key": "d36-d3f",
+    "text": "ശി",
+    "label": "śi"
+  },
+  {
+    "key": "d36-d41",
+    "text": "ശു",
+    "label": "śu"
+  },
+  {
+    "key": "d36-d02",
+    "text": "ശം",
+    "label": "śaṁ"
+  },
+  {
+    "key": "d36-d40",
+    "text": "ശീ",
+    "label": "śī"
+  },
+  {
+    "key": "d36-d42",
+    "text": "ശൂ",
+    "label": "śū"
+  },
+  {
+    "key": "d36-d46",
+    "text": "ശെ",
+    "label": "śe"
+  },
+  {
+    "key": "d36-d47",
+    "text": "ശേ",
+    "label": "śē"
+  },
+  {
+    "key": "d37-d3e",
+    "text": "ഷാ",
+    "label": "ṣā"
+  },
+  {
+    "key": "d37-d3f",
+    "text": "ഷി",
+    "label": "ṣi"
+  },
+  {
+    "key": "d37-d41",
+    "text": "ഷു",
+    "label": "ṣu"
+  },
+  {
+    "key": "d37-d02",
+    "text": "ഷം",
+    "label": "ṣaṁ"
+  },
+  {
+    "key": "d37-d40",
+    "text": "ഷീ",
+    "label": "ṣī"
+  },
+  {
+    "key": "d37-d42",
+    "text": "ഷൂ",
+    "label": "ṣū"
+  },
+  {
+    "key": "d37-d46",
+    "text": "ഷെ",
+    "label": "ṣe"
+  },
+  {
+    "key": "d37-d47",
+    "text": "ഷേ",
+    "label": "ṣē"
+  },
+  {
+    "key": "d39-d3e",
+    "text": "ഹാ",
+    "label": "hā"
+  },
+  {
+    "key": "d39-d3f",
+    "text": "ഹി",
+    "label": "hi"
+  },
+  {
+    "key": "d39-d41",
+    "text": "ഹു",
+    "label": "hu"
+  },
+  {
+    "key": "d39-d02",
+    "text": "ഹം",
+    "label": "haṁ"
+  },
+  {
+    "key": "d39-d40",
+    "text": "ഹീ",
+    "label": "hī"
+  },
+  {
+    "key": "d39-d42",
+    "text": "ഹൂ",
+    "label": "hū"
+  },
+  {
+    "key": "d39-d46",
+    "text": "ഹെ",
+    "label": "he"
+  },
+  {
+    "key": "d39-d47",
+    "text": "ഹേ",
+    "label": "hē"
+  },
+  {
+    "key": "d7b",
+    "text": "ൻ",
+    "label": "n"
+  },
+  {
+    "key": "d7c",
+    "text": "ർ",
+    "label": "r"
+  },
+  {
+    "key": "d7d",
+    "text": "ൽ",
+    "label": "l"
+  },
+  {
+    "key": "d7e",
+    "text": "ൾ",
+    "label": "ḷ"
+  },
+  {
+    "key": "d2c",
+    "text": "ബ",
+    "label": "ba"
+  },
+  {
+    "key": "d2d",
+    "text": "ഭ",
+    "label": "bha"
+  },
+  {
+    "key": "d34",
+    "text": "ഴ",
+    "label": "ḻa"
+  },
+  {
+    "key": "d15-d4b",
+    "text": "കോ",
+    "label": "ō"
+  },
+  {
+    "key": "d2c-d4b",
+    "text": "ബോ",
+    "label": "bō"
+  },
+  {
+    "key": "d2d-d4b",
+    "text": "ഭോ",
+    "label": "bhō"
+  },
+  {
+    "key": "d34-d4b",
+    "text": "ഴോ",
+    "label": "ḻō"
+  },
+  {
+    "key": "d28-d4b",
+    "text": "നോ",
+    "label": "nō"
+  },
+  {
+    "key": "d2e-d4b",
+    "text": "മോ",
+    "label": "mō"
+  },
+  {
+    "key": "d24-d4b",
+    "text": "തോ",
+    "label": "tō"
+  },
+  {
+    "key": "d2a-d4b",
+    "text": "പോ",
+    "label": "pō"
+  },
+  {
+    "key": "d32-d4b",
+    "text": "ലോ",
+    "label": "lō"
+  },
+  {
+    "key": "d30-d4b",
+    "text": "രോ",
+    "label": "rō"
+  },
+  {
+    "key": "d35-d4b",
+    "text": "വോ",
+    "label": "vō"
+  },
+  {
+    "key": "d2f-d4b",
+    "text": "യോ",
+    "label": "yō"
+  },
+  {
+    "key": "d1f-d4b",
+    "text": "ടോ",
+    "label": "ṭō"
+  },
+  {
+    "key": "d23-d4b",
+    "text": "ണോ",
+    "label": "ṇō"
+  },
+  {
+    "key": "d38-d4b",
+    "text": "സോ",
+    "label": "sō"
+  },
+  {
+    "key": "d33-d4b",
+    "text": "ളോ",
+    "label": "ḷō"
+  },
+  {
+    "key": "d1c-d4b",
+    "text": "ജോ",
+    "label": "jō"
+  },
+  {
+    "key": "d26-d4b",
+    "text": "ദോ",
+    "label": "dō"
+  },
+  {
+    "key": "d1a-d4b",
+    "text": "ചോ",
+    "label": "cō"
+  },
+  {
+    "key": "d17-d4b",
+    "text": "ഗോ",
+    "label": "gō"
+  },
+  {
+    "key": "d36-d4b",
+    "text": "ശോ",
+    "label": "śō"
+  },
+  {
+    "key": "d37-d4b",
+    "text": "ഷോ",
+    "label": "ṣō"
+  },
+  {
+    "key": "d39-d4b",
+    "text": "ഹോ",
+    "label": "hō"
+  },
+  {
+    "key": "d2c-d3e",
+    "text": "ബാ",
+    "label": "bā"
+  },
+  {
+    "key": "d2c-d3f",
+    "text": "ബി",
+    "label": "bi"
+  },
+  {
+    "key": "d2c-d41",
+    "text": "ബു",
+    "label": "bu"
+  },
+  {
+    "key": "d2c-d02",
+    "text": "ബം",
+    "label": "baṁ"
+  },
+  {
+    "key": "d2c-d40",
+    "text": "ബീ",
+    "label": "bī"
+  },
+  {
+    "key": "d2c-d42",
+    "text": "ബൂ",
+    "label": "bū"
+  },
+  {
+    "key": "d2c-d46",
+    "text": "ബെ",
+    "label": "be"
+  },
+  {
+    "key": "d2c-d47",
+    "text": "ബേ",
+    "label": "bē"
+  },
+  {
+    "key": "d2c-d4a",
+    "text": "ബൊ",
+    "label": "bo"
+  },
+  {
+    "key": "d2d-d3e",
+    "text": "ഭാ",
+    "label": "bhā"
+  },
+  {
+    "key": "d2d-d3f",
+    "text": "ഭി",
+    "label": "bhi"
+  },
+  {
+    "key": "d2d-d41",
+    "text": "ഭു",
+    "label": "bhu"
+  },
+  {
+    "key": "d2d-d02",
+    "text": "ഭം",
+    "label": "bhaṁ"
+  },
+  {
+    "key": "d2d-d40",
+    "text": "ഭീ",
+    "label": "bhī"
+  },
+  {
+    "key": "d2d-d42",
+    "text": "ഭൂ",
+    "label": "bhū"
+  },
+  {
+    "key": "d2d-d46",
+    "text": "ഭെ",
+    "label": "bhe"
+  },
+  {
+    "key": "d2d-d47",
+    "text": "ഭേ",
+    "label": "bhē"
+  },
+  {
+    "key": "d2d-d4a",
+    "text": "ഭൊ",
+    "label": "bho"
+  },
+  {
+    "key": "d34-d3e",
+    "text": "ഴാ",
+    "label": "ḻā"
+  },
+  {
+    "key": "d34-d3f",
+    "text": "ഴി",
+    "label": "ḻi"
+  },
+  {
+    "key": "d34-d41",
+    "text": "ഴു",
+    "label": "ḻu"
+  },
+  {
+    "key": "d34-d02",
+    "text": "ഴം",
+    "label": "ḻaṁ"
+  },
+  {
+    "key": "d34-d40",
+    "text": "ഴീ",
+    "label": "ḻī"
+  },
+  {
+    "key": "d34-d42",
+    "text": "ഴൂ",
+    "label": "ḻū"
+  },
+  {
+    "key": "d34-d46",
+    "text": "ഴെ",
+    "label": "ḻe"
+  },
+  {
+    "key": "d34-d47",
+    "text": "ഴേ",
+    "label": "ḻē"
+  },
+  {
+    "key": "d34-d4a",
+    "text": "ഴൊ",
+    "label": "ḻo"
+  },
+  {
+    "key": "d31",
+    "text": "റ",
+    "label": "ṟa"
+  },
+  {
+    "key": "d1e",
+    "text": "ഞ",
+    "label": "ña"
+  },
+  {
+    "key": "d19",
+    "text": "ങ",
+    "label": "ṅa"
+  },
+  {
+    "key": "d15-d48",
+    "text": "കൈ",
+    "label": "ai"
+  },
+  {
+    "key": "d31-d48",
+    "text": "റൈ",
+    "label": "ṟai"
+  },
+  {
+    "key": "d1e-d48",
+    "text": "ഞൈ",
+    "label": "ñai"
+  },
+  {
+    "key": "d19-d48",
+    "text": "ങൈ",
+    "label": "ṅai"
+  },
+  {
+    "key": "d28-d48",
+    "text": "നൈ",
+    "label": "nai"
+  },
+  {
+    "key": "d2e-d48",
+    "text": "മൈ",
+    "label": "mai"
+  },
+  {
+    "key": "d24-d48",
+    "text": "തൈ",
+    "label": "tai"
+  },
+  {
+    "key": "d2a-d48",
+    "text": "പൈ",
+    "label": "pai"
+  },
+  {
+    "key": "d32-d48",
+    "text": "ലൈ",
+    "label": "lai"
+  },
+  {
+    "key": "d30-d48",
+    "text": "രൈ",
+    "label": "rai"
+  },
+  {
+    "key": "d35-d48",
+    "text": "വൈ",
+    "label": "vai"
+  },
+  {
+    "key": "d2f-d48",
+    "text": "യൈ",
+    "label": "yai"
+  },
+  {
+    "key": "d1f-d48",
+    "text": "ടൈ",
+    "label": "ṭai"
+  },
+  {
+    "key": "d23-d48",
+    "text": "ണൈ",
+    "label": "ṇai"
+  },
+  {
+    "key": "d38-d48",
+    "text": "സൈ",
+    "label": "sai"
+  },
+  {
+    "key": "d33-d48",
+    "text": "ളൈ",
+    "label": "ḷai"
+  },
+  {
+    "key": "d1c-d48",
+    "text": "ജൈ",
+    "label": "jai"
+  },
+  {
+    "key": "d26-d48",
+    "text": "ദൈ",
+    "label": "dai"
+  },
+  {
+    "key": "d1a-d48",
+    "text": "ചൈ",
+    "label": "cai"
+  },
+  {
+    "key": "d17-d48",
+    "text": "ഗൈ",
+    "label": "gai"
+  },
+  {
+    "key": "d36-d48",
+    "text": "ശൈ",
+    "label": "śai"
+  },
+  {
+    "key": "d37-d48",
+    "text": "ഷൈ",
+    "label": "ṣai"
+  },
+  {
+    "key": "d39-d48",
+    "text": "ഹൈ",
+    "label": "hai"
+  },
+  {
+    "key": "d2c-d48",
+    "text": "ബൈ",
+    "label": "bai"
+  },
+  {
+    "key": "d2d-d48",
+    "text": "ഭൈ",
+    "label": "bhai"
+  },
+  {
+    "key": "d34-d48",
+    "text": "ഴൈ",
+    "label": "ḻai"
+  },
+  {
+    "key": "d31-d3e",
+    "text": "റാ",
+    "label": "ṟā"
+  },
+  {
+    "key": "d31-d3f",
+    "text": "റി",
+    "label": "ṟi"
+  },
+  {
+    "key": "d31-d41",
+    "text": "റു",
+    "label": "ṟu"
+  },
+  {
+    "key": "d31-d02",
+    "text": "റം",
+    "label": "ṟaṁ"
+  },
+  {
+    "key": "d31-d40",
+    "text": "റീ",
+    "label": "ṟī"
+  },
+  {
+    "key": "d31-d42",
+    "text": "റൂ",
+    "label": "ṟū"
+  },
+  {
+    "key": "d31-d46",
+    "text": "റെ",
+    "label": "ṟe"
+  },
+  {
+    "key": "d31-d47",
+    "text": "റേ",
+    "label": "ṟē"
+  },
+  {
+    "key": "d31-d4a",
+    "text": "റൊ",
+    "label": "ṟo"
+  },
+  {
+    "key": "d31-d4b",
+    "text": "റോ",
+    "label": "ṟō"
+  },
+  {
+    "key": "d1e-d3e",
+    "text": "ഞാ",
+    "label": "ñā"
+  },
+  {
+    "key": "d1e-d3f",
+    "text": "ഞി",
+    "label": "ñi"
+  },
+  {
+    "key": "d1e-d41",
+    "text": "ഞു",
+    "label": "ñu"
+  },
+  {
+    "key": "d1e-d02",
+    "text": "ഞം",
+    "label": "ñaṁ"
+  },
+  {
+    "key": "d1e-d40",
+    "text": "ഞീ",
+    "label": "ñī"
+  },
+  {
+    "key": "d1e-d42",
+    "text": "ഞൂ",
+    "label": "ñū"
+  },
+  {
+    "key": "d1e-d46",
+    "text": "ഞെ",
+    "label": "ñe"
+  },
+  {
+    "key": "d1e-d47",
+    "text": "ഞേ",
+    "label": "ñē"
+  },
+  {
+    "key": "d1e-d4a",
+    "text": "ഞൊ",
+    "label": "ño"
+  },
+  {
+    "key": "d1e-d4b",
+    "text": "ഞോ",
+    "label": "ñō"
+  },
+  {
+    "key": "d19-d3e",
+    "text": "ങാ",
+    "label": "ṅā"
+  },
+  {
+    "key": "d19-d3f",
+    "text": "ങി",
+    "label": "ṅi"
+  },
+  {
+    "key": "d19-d41",
+    "text": "ങു",
+    "label": "ṅu"
+  },
+  {
+    "key": "d19-d02",
+    "text": "ങം",
+    "label": "ṅaṁ"
+  },
+  {
+    "key": "d19-d40",
+    "text": "ങീ",
+    "label": "ṅī"
+  },
+  {
+    "key": "d19-d42",
+    "text": "ങൂ",
+    "label": "ṅū"
+  },
+  {
+    "key": "d19-d46",
+    "text": "ങെ",
+    "label": "ṅe"
+  },
+  {
+    "key": "d19-d47",
+    "text": "ങേ",
+    "label": "ṅē"
+  },
+  {
+    "key": "d19-d4a",
+    "text": "ങൊ",
+    "label": "ṅo"
+  },
+  {
+    "key": "d19-d4b",
+    "text": "ങോ",
+    "label": "ṅō"
+  },
+  {
+    "key": "d15-d4d-d15",
+    "text": "ക്ക",
+    "label": "kka"
+  },
+  {
+    "key": "d24-d4d-d24",
+    "text": "ത്ത",
+    "label": "tta"
+  },
+  {
+    "key": "d28-d4d-d28",
+    "text": "ന്ന",
+    "label": "nna"
+  },
+  {
+    "key": "d2a-d4d-d2a",
+    "text": "പ്പ",
+    "label": "ppa"
+  },
+  {
+    "key": "d15-d4d-d15-d3e",
+    "text": "ക്കാ",
+    "label": "kkā"
+  },
+  {
+    "key": "d15-d4d-d15-d3f",
+    "text": "ക്കി",
+    "label": "kki"
+  },
+  {
+    "key": "d15-d4d-d15-d41",
+    "text": "ക്കു",
+    "label": "kku"
+  },
+  {
+    "key": "d15-d4d-d15-d02",
+    "text": "ക്കം",
+    "label": "kkaṁ"
+  },
+  {
+    "key": "d15-d4d-d15-d40",
+    "text": "ക്കീ",
+    "label": "kkī"
+  },
+  {
+    "key": "d15-d4d-d15-d42",
+    "text": "ക്കൂ",
+    "label": "kkū"
+  },
+  {
+    "key": "d15-d4d-d15-d46",
+    "text": "ക്കെ",
+    "label": "kke"
+  },
+  {
+    "key": "d15-d4d-d15-d47",
+    "text": "ക്കേ",
+    "label": "kkē"
+  },
+  {
+    "key": "d15-d4d-d15-d4a",
+    "text": "ക്കൊ",
+    "label": "kko"
+  },
+  {
+    "key": "d15-d4d-d15-d4b",
+    "text": "ക്കോ",
+    "label": "kkō"
+  },
+  {
+    "key": "d15-d4d-d15-d48",
+    "text": "ക്കൈ",
+    "label": "kkai"
+  },
+  {
+    "key": "d24-d4d-d24-d3e",
+    "text": "ത്താ",
+    "label": "ttā"
+  },
+  {
+    "key": "d24-d4d-d24-d3f",
+    "text": "ത്തി",
+    "label": "tti"
+  },
+  {
+    "key": "d24-d4d-d24-d41",
+    "text": "ത്തു",
+    "label": "ttu"
+  },
+  {
+    "key": "d24-d4d-d24-d02",
+    "text": "ത്തം",
+    "label": "ttaṁ"
+  },
+  {
+    "key": "d24-d4d-d24-d40",
+    "text": "ത്തീ",
+    "label": "ttī"
+  },
+  {
+    "key": "d24-d4d-d24-d42",
+    "text": "ത്തൂ",
+    "label": "ttū"
+  },
+  {
+    "key": "d24-d4d-d24-d46",
+    "text": "ത്തെ",
+    "label": "tte"
+  },
+  {
+    "key": "d24-d4d-d24-d47",
+    "text": "ത്തേ",
+    "label": "ttē"
+  },
+  {
+    "key": "d24-d4d-d24-d4a",
+    "text": "ത്തൊ",
+    "label": "tto"
+  },
+  {
+    "key": "d24-d4d-d24-d4b",
+    "text": "ത്തോ",
+    "label": "ttō"
+  },
+  {
+    "key": "d24-d4d-d24-d48",
+    "text": "ത്തൈ",
+    "label": "ttai"
+  },
+  {
+    "key": "d28-d4d-d28-d3e",
+    "text": "ന്നാ",
+    "label": "nnā"
+  },
+  {
+    "key": "d28-d4d-d28-d3f",
+    "text": "ന്നി",
+    "label": "nni"
+  },
+  {
+    "key": "d28-d4d-d28-d41",
+    "text": "ന്നു",
+    "label": "nnu"
+  },
+  {
+    "key": "d28-d4d-d28-d02",
+    "text": "ന്നം",
+    "label": "nnaṁ"
+  },
+  {
+    "key": "d28-d4d-d28-d40",
+    "text": "ന്നീ",
+    "label": "nnī"
+  },
+  {
+    "key": "d28-d4d-d28-d42",
+    "text": "ന്നൂ",
+    "label": "nnū"
+  },
+  {
+    "key": "d28-d4d-d28-d46",
+    "text": "ന്നെ",
+    "label": "nne"
+  },
+  {
+    "key": "d28-d4d-d28-d47",
+    "text": "ന്നേ",
+    "label": "nnē"
+  },
+  {
+    "key": "d28-d4d-d28-d4a",
+    "text": "ന്നൊ",
+    "label": "nno"
+  },
+  {
+    "key": "d28-d4d-d28-d4b",
+    "text": "ന്നോ",
+    "label": "nnō"
+  },
+  {
+    "key": "d28-d4d-d28-d48",
+    "text": "ന്നൈ",
+    "label": "nnai"
+  },
+  {
+    "key": "d2a-d4d-d2a-d3e",
+    "text": "പ്പാ",
+    "label": "ppā"
+  },
+  {
+    "key": "d2a-d4d-d2a-d3f",
+    "text": "പ്പി",
+    "label": "ppi"
+  },
+  {
+    "key": "d2a-d4d-d2a-d41",
+    "text": "പ്പു",
+    "label": "ppu"
+  },
+  {
+    "key": "d2a-d4d-d2a-d02",
+    "text": "പ്പം",
+    "label": "ppaṁ"
+  },
+  {
+    "key": "d2a-d4d-d2a-d40",
+    "text": "പ്പീ",
+    "label": "ppī"
+  },
+  {
+    "key": "d2a-d4d-d2a-d42",
+    "text": "പ്പൂ",
+    "label": "ppū"
+  },
+  {
+    "key": "d2a-d4d-d2a-d46",
+    "text": "പ്പെ",
+    "label": "ppe"
+  },
+  {
+    "key": "d2a-d4d-d2a-d47",
+    "text": "പ്പേ",
+    "label": "ppē"
+  },
+  {
+    "key": "d2a-d4d-d2a-d4a",
+    "text": "പ്പൊ",
+    "label": "ppo"
+  },
+  {
+    "key": "d2a-d4d-d2a-d4b",
+    "text": "പ്പോ",
+    "label": "ppō"
+  },
+  {
+    "key": "d2a-d4d-d2a-d48",
+    "text": "പ്പൈ",
+    "label": "ppai"
+  },
+  {
+    "key": "d16",
+    "text": "ഖ",
+    "label": "kha"
+  },
+  {
+    "key": "d18",
+    "text": "ഘ",
+    "label": "gha"
+  },
+  {
+    "key": "d1b",
+    "text": "ഛ",
+    "label": "cha"
+  },
+  {
+    "key": "d25",
+    "text": "ഥ",
+    "label": "tha"
+  },
+  {
+    "key": "d16-d3e",
+    "text": "ഖാ",
+    "label": "khā"
+  },
+  {
+    "key": "d16-d3f",
+    "text": "ഖി",
+    "label": "khi"
+  },
+  {
+    "key": "d16-d41",
+    "text": "ഖു",
+    "label": "khu"
+  },
+  {
+    "key": "d16-d02",
+    "text": "ഖം",
+    "label": "khaṁ"
+  },
+  {
+    "key": "d16-d40",
+    "text": "ഖീ",
+    "label": "khī"
+  },
+  {
+    "key": "d16-d42",
+    "text": "ഖൂ",
+    "label": "khū"
+  },
+  {
+    "key": "d16-d46",
+    "text": "ഖെ",
+    "label": "khe"
+  },
+  {
+    "key": "d16-d47",
+    "text": "ഖേ",
+    "label": "khē"
+  },
+  {
+    "key": "d16-d4a",
+    "text": "ഖൊ",
+    "label": "kho"
+  },
+  {
+    "key": "d16-d4b",
+    "text": "ഖോ",
+    "label": "khō"
+  },
+  {
+    "key": "d16-d48",
+    "text": "ഖൈ",
+    "label": "khai"
+  },
+  {
+    "key": "d18-d3e",
+    "text": "ഘാ",
+    "label": "ghā"
+  },
+  {
+    "key": "d18-d3f",
+    "text": "ഘി",
+    "label": "ghi"
+  },
+  {
+    "key": "d18-d41",
+    "text": "ഘു",
+    "label": "ghu"
+  },
+  {
+    "key": "d18-d02",
+    "text": "ഘം",
+    "label": "ghaṁ"
+  },
+  {
+    "key": "d18-d40",
+    "text": "ഘീ",
+    "label": "ghī"
+  },
+  {
+    "key": "d18-d42",
+    "text": "ഘൂ",
+    "label": "ghū"
+  },
+  {
+    "key": "d18-d46",
+    "text": "ഘെ",
+    "label": "ghe"
+  },
+  {
+    "key": "d18-d47",
+    "text": "ഘേ",
+    "label": "ghē"
+  },
+  {
+    "key": "d18-d4a",
+    "text": "ഘൊ",
+    "label": "gho"
+  },
+  {
+    "key": "d18-d4b",
+    "text": "ഘോ",
+    "label": "ghō"
+  },
+  {
+    "key": "d18-d48",
+    "text": "ഘൈ",
+    "label": "ghai"
+  },
+  {
+    "key": "d1b-d3e",
+    "text": "ഛാ",
+    "label": "chā"
+  },
+  {
+    "key": "d1b-d3f",
+    "text": "ഛി",
+    "label": "chi"
+  },
+  {
+    "key": "d1b-d41",
+    "text": "ഛു",
+    "label": "chu"
+  },
+  {
+    "key": "d1b-d02",
+    "text": "ഛം",
+    "label": "chaṁ"
+  },
+  {
+    "key": "d1b-d40",
+    "text": "ഛീ",
+    "label": "chī"
+  },
+  {
+    "key": "d1b-d42",
+    "text": "ഛൂ",
+    "label": "chū"
+  },
+  {
+    "key": "d1b-d46",
+    "text": "ഛെ",
+    "label": "che"
+  },
+  {
+    "key": "d1b-d47",
+    "text": "ഛേ",
+    "label": "chē"
+  },
+  {
+    "key": "d1b-d4a",
+    "text": "ഛൊ",
+    "label": "cho"
+  },
+  {
+    "key": "d1b-d4b",
+    "text": "ഛോ",
+    "label": "chō"
+  },
+  {
+    "key": "d1b-d48",
+    "text": "ഛൈ",
+    "label": "chai"
+  },
+  {
+    "key": "d25-d3e",
+    "text": "ഥാ",
+    "label": "thā"
+  },
+  {
+    "key": "d25-d3f",
+    "text": "ഥി",
+    "label": "thi"
+  },
+  {
+    "key": "d25-d41",
+    "text": "ഥു",
+    "label": "thu"
+  },
+  {
+    "key": "d25-d02",
+    "text": "ഥം",
+    "label": "thaṁ"
+  },
+  {
+    "key": "d25-d40",
+    "text": "ഥീ",
+    "label": "thī"
+  },
+  {
+    "key": "d25-d42",
+    "text": "ഥൂ",
+    "label": "thū"
+  },
+  {
+    "key": "d25-d46",
+    "text": "ഥെ",
+    "label": "the"
+  },
+  {
+    "key": "d25-d47",
+    "text": "ഥേ",
+    "label": "thē"
+  },
+  {
+    "key": "d25-d4a",
+    "text": "ഥൊ",
+    "label": "tho"
+  },
+  {
+    "key": "d25-d4b",
+    "text": "ഥോ",
+    "label": "thō"
+  },
+  {
+    "key": "d25-d48",
+    "text": "ഥൈ",
+    "label": "thai"
+  },
+  {
+    "key": "d27",
+    "text": "ധ",
+    "label": "dha"
+  },
+  {
+    "key": "d2b",
+    "text": "ഫ",
+    "label": "pha"
+  },
+  {
+    "key": "d20",
+    "text": "ഠ",
+    "label": "ṭha"
+  },
+  {
+    "key": "d21",
+    "text": "ഡ",
+    "label": "ḍa"
+  },
+  {
+    "key": "d27-d3e",
+    "text": "ധാ",
+    "label": "dhā"
+  },
+  {
+    "key": "d27-d3f",
+    "text": "ധി",
+    "label": "dhi"
+  },
+  {
+    "key": "d27-d41",
+    "text": "ധു",
+    "label": "dhu"
+  },
+  {
+    "key": "d27-d02",
+    "text": "ധം",
+    "label": "dhaṁ"
+  },
+  {
+    "key": "d27-d40",
+    "text": "ധീ",
+    "label": "dhī"
+  },
+  {
+    "key": "d27-d42",
+    "text": "ധൂ",
+    "label": "dhū"
+  },
+  {
+    "key": "d27-d46",
+    "text": "ധെ",
+    "label": "dhe"
+  },
+  {
+    "key": "d27-d47",
+    "text": "ധേ",
+    "label": "dhē"
+  },
+  {
+    "key": "d27-d4a",
+    "text": "ധൊ",
+    "label": "dho"
+  },
+  {
+    "key": "d27-d4b",
+    "text": "ധോ",
+    "label": "dhō"
+  },
+  {
+    "key": "d27-d48",
+    "text": "ധൈ",
+    "label": "dhai"
+  },
+  {
+    "key": "d2b-d3e",
+    "text": "ഫാ",
+    "label": "phā"
+  },
+  {
+    "key": "d2b-d3f",
+    "text": "ഫി",
+    "label": "phi"
+  },
+  {
+    "key": "d2b-d41",
+    "text": "ഫു",
+    "label": "phu"
+  },
+  {
+    "key": "d2b-d02",
+    "text": "ഫം",
+    "label": "phaṁ"
+  },
+  {
+    "key": "d2b-d40",
+    "text": "ഫീ",
+    "label": "phī"
+  },
+  {
+    "key": "d2b-d42",
+    "text": "ഫൂ",
+    "label": "phū"
+  },
+  {
+    "key": "d2b-d46",
+    "text": "ഫെ",
+    "label": "phe"
+  },
+  {
+    "key": "d2b-d47",
+    "text": "ഫേ",
+    "label": "phē"
+  },
+  {
+    "key": "d2b-d4a",
+    "text": "ഫൊ",
+    "label": "pho"
+  },
+  {
+    "key": "d2b-d4b",
+    "text": "ഫോ",
+    "label": "phō"
+  },
+  {
+    "key": "d2b-d48",
+    "text": "ഫൈ",
+    "label": "phai"
+  },
+  {
+    "key": "d20-d3e",
+    "text": "ഠാ",
+    "label": "ṭhā"
+  },
+  {
+    "key": "d20-d3f",
+    "text": "ഠി",
+    "label": "ṭhi"
+  },
+  {
+    "key": "d20-d41",
+    "text": "ഠു",
+    "label": "ṭhu"
+  },
+  {
+    "key": "d20-d02",
+    "text": "ഠം",
+    "label": "ṭhaṁ"
+  },
+  {
+    "key": "d20-d40",
+    "text": "ഠീ",
+    "label": "ṭhī"
+  },
+  {
+    "key": "d20-d42",
+    "text": "ഠൂ",
+    "label": "ṭhū"
+  },
+  {
+    "key": "d20-d46",
+    "text": "ഠെ",
+    "label": "ṭhe"
+  },
+  {
+    "key": "d20-d47",
+    "text": "ഠേ",
+    "label": "ṭhē"
+  },
+  {
+    "key": "d20-d4a",
+    "text": "ഠൊ",
+    "label": "ṭho"
+  },
+  {
+    "key": "d20-d4b",
+    "text": "ഠോ",
+    "label": "ṭhō"
+  },
+  {
+    "key": "d20-d48",
+    "text": "ഠൈ",
+    "label": "ṭhai"
+  },
+  {
+    "key": "d21-d3e",
+    "text": "ഡാ",
+    "label": "ḍā"
+  },
+  {
+    "key": "d21-d3f",
+    "text": "ഡി",
+    "label": "ḍi"
+  },
+  {
+    "key": "d21-d41",
+    "text": "ഡു",
+    "label": "ḍu"
+  },
+  {
+    "key": "d21-d02",
+    "text": "ഡം",
+    "label": "ḍaṁ"
+  },
+  {
+    "key": "d21-d40",
+    "text": "ഡീ",
+    "label": "ḍī"
+  },
+  {
+    "key": "d21-d42",
+    "text": "ഡൂ",
+    "label": "ḍū"
+  },
+  {
+    "key": "d21-d46",
+    "text": "ഡെ",
+    "label": "ḍe"
+  },
+  {
+    "key": "d21-d47",
+    "text": "ഡേ",
+    "label": "ḍē"
+  },
+  {
+    "key": "d21-d4a",
+    "text": "ഡൊ",
+    "label": "ḍo"
+  },
+  {
+    "key": "d21-d4b",
+    "text": "ഡോ",
+    "label": "ḍō"
+  },
+  {
+    "key": "d21-d48",
+    "text": "ഡൈ",
+    "label": "ḍai"
+  },
+  {
+    "key": "d22",
+    "text": "ഢ",
+    "label": "ḍha"
+  },
+  {
+    "key": "d7a",
+    "text": "ൺ",
+    "label": "ṇ"
+  },
+  {
+    "key": "d10",
+    "text": "ഐ",
+    "label": "ai"
+  },
+  {
+    "key": "d14",
+    "text": "ഔ",
+    "label": "au"
+  },
+  {
+    "key": "d22-d3e",
+    "text": "ഢാ",
+    "label": "ḍhā"
+  },
+  {
+    "key": "d22-d3f",
+    "text": "ഢി",
+    "label": "ḍhi"
+  },
+  {
+    "key": "d22-d41",
+    "text": "ഢു",
+    "label": "ḍhu"
+  },
+  {
+    "key": "d22-d02",
+    "text": "ഢം",
+    "label": "ḍhaṁ"
+  },
+  {
+    "key": "d22-d40",
+    "text": "ഢീ",
+    "label": "ḍhī"
+  },
+  {
+    "key": "d22-d42",
+    "text": "ഢൂ",
+    "label": "ḍhū"
+  },
+  {
+    "key": "d22-d46",
+    "text": "ഢെ",
+    "label": "ḍhe"
+  },
+  {
+    "key": "d22-d47",
+    "text": "ഢേ",
+    "label": "ḍhē"
+  },
+  {
+    "key": "d22-d4a",
+    "text": "ഢൊ",
+    "label": "ḍho"
+  },
+  {
+    "key": "d22-d4b",
+    "text": "ഢോ",
+    "label": "ḍhō"
+  },
+  {
+    "key": "d22-d48",
+    "text": "ഢൈ",
+    "label": "ḍhai"
+  },
+  {
+    "key": "d15-d57",
+    "text": "കൗ",
+    "label": "au"
+  },
+  {
+    "key": "d15-d03",
+    "text": "കഃ",
+    "label": "ḥ"
+  },
+  {
+    "key": "d15-d43",
+    "text": "കൃ",
+    "label": "r̥"
+  },
+  {
+    "key": "d0b",
+    "text": "ഋ",
+    "label": "r̥"
+  },
+  {
+    "key": "d28-d57",
+    "text": "നൗ",
+    "label": "nau"
+  },
+  {
+    "key": "d28-d43",
+    "text": "നൃ",
+    "label": "nr̥"
+  },
+  {
+    "key": "d2e-d57",
+    "text": "മൗ",
+    "label": "mau"
+  },
+  {
+    "key": "d2e-d43",
+    "text": "മൃ",
+    "label": "mr̥"
+  },
+  {
+    "key": "d24-d57",
+    "text": "തൗ",
+    "label": "tau"
+  },
+  {
+    "key": "d24-d43",
+    "text": "തൃ",
+    "label": "tr̥"
+  },
+  {
+    "key": "d2a-d57",
+    "text": "പൗ",
+    "label": "pau"
+  },
+  {
+    "key": "d2a-d43",
+    "text": "പൃ",
+    "label": "pr̥"
+  },
+  {
+    "key": "d32-d57",
+    "text": "ലൗ",
+    "label": "lau"
+  },
+  {
+    "key": "d32-d43",
+    "text": "ലൃ",
+    "label": "lr̥"
+  },
+  {
+    "key": "d30-d57",
+    "text": "രൗ",
+    "label": "rau"
+  },
+  {
+    "key": "d30-d43",
+    "text": "രൃ",
+    "label": "rr̥"
+  },
+  {
+    "key": "d35-d57",
+    "text": "വൗ",
+    "label": "vau"
+  },
+  {
+    "key": "d35-d43",
+    "text": "വൃ",
+    "label": "vr̥"
+  },
+  {
+    "key": "d2f-d57",
+    "text": "യൗ",
+    "label": "yau"
+  },
+  {
+    "key": "d2f-d43",
+    "text": "യൃ",
+    "label": "yr̥"
+  },
+  {
+    "key": "d1f-d57",
+    "text": "ടൗ",
+    "label": "ṭau"
+  },
+  {
+    "key": "d1f-d43",
+    "text": "ടൃ",
+    "label": "ṭr̥"
+  },
+  {
+    "key": "d23-d57",
+    "text": "ണൗ",
+    "label": "ṇau"
+  },
+  {
+    "key": "d23-d43",
+    "text": "ണൃ",
+    "label": "ṇr̥"
+  },
+  {
+    "key": "d38-d57",
+    "text": "സൗ",
+    "label": "sau"
+  },
+  {
+    "key": "d38-d43",
+    "text": "സൃ",
+    "label": "sr̥"
+  },
+  {
+    "key": "d33-d57",
+    "text": "ളൗ",
+    "label": "ḷau"
+  },
+  {
+    "key": "d33-d43",
+    "text": "ളൃ",
+    "label": "ḷr̥"
+  },
+  {
+    "key": "d1c-d57",
+    "text": "ജൗ",
+    "label": "jau"
+  },
+  {
+    "key": "d1c-d43",
+    "text": "ജൃ",
+    "label": "jr̥"
+  },
+  {
+    "key": "d26-d57",
+    "text": "ദൗ",
+    "label": "dau"
+  },
+  {
+    "key": "d26-d43",
+    "text": "ദൃ",
+    "label": "dr̥"
+  },
+  {
+    "key": "d1a-d57",
+    "text": "ചൗ",
+    "label": "cau"
+  },
+  {
+    "key": "d1a-d43",
+    "text": "ചൃ",
+    "label": "cr̥"
+  },
+  {
+    "key": "d17-d57",
+    "text": "ഗൗ",
+    "label": "gau"
+  },
+  {
+    "key": "d17-d43",
+    "text": "ഗൃ",
+    "label": "gr̥"
+  },
+  {
+    "key": "d36-d57",
+    "text": "ശൗ",
+    "label": "śau"
+  },
+  {
+    "key": "d36-d43",
+    "text": "ശൃ",
+    "label": "śr̥"
+  },
+  {
+    "key": "d37-d57",
+    "text": "ഷൗ",
+    "label": "ṣau"
+  },
+  {
+    "key": "d37-d43",
+    "text": "ഷൃ",
+    "label": "ṣr̥"
+  },
+  {
+    "key": "d39-d57",
+    "text": "ഹൗ",
+    "label": "hau"
+  },
+  {
+    "key": "d39-d43",
+    "text": "ഹൃ",
+    "label": "hr̥"
+  },
+  {
+    "key": "d2c-d57",
+    "text": "ബൗ",
+    "label": "bau"
+  },
+  {
+    "key": "d2c-d43",
+    "text": "ബൃ",
+    "label": "br̥"
+  },
+  {
+    "key": "d2d-d57",
+    "text": "ഭൗ",
+    "label": "bhau"
+  },
+  {
+    "key": "d2d-d43",
+    "text": "ഭൃ",
+    "label": "bhr̥"
+  },
+  {
+    "key": "d34-d57",
+    "text": "ഴൗ",
+    "label": "ḻau"
+  },
+  {
+    "key": "d34-d43",
+    "text": "ഴൃ",
+    "label": "ḻr̥"
+  },
+  {
+    "key": "d31-d57",
+    "text": "റൗ",
+    "label": "ṟau"
+  },
+  {
+    "key": "d31-d43",
+    "text": "റൃ",
+    "label": "ṟr̥"
+  },
+  {
+    "key": "d1e-d57",
+    "text": "ഞൗ",
+    "label": "ñau"
+  },
+  {
+    "key": "d1e-d43",
+    "text": "ഞൃ",
+    "label": "ñr̥"
+  },
+  {
+    "key": "d19-d57",
+    "text": "ങൗ",
+    "label": "ṅau"
+  },
+  {
+    "key": "d19-d43",
+    "text": "ങൃ",
+    "label": "ṅr̥"
+  },
+  {
+    "key": "d15-d4d-d15-d57",
+    "text": "ക്കൗ",
+    "label": "kkau"
+  },
+  {
+    "key": "d15-d4d-d15-d43",
+    "text": "ക്കൃ",
+    "label": "kkr̥"
+  },
+  {
+    "key": "d24-d4d-d24-d57",
+    "text": "ത്തൗ",
+    "label": "ttau"
+  },
+  {
+    "key": "d24-d4d-d24-d43",
+    "text": "ത്തൃ",
+    "label": "ttr̥"
+  },
+  {
+    "key": "d28-d4d-d28-d57",
+    "text": "ന്നൗ",
+    "label": "nnau"
+  },
+  {
+    "key": "d28-d4d-d28-d43",
+    "text": "ന്നൃ",
+    "label": "nnr̥"
+  },
+  {
+    "key": "d2a-d4d-d2a-d57",
+    "text": "പ്പൗ",
+    "label": "ppau"
+  },
+  {
+    "key": "d2a-d4d-d2a-d43",
+    "text": "പ്പൃ",
+    "label": "ppr̥"
+  },
+  {
+    "key": "d16-d57",
+    "text": "ഖൗ",
+    "label": "khau"
+  },
+  {
+    "key": "d16-d43",
+    "text": "ഖൃ",
+    "label": "khr̥"
+  },
+  {
+    "key": "d18-d57",
+    "text": "ഘൗ",
+    "label": "ghau"
+  },
+  {
+    "key": "d18-d43",
+    "text": "ഘൃ",
+    "label": "ghr̥"
+  },
+  {
+    "key": "d1b-d57",
+    "text": "ഛൗ",
+    "label": "chau"
+  },
+  {
+    "key": "d1b-d43",
+    "text": "ഛൃ",
+    "label": "chr̥"
+  },
+  {
+    "key": "d25-d57",
+    "text": "ഥൗ",
+    "label": "thau"
+  },
+  {
+    "key": "d25-d43",
+    "text": "ഥൃ",
+    "label": "thr̥"
+  },
+  {
+    "key": "d27-d57",
+    "text": "ധൗ",
+    "label": "dhau"
+  },
+  {
+    "key": "d27-d43",
+    "text": "ധൃ",
+    "label": "dhr̥"
+  },
+  {
+    "key": "d2b-d57",
+    "text": "ഫൗ",
+    "label": "phau"
+  },
+  {
+    "key": "d2b-d43",
+    "text": "ഫൃ",
+    "label": "phr̥"
+  },
+  {
+    "key": "d20-d57",
+    "text": "ഠൗ",
+    "label": "ṭhau"
+  },
+  {
+    "key": "d20-d43",
+    "text": "ഠൃ",
+    "label": "ṭhr̥"
+  },
+  {
+    "key": "d21-d57",
+    "text": "ഡൗ",
+    "label": "ḍau"
+  },
+  {
+    "key": "d21-d43",
+    "text": "ഡൃ",
+    "label": "ḍr̥"
+  },
+  {
+    "key": "d22-d57",
+    "text": "ഢൗ",
+    "label": "ḍhau"
+  },
+  {
+    "key": "d22-d43",
+    "text": "ഢൃ",
+    "label": "ḍhr̥"
+  },
+  {
+    "key": "d2e-d4d-d2e",
+    "text": "മ്മ",
+    "label": "mma"
+  },
+  {
+    "key": "d32-d4d-d32",
+    "text": "ല്ല",
+    "label": "lla"
+  },
+  {
+    "key": "d33-d4d-d33",
+    "text": "ള്ള",
+    "label": "ḷḷa"
+  },
+  {
+    "key": "d1f-d4d-d1f",
+    "text": "ട്ട",
+    "label": "ṭṭa"
+  },
+  {
+    "key": "d2e-d4d-d2e-d3e",
+    "text": "മ്മാ",
+    "label": "mmā"
+  },
+  {
+    "key": "d2e-d4d-d2e-d3f",
+    "text": "മ്മി",
+    "label": "mmi"
+  },
+  {
+    "key": "d2e-d4d-d2e-d41",
+    "text": "മ്മു",
+    "label": "mmu"
+  },
+  {
+    "key": "d2e-d4d-d2e-d02",
+    "text": "മ്മം",
+    "label": "mmaṁ"
+  },
+  {
+    "key": "d2e-d4d-d2e-d40",
+    "text": "മ്മീ",
+    "label": "mmī"
+  },
+  {
+    "key": "d2e-d4d-d2e-d42",
+    "text": "മ്മൂ",
+    "label": "mmū"
+  },
+  {
+    "key": "d2e-d4d-d2e-d46",
+    "text": "മ്മെ",
+    "label": "mme"
+  },
+  {
+    "key": "d2e-d4d-d2e-d47",
+    "text": "മ്മേ",
+    "label": "mmē"
+  },
+  {
+    "key": "d2e-d4d-d2e-d4a",
+    "text": "മ്മൊ",
+    "label": "mmo"
+  },
+  {
+    "key": "d2e-d4d-d2e-d4b",
+    "text": "മ്മോ",
+    "label": "mmō"
+  },
+  {
+    "key": "d2e-d4d-d2e-d48",
+    "text": "മ്മൈ",
+    "label": "mmai"
+  },
+  {
+    "key": "d2e-d4d-d2e-d57",
+    "text": "മ്മൗ",
+    "label": "mmau"
+  },
+  {
+    "key": "d2e-d4d-d2e-d43",
+    "text": "മ്മൃ",
+    "label": "mmr̥"
+  },
+  {
+    "key": "d32-d4d-d32-d3e",
+    "text": "ല്ലാ",
+    "label": "llā"
+  },
+  {
+    "key": "d32-d4d-d32-d3f",
+    "text": "ല്ലി",
+    "label": "lli"
+  },
+  {
+    "key": "d32-d4d-d32-d41",
+    "text": "ല്ലു",
+    "label": "llu"
+  },
+  {
+    "key": "d32-d4d-d32-d02",
+    "text": "ല്ലം",
+    "label": "llaṁ"
+  },
+  {
+    "key": "d32-d4d-d32-d40",
+    "text": "ല്ലീ",
+    "label": "llī"
+  },
+  {
+    "key": "d32-d4d-d32-d42",
+    "text": "ല്ലൂ",
+    "label": "llū"
+  },
+  {
+    "key": "d32-d4d-d32-d46",
+    "text": "ല്ലെ",
+    "label": "lle"
+  },
+  {
+    "key": "d32-d4d-d32-d47",
+    "text": "ല്ലേ",
+    "label": "llē"
+  },
+  {
+    "key": "d32-d4d-d32-d4a",
+    "text": "ല്ലൊ",
+    "label": "llo"
+  },
+  {
+    "key": "d32-d4d-d32-d4b",
+    "text": "ല്ലോ",
+    "label": "llō"
+  },
+  {
+    "key": "d32-d4d-d32-d48",
+    "text": "ല്ലൈ",
+    "label": "llai"
+  },
+  {
+    "key": "d32-d4d-d32-d57",
+    "text": "ല്ലൗ",
+    "label": "llau"
+  },
+  {
+    "key": "d32-d4d-d32-d43",
+    "text": "ല്ലൃ",
+    "label": "llr̥"
+  },
+  {
+    "key": "d33-d4d-d33-d3e",
+    "text": "ള്ളാ",
+    "label": "ḷḷā"
+  },
+  {
+    "key": "d33-d4d-d33-d3f",
+    "text": "ള്ളി",
+    "label": "ḷḷi"
+  },
+  {
+    "key": "d33-d4d-d33-d41",
+    "text": "ള്ളു",
+    "label": "ḷḷu"
+  },
+  {
+    "key": "d33-d4d-d33-d02",
+    "text": "ള്ളം",
+    "label": "ḷḷaṁ"
+  },
+  {
+    "key": "d33-d4d-d33-d40",
+    "text": "ള്ളീ",
+    "label": "ḷḷī"
+  },
+  {
+    "key": "d33-d4d-d33-d42",
+    "text": "ള്ളൂ",
+    "label": "ḷḷū"
+  },
+  {
+    "key": "d33-d4d-d33-d46",
+    "text": "ള്ളെ",
+    "label": "ḷḷe"
+  },
+  {
+    "key": "d33-d4d-d33-d47",
+    "text": "ള്ളേ",
+    "label": "ḷḷē"
+  },
+  {
+    "key": "d33-d4d-d33-d4a",
+    "text": "ള്ളൊ",
+    "label": "ḷḷo"
+  },
+  {
+    "key": "d33-d4d-d33-d4b",
+    "text": "ള്ളോ",
+    "label": "ḷḷō"
+  },
+  {
+    "key": "d33-d4d-d33-d48",
+    "text": "ള്ളൈ",
+    "label": "ḷḷai"
+  },
+  {
+    "key": "d33-d4d-d33-d57",
+    "text": "ള്ളൗ",
+    "label": "ḷḷau"
+  },
+  {
+    "key": "d33-d4d-d33-d43",
+    "text": "ള്ളൃ",
+    "label": "ḷḷr̥"
+  },
+  {
+    "key": "d1f-d4d-d1f-d3e",
+    "text": "ട്ടാ",
+    "label": "ṭṭā"
+  },
+  {
+    "key": "d1f-d4d-d1f-d3f",
+    "text": "ട്ടി",
+    "label": "ṭṭi"
+  },
+  {
+    "key": "d1f-d4d-d1f-d41",
+    "text": "ട്ടു",
+    "label": "ṭṭu"
+  },
+  {
+    "key": "d1f-d4d-d1f-d02",
+    "text": "ട്ടം",
+    "label": "ṭṭaṁ"
+  },
+  {
+    "key": "d1f-d4d-d1f-d40",
+    "text": "ട്ടീ",
+    "label": "ṭṭī"
+  },
+  {
+    "key": "d1f-d4d-d1f-d42",
+    "text": "ട്ടൂ",
+    "label": "ṭṭū"
+  },
+  {
+    "key": "d1f-d4d-d1f-d46",
+    "text": "ട്ടെ",
+    "label": "ṭṭe"
+  },
+  {
+    "key": "d1f-d4d-d1f-d47",
+    "text": "ട്ടേ",
+    "label": "ṭṭē"
+  },
+  {
+    "key": "d1f-d4d-d1f-d4a",
+    "text": "ട്ടൊ",
+    "label": "ṭṭo"
+  },
+  {
+    "key": "d1f-d4d-d1f-d4b",
+    "text": "ട്ടോ",
+    "label": "ṭṭō"
+  },
+  {
+    "key": "d1f-d4d-d1f-d48",
+    "text": "ട്ടൈ",
+    "label": "ṭṭai"
+  },
+  {
+    "key": "d1f-d4d-d1f-d57",
+    "text": "ട്ടൗ",
+    "label": "ṭṭau"
+  },
+  {
+    "key": "d1f-d4d-d1f-d43",
+    "text": "ട്ടൃ",
+    "label": "ṭṭr̥"
+  },
+  {
+    "key": "d19-d4d-d19",
+    "text": "ങ്ങ",
+    "label": "ṅṅa"
+  },
+  {
+    "key": "d1a-d4d-d1a",
+    "text": "ച്ച",
+    "label": "cca"
+  },
+  {
+    "key": "d1e-d4d-d1e",
+    "text": "ഞ്ഞ",
+    "label": "ñña"
+  },
+  {
+    "key": "d23-d4d-d23",
+    "text": "ണ്ണ",
+    "label": "ṇṇa"
+  },
+  {
+    "key": "d19-d4d-d19-d3e",
+    "text": "ങ്ങാ",
+    "label": "ṅṅā"
+  },
+  {
+    "key": "d19-d4d-d19-d3f",
+    "text": "ങ്ങി",
+    "label": "ṅṅi"
+  },
+  {
+    "key": "d19-d4d-d19-d41",
+    "text": "ങ്ങു",
+    "label": "ṅṅu"
+  },
+  {
+    "key": "d19-d4d-d19-d02",
+    "text": "ങ്ങം",
+    "label": "ṅṅaṁ"
+  },
+  {
+    "key": "d19-d4d-d19-d40",
+    "text": "ങ്ങീ",
+    "label": "ṅṅī"
+  },
+  {
+    "key": "d19-d4d-d19-d42",
+    "text": "ങ്ങൂ",
+    "label": "ṅṅū"
+  },
+  {
+    "key": "d19-d4d-d19-d46",
+    "text": "ങ്ങെ",
+    "label": "ṅṅe"
+  },
+  {
+    "key": "d19-d4d-d19-d47",
+    "text": "ങ്ങേ",
+    "label": "ṅṅē"
+  },
+  {
+    "key": "d19-d4d-d19-d4a",
+    "text": "ങ്ങൊ",
+    "label": "ṅṅo"
+  },
+  {
+    "key": "d19-d4d-d19-d4b",
+    "text": "ങ്ങോ",
+    "label": "ṅṅō"
+  },
+  {
+    "key": "d19-d4d-d19-d48",
+    "text": "ങ്ങൈ",
+    "label": "ṅṅai"
+  },
+  {
+    "key": "d19-d4d-d19-d57",
+    "text": "ങ്ങൗ",
+    "label": "ṅṅau"
+  },
+  {
+    "key": "d19-d4d-d19-d43",
+    "text": "ങ്ങൃ",
+    "label": "ṅṅr̥"
+  },
+  {
+    "key": "d1a-d4d-d1a-d3e",
+    "text": "ച്ചാ",
+    "label": "ccā"
+  },
+  {
+    "key": "d1a-d4d-d1a-d3f",
+    "text": "ച്ചി",
+    "label": "cci"
+  },
+  {
+    "key": "d1a-d4d-d1a-d41",
+    "text": "ച്ചു",
+    "label": "ccu"
+  },
+  {
+    "key": "d1a-d4d-d1a-d02",
+    "text": "ച്ചം",
+    "label": "ccaṁ"
+  },
+  {
+    "key": "d1a-d4d-d1a-d40",
+    "text": "ച്ചീ",
+    "label": "ccī"
+  },
+  {
+    "key": "d1a-d4d-d1a-d42",
+    "text": "ച്ചൂ",
+    "label": "ccū"
+  },
+  {
+    "key": "d1a-d4d-d1a-d46",
+    "text": "ച്ചെ",
+    "label": "cce"
+  },
+  {
+    "key": "d1a-d4d-d1a-d47",
+    "text": "ച്ചേ",
+    "label": "ccē"
+  },
+  {
+    "key": "d1a-d4d-d1a-d4a",
+    "text": "ച്ചൊ",
+    "label": "cco"
+  },
+  {
+    "key": "d1a-d4d-d1a-d4b",
+    "text": "ച്ചോ",
+    "label": "ccō"
+  },
+  {
+    "key": "d1a-d4d-d1a-d48",
+    "text": "ച്ചൈ",
+    "label": "ccai"
+  },
+  {
+    "key": "d1a-d4d-d1a-d57",
+    "text": "ച്ചൗ",
+    "label": "ccau"
+  },
+  {
+    "key": "d1a-d4d-d1a-d43",
+    "text": "ച്ചൃ",
+    "label": "ccr̥"
+  },
+  {
+    "key": "d1e-d4d-d1e-d3e",
+    "text": "ഞ്ഞാ",
+    "label": "ññā"
+  },
+  {
+    "key": "d1e-d4d-d1e-d3f",
+    "text": "ഞ്ഞി",
+    "label": "ññi"
+  },
+  {
+    "key": "d1e-d4d-d1e-d41",
+    "text": "ഞ്ഞു",
+    "label": "ññu"
+  },
+  {
+    "key": "d1e-d4d-d1e-d02",
+    "text": "ഞ്ഞം",
+    "label": "ññaṁ"
+  },
+  {
+    "key": "d1e-d4d-d1e-d40",
+    "text": "ഞ്ഞീ",
+    "label": "ññī"
+  },
+  {
+    "key": "d1e-d4d-d1e-d42",
+    "text": "ഞ്ഞൂ",
+    "label": "ññū"
+  },
+  {
+    "key": "d1e-d4d-d1e-d46",
+    "text": "ഞ്ഞെ",
+    "label": "ññe"
+  },
+  {
+    "key": "d1e-d4d-d1e-d47",
+    "text": "ഞ്ഞേ",
+    "label": "ññē"
+  },
+  {
+    "key": "d1e-d4d-d1e-d4a",
+    "text": "ഞ്ഞൊ",
+    "label": "ñño"
+  },
+  {
+    "key": "d1e-d4d-d1e-d4b",
+    "text": "ഞ്ഞോ",
+    "label": "ññō"
+  },
+  {
+    "key": "d1e-d4d-d1e-d48",
+    "text": "ഞ്ഞൈ",
+    "label": "ññai"
+  },
+  {
+    "key": "d1e-d4d-d1e-d57",
+    "text": "ഞ്ഞൗ",
+    "label": "ññau"
+  },
+  {
+    "key": "d1e-d4d-d1e-d43",
+    "text": "ഞ്ഞൃ",
+    "label": "ññr̥"
+  },
+  {
+    "key": "d23-d4d-d23-d3e",
+    "text": "ണ്ണാ",
+    "label": "ṇṇā"
+  },
+  {
+    "key": "d23-d4d-d23-d3f",
+    "text": "ണ്ണി",
+    "label": "ṇṇi"
+  },
+  {
+    "key": "d23-d4d-d23-d41",
+    "text": "ണ്ണു",
+    "label": "ṇṇu"
+  },
+  {
+    "key": "d23-d4d-d23-d02",
+    "text": "ണ്ണം",
+    "label": "ṇṇaṁ"
+  },
+  {
+    "key": "d23-d4d-d23-d40",
+    "text": "ണ്ണീ",
+    "label": "ṇṇī"
+  },
+  {
+    "key": "d23-d4d-d23-d42",
+    "text": "ണ്ണൂ",
+    "label": "ṇṇū"
+  },
+  {
+    "key": "d23-d4d-d23-d46",
+    "text": "ണ്ണെ",
+    "label": "ṇṇe"
+  },
+  {
+    "key": "d23-d4d-d23-d47",
+    "text": "ണ്ണേ",
+    "label": "ṇṇē"
+  },
+  {
+    "key": "d23-d4d-d23-d4a",
+    "text": "ണ്ണൊ",
+    "label": "ṇṇo"
+  },
+  {
+    "key": "d23-d4d-d23-d4b",
+    "text": "ണ്ണോ",
+    "label": "ṇṇō"
+  },
+  {
+    "key": "d23-d4d-d23-d48",
+    "text": "ണ്ണൈ",
+    "label": "ṇṇai"
+  },
+  {
+    "key": "d23-d4d-d23-d57",
+    "text": "ണ്ണൗ",
+    "label": "ṇṇau"
+  },
+  {
+    "key": "d23-d4d-d23-d43",
+    "text": "ണ്ണൃ",
+    "label": "ṇṇr̥"
+  },
+  {
+    "key": "d19-d4d-d15",
+    "text": "ങ്ക",
+    "label": "ṅka"
+  },
+  {
+    "key": "d28-d4d-d24",
+    "text": "ന്ത",
+    "label": "nta"
+  },
+  {
+    "key": "d2e-d4d-d2a",
+    "text": "മ്പ",
+    "label": "mpa"
+  },
+  {
+    "key": "d15-d4d-d37",
+    "text": "ക്ഷ",
+    "label": "kṣa"
+  },
+  {
+    "key": "d19-d4d-d15-d3e",
+    "text": "ങ്കാ",
+    "label": "ṅkā"
+  },
+  {
+    "key": "d19-d4d-d15-d3f",
+    "text": "ങ്കി",
+    "label": "ṅki"
+  },
+  {
+    "key": "d19-d4d-d15-d41",
+    "text": "ങ്കു",
+    "label": "ṅku"
+  },
+  {
+    "key": "d19-d4d-d15-d02",
+    "text": "ങ്കം",
+    "label": "ṅkaṁ"
+  },
+  {
+    "key": "d19-d4d-d15-d40",
+    "text": "ങ്കീ",
+    "label": "ṅkī"
+  },
+  {
+    "key": "d19-d4d-d15-d42",
+    "text": "ങ്കൂ",
+    "label": "ṅkū"
+  },
+  {
+    "key": "d19-d4d-d15-d46",
+    "text": "ങ്കെ",
+    "label": "ṅke"
+  },
+  {
+    "key": "d19-d4d-d15-d47",
+    "text": "ങ്കേ",
+    "label": "ṅkē"
+  },
+  {
+    "key": "d19-d4d-d15-d4a",
+    "text": "ങ്കൊ",
+    "label": "ṅko"
+  },
+  {
+    "key": "d19-d4d-d15-d4b",
+    "text": "ങ്കോ",
+    "label": "ṅkō"
+  },
+  {
+    "key": "d19-d4d-d15-d48",
+    "text": "ങ്കൈ",
+    "label": "ṅkai"
+  },
+  {
+    "key": "d19-d4d-d15-d57",
+    "text": "ങ്കൗ",
+    "label": "ṅkau"
+  },
+  {
+    "key": "d19-d4d-d15-d43",
+    "text": "ങ്കൃ",
+    "label": "ṅkr̥"
+  },
+  {
+    "key": "d28-d4d-d24-d3e",
+    "text": "ന്താ",
+    "label": "ntā"
+  },
+  {
+    "key": "d28-d4d-d24-d3f",
+    "text": "ന്തി",
+    "label": "nti"
+  },
+  {
+    "key": "d28-d4d-d24-d41",
+    "text": "ന്തു",
+    "label": "ntu"
+  },
+  {
+    "key": "d28-d4d-d24-d02",
+    "text": "ന്തം",
+    "label": "ntaṁ"
+  },
+  {
+    "key": "d28-d4d-d24-d40",
+    "text": "ന്തീ",
+    "label": "ntī"
+  },
+  {
+    "key": "d28-d4d-d24-d42",
+    "text": "ന്തൂ",
+    "label": "ntū"
+  },
+  {
+    "key": "d28-d4d-d24-d46",
+    "text": "ന്തെ",
+    "label": "nte"
+  },
+  {
+    "key": "d28-d4d-d24-d47",
+    "text": "ന്തേ",
+    "label": "ntē"
+  },
+  {
+    "key": "d28-d4d-d24-d4a",
+    "text": "ന്തൊ",
+    "label": "nto"
+  },
+  {
+    "key": "d28-d4d-d24-d4b",
+    "text": "ന്തോ",
+    "label": "ntō"
+  },
+  {
+    "key": "d28-d4d-d24-d48",
+    "text": "ന്തൈ",
+    "label": "ntai"
+  },
+  {
+    "key": "d28-d4d-d24-d57",
+    "text": "ന്തൗ",
+    "label": "ntau"
+  },
+  {
+    "key": "d28-d4d-d24-d43",
+    "text": "ന്തൃ",
+    "label": "ntr̥"
+  },
+  {
+    "key": "d2e-d4d-d2a-d3e",
+    "text": "മ്പാ",
+    "label": "mpā"
+  },
+  {
+    "key": "d2e-d4d-d2a-d3f",
+    "text": "മ്പി",
+    "label": "mpi"
+  },
+  {
+    "key": "d2e-d4d-d2a-d41",
+    "text": "മ്പു",
+    "label": "mpu"
+  },
+  {
+    "key": "d2e-d4d-d2a-d02",
+    "text": "മ്പം",
+    "label": "mpaṁ"
+  },
+  {
+    "key": "d2e-d4d-d2a-d40",
+    "text": "മ്പീ",
+    "label": "mpī"
+  },
+  {
+    "key": "d2e-d4d-d2a-d42",
+    "text": "മ്പൂ",
+    "label": "mpū"
+  },
+  {
+    "key": "d2e-d4d-d2a-d46",
+    "text": "മ്പെ",
+    "label": "mpe"
+  },
+  {
+    "key": "d2e-d4d-d2a-d47",
+    "text": "മ്പേ",
+    "label": "mpē"
+  },
+  {
+    "key": "d2e-d4d-d2a-d4a",
+    "text": "മ്പൊ",
+    "label": "mpo"
+  },
+  {
+    "key": "d2e-d4d-d2a-d4b",
+    "text": "മ്പോ",
+    "label": "mpō"
+  },
+  {
+    "key": "d2e-d4d-d2a-d48",
+    "text": "മ്പൈ",
+    "label": "mpai"
+  },
+  {
+    "key": "d2e-d4d-d2a-d57",
+    "text": "മ്പൗ",
+    "label": "mpau"
+  },
+  {
+    "key": "d2e-d4d-d2a-d43",
+    "text": "മ്പൃ",
+    "label": "mpr̥"
+  },
+  {
+    "key": "d15-d4d-d37-d3e",
+    "text": "ക്ഷാ",
+    "label": "kṣā"
+  },
+  {
+    "key": "d15-d4d-d37-d3f",
+    "text": "ക്ഷി",
+    "label": "kṣi"
+  },
+  {
+    "key": "d15-d4d-d37-d41",
+    "text": "ക്ഷു",
+    "label": "kṣu"
+  },
+  {
+    "key": "d15-d4d-d37-d02",
+    "text": "ക്ഷം",
+    "label": "kṣaṁ"
+  },
+  {
+    "key": "d15-d4d-d37-d40",
+    "text": "ക്ഷീ",
+    "label": "kṣī"
+  },
+  {
+    "key": "d15-d4d-d37-d42",
+    "text": "ക്ഷൂ",
+    "label": "kṣū"
+  },
+  {
+    "key": "d15-d4d-d37-d46",
+    "text": "ക്ഷെ",
+    "label": "kṣe"
+  },
+  {
+    "key": "d15-d4d-d37-d47",
+    "text": "ക്ഷേ",
+    "label": "kṣē"
+  },
+  {
+    "key": "d15-d4d-d37-d4a",
+    "text": "ക്ഷൊ",
+    "label": "kṣo"
+  },
+  {
+    "key": "d15-d4d-d37-d4b",
+    "text": "ക്ഷോ",
+    "label": "kṣō"
+  },
+  {
+    "key": "d15-d4d-d37-d48",
+    "text": "ക്ഷൈ",
+    "label": "kṣai"
+  },
+  {
+    "key": "d15-d4d-d37-d57",
+    "text": "ക്ഷൗ",
+    "label": "kṣau"
+  },
+  {
+    "key": "d15-d4d-d37-d43",
+    "text": "ക്ഷൃ",
+    "label": "kṣr̥"
+  },
+  {
+    "key": "d1c-d4d-d1e",
+    "text": "ജ്ഞ",
+    "label": "jña"
+  },
+  {
+    "key": "d24-d4d-d30",
+    "text": "ത്ര",
+    "label": "tra"
+  },
+  {
+    "key": "d36-d4d-d30",
+    "text": "ശ്ര",
+    "label": "śra"
+  },
+  {
+    "key": "d1c-d4d-d1e-d3e",
+    "text": "ജ്ഞാ",
+    "label": "jñā"
+  },
+  {
+    "key": "d1c-d4d-d1e-d3f",
+    "text": "ജ്ഞി",
+    "label": "jñi"
+  },
+  {
+    "key": "d1c-d4d-d1e-d41",
+    "text": "ജ്ഞു",
+    "label": "jñu"
+  },
+  {
+    "key": "d1c-d4d-d1e-d02",
+    "text": "ജ്ഞം",
+    "label": "jñaṁ"
+  },
+  {
+    "key": "d1c-d4d-d1e-d40",
+    "text": "ജ്ഞീ",
+    "label": "jñī"
+  },
+  {
+    "key": "d1c-d4d-d1e-d42",
+    "text": "ജ്ഞൂ",
+    "label": "jñū"
+  },
+  {
+    "key": "d1c-d4d-d1e-d46",
+    "text": "ജ്ഞെ",
+    "label": "jñe"
+  },
+  {
+    "key": "d1c-d4d-d1e-d47",
+    "text": "ജ്ഞേ",
+    "label": "jñē"
+  },
+  {
+    "key": "d1c-d4d-d1e-d4a",
+    "text": "ജ്ഞൊ",
+    "label": "jño"
+  },
+  {
+    "key": "d1c-d4d-d1e-d4b",
+    "text": "ജ്ഞോ",
+    "label": "jñō"
+  },
+  {
+    "key": "d1c-d4d-d1e-d48",
+    "text": "ജ്ഞൈ",
+    "label": "jñai"
+  },
+  {
+    "key": "d1c-d4d-d1e-d57",
+    "text": "ജ്ഞൗ",
+    "label": "jñau"
+  },
+  {
+    "key": "d1c-d4d-d1e-d43",
+    "text": "ജ്ഞൃ",
+    "label": "jñr̥"
+  },
+  {
+    "key": "d24-d4d-d30-d3e",
+    "text": "ത്രാ",
+    "label": "trā"
+  },
+  {
+    "key": "d24-d4d-d30-d3f",
+    "text": "ത്രി",
+    "label": "tri"
+  },
+  {
+    "key": "d24-d4d-d30-d41",
+    "text": "ത്രു",
+    "label": "tru"
+  },
+  {
+    "key": "d24-d4d-d30-d02",
+    "text": "ത്രം",
+    "label": "traṁ"
+  },
+  {
+    "key": "d24-d4d-d30-d40",
+    "text": "ത്രീ",
+    "label": "trī"
+  },
+  {
+    "key": "d24-d4d-d30-d42",
+    "text": "ത്രൂ",
+    "label": "trū"
+  },
+  {
+    "key": "d24-d4d-d30-d46",
+    "text": "ത്രെ",
+    "label": "tre"
+  },
+  {
+    "key": "d24-d4d-d30-d47",
+    "text": "ത്രേ",
+    "label": "trē"
+  },
+  {
+    "key": "d24-d4d-d30-d4a",
+    "text": "ത്രൊ",
+    "label": "tro"
+  },
+  {
+    "key": "d24-d4d-d30-d4b",
+    "text": "ത്രോ",
+    "label": "trō"
+  },
+  {
+    "key": "d24-d4d-d30-d48",
+    "text": "ത്രൈ",
+    "label": "trai"
+  },
+  {
+    "key": "d24-d4d-d30-d57",
+    "text": "ത്രൗ",
+    "label": "trau"
+  },
+  {
+    "key": "d24-d4d-d30-d43",
+    "text": "ത്രൃ",
+    "label": "trr̥"
+  },
+  {
+    "key": "d36-d4d-d30-d3e",
+    "text": "ശ്രാ",
+    "label": "śrā"
+  },
+  {
+    "key": "d36-d4d-d30-d3f",
+    "text": "ശ്രി",
+    "label": "śri"
+  },
+  {
+    "key": "d36-d4d-d30-d41",
+    "text": "ശ്രു",
+    "label": "śru"
+  },
+  {
+    "key": "d36-d4d-d30-d02",
+    "text": "ശ്രം",
+    "label": "śraṁ"
+  },
+  {
+    "key": "d36-d4d-d30-d40",
+    "text": "ശ്രീ",
+    "label": "śrī"
+  },
+  {
+    "key": "d36-d4d-d30-d42",
+    "text": "ശ്രൂ",
+    "label": "śrū"
+  },
+  {
+    "key": "d36-d4d-d30-d46",
+    "text": "ശ്രെ",
+    "label": "śre"
+  },
+  {
+    "key": "d36-d4d-d30-d47",
+    "text": "ശ്രേ",
+    "label": "śrē"
+  },
+  {
+    "key": "d36-d4d-d30-d4a",
+    "text": "ശ്രൊ",
+    "label": "śro"
+  },
+  {
+    "key": "d36-d4d-d30-d4b",
+    "text": "ശ്രോ",
+    "label": "śrō"
+  },
+  {
+    "key": "d36-d4d-d30-d48",
+    "text": "ശ്രൈ",
+    "label": "śrai"
+  },
+  {
+    "key": "d36-d4d-d30-d57",
+    "text": "ശ്രൗ",
+    "label": "śrau"
+  },
+  {
+    "key": "d36-d4d-d30-d43",
+    "text": "ശ്രൃ",
+    "label": "śrr̥"
+  },
+  {
+    "key": "d0c",
+    "text": "ഌ",
+    "label": "l̥"
+  },
+  {
+    "key": "d60",
+    "text": "ൠ",
+    "label": "r̥̄"
+  },
+  {
+    "key": "d61",
+    "text": "ൡ",
+    "label": "l̥̄"
+  },
+  {
+    "key": "d5f",
+    "text": "ൟ",
+    "label": "ī"
+  },
+  {
+    "key": "d1d",
+    "text": "ഝ",
+    "label": "jha"
+  },
+  {
+    "key": "d29",
+    "text": "ഩ",
+    "label": "ṉa"
+  },
+  {
+    "key": "d3a",
+    "text": "ഺ",
+    "label": "ṯa"
+  },
+  {
+    "key": "d7f",
+    "text": "ൿ",
+    "label": "k"
+  },
+  {
+    "key": "d54",
+    "text": "ൔ",
+    "label": "m"
+  },
+  {
+    "key": "d55",
+    "text": "ൕ",
+    "label": "y"
+  },
+  {
+    "key": "d56",
+    "text": "ൖ",
+    "label": "ḻ"
+  },
+  {
+    "key": "d15-d4c",
+    "text": "കൌ",
+    "label": "au"
+  },
+  {
+    "key": "d15-d44",
+    "text": "കൄ",
+    "label": "r̥̄"
+  },
+  {
+    "key": "d15-d62",
+    "text": "കൢ",
+    "label": "l̥"
+  },
+  {
+    "key": "d15-d63",
+    "text": "കൣ",
+    "label": "l̥̄"
+  },
+  {
+    "key": "d15-d01",
+    "text": "കഁ",
+    "label": "m̐"
+  },
+  {
+    "key": "d15-d3d",
+    "text": "കഽ",
+    "label": "’"
+  },
+  {
+    "key": "d15-d00",
+    "text": "കഀ",
+    "label": "ṁ (historic)"
+  },
+  {
+    "key": "d15-d04",
+    "text": "കഄ",
+    "label": "ṁ (Vedic)"
+  },
+  {
+    "key": "d15-d3b",
+    "text": "ക഻",
+    "label": "∅ (vertical)"
+  },
+  {
+    "key": "d15-d3c",
+    "text": "ക഼",
+    "label": "∅ (circular)"
+  },
+  {
+    "key": "d15-d4e",
+    "text": "കൎ",
+    "label": "r (reph)"
+  }
+]

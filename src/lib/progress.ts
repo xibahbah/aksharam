@@ -10,7 +10,7 @@ export function emptyProgress(): Progress {
     introduced: [],
     attempts: [],
     studyDays: [],
-    preferences: { dailyGoal: 10, lessonSize: 5 },
+    preferences: { dailyGoal: 15, lessonSize: 10 },
   };
 }
 export function localDay(now = Date.now()): string {
@@ -63,7 +63,13 @@ export function reviewCard(
     studyDays: Array.from(new Set([...progress.studyDays, localDay(now)])),
   };
 }
-export function streak(days: string[], now = Date.now()): number {
+/** Consecutive practiced days, counting rest days that protected the streak. */
+export function streak(
+  days: string[],
+  now = Date.now(),
+  frozen: string[] = [],
+): number {
+  if (frozen.length) days = [...days, ...frozen];
   const date = new Date(now);
   let count = 0;
   if (!days.includes(localDay(date.getTime())))
@@ -159,6 +165,7 @@ export function parseProgress(raw: string): Progress {
     new Set(p.studyDays).size !== p.studyDays.length
   )
     throw new Error("Invalid study dates.");
+  const extras = parseExtras(p);
   // Explicit construction strips unrecognized top-level fields from imported files.
   return {
     version: 1,
@@ -179,7 +186,77 @@ export function parseProgress(raw: string): Progress {
       dailyGoal: Number(pref.dailyGoal),
       lessonSize: Number(pref.lessonSize),
     },
+    ...extras,
   };
+}
+const day = (d: unknown) =>
+  typeof d === "string" &&
+  /^\d{4}-\d{2}-\d{2}$/.test(d) &&
+  !Number.isNaN(Date.parse(d));
+const lessonKinds = ["unit", "review", "weak", "placement", "test"];
+const reasons = ["family", "travel", "heritage", "curious"];
+/** Validates the optional v1 additions; absent fields stay absent. */
+function parseExtras(p: Record<string, unknown>): Partial<Progress> {
+  const out: Partial<Progress> = {};
+  if (p.xp !== undefined) {
+    if (
+      !record(p.xp) ||
+      !Object.entries(p.xp).every(([k, v]) => day(k) && numeric(v))
+    )
+      throw new Error("Invalid XP history.");
+    out.xp = p.xp as Record<string, number>;
+  }
+  if (p.lessons !== undefined) {
+    if (
+      !Array.isArray(p.lessons) ||
+      !p.lessons.every(
+        (l) =>
+          record(l) &&
+          numeric(l.at) &&
+          lessonKinds.includes(String(l.kind)) &&
+          (l.unit === undefined || typeof l.unit === "string") &&
+          Number.isInteger(l.correct) &&
+          Number.isInteger(l.total) &&
+          numeric(l.correct) &&
+          Number(l.correct) <= Number(l.total),
+      )
+    )
+      throw new Error("Invalid lesson history.");
+    out.lessons = p.lessons as Progress["lessons"];
+  }
+  if (p.freezes !== undefined) {
+    if (
+      !Number.isInteger(p.freezes) ||
+      Number(p.freezes) < 0 ||
+      Number(p.freezes) > 2
+    )
+      throw new Error("Invalid rest days.");
+    out.freezes = Number(p.freezes);
+  }
+  for (const key of ["frozenDays", "milestones"] as const) {
+    const v = p[key];
+    if (v === undefined) continue;
+    if (
+      !Array.isArray(v) ||
+      !v.every((x) => typeof x === "string" && (key !== "frozenDays" || day(x)))
+    )
+      throw new Error("Invalid saved milestones or rest days.");
+    out[key] = v as string[];
+  }
+  if (p.onboarded !== undefined) {
+    if (typeof p.onboarded !== "boolean") throw new Error("Invalid profile.");
+    out.onboarded = p.onboarded;
+  }
+  if (p.reason !== undefined) {
+    if (!reasons.includes(String(p.reason)))
+      throw new Error("Invalid profile.");
+    out.reason = p.reason as Progress["reason"];
+  }
+  if (p.lastBackupAt !== undefined) {
+    if (!numeric(p.lastBackupAt)) throw new Error("Invalid backup date.");
+    out.lastBackupAt = Number(p.lastBackupAt);
+  }
+  return out;
 }
 export function loadProgress(storage: Pick<Storage, "getItem">): {
   progress: Progress;

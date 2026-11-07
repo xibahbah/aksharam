@@ -8,12 +8,7 @@ import {
   loadProgress,
   DAY,
 } from "@/lib/progress";
-import {
-  learnPools,
-  selectLearnLetters,
-  difficultIds,
-  learnSteps,
-} from "@/lib/learn";
+import { learnPools, difficultIds } from "@/lib/learn";
 const now = 1_800_000_000_000;
 const [a, b, c, d] = letters;
 describe("v1 progress compatibility", () => {
@@ -82,19 +77,6 @@ describe("Learn pool selection", () => {
     );
     expect(pool.difficult).toHaveLength(0); // Introduction, a correct answer, and a bookmark are not difficulty evidence.
   });
-  it("prioritizes the oldest due reviews and only includes future/unscheduled cards when requested", () => {
-    let p = reviewCard(emptyProgress(), a.id, "good", now - 2 * DAY);
-    p = reviewCard(p, b.id, "good", now - 3 * DAY);
-    p = reviewCard(p, c.id, "easy", now);
-    p.introduced.push(d.id);
-    expect(selectLearnLetters(p, now, "review", 20).map((l) => l.id)).toEqual([
-      b.id,
-      a.id,
-    ]);
-    expect(
-      selectLearnLetters(p, now, "review", 20, "all", true).map((l) => l.id),
-    ).toEqual([b.id, a.id, c.id, d.id]);
-  });
   it("uses Again, Hard, unrecovered lapses and recent incorrect answers for difficulty", () => {
     let p = reviewCard(emptyProgress(), a.id, "again", now);
     p = reviewCard(p, b.id, "hard", now);
@@ -113,36 +95,11 @@ describe("Learn pool selection", () => {
     for (let i = 1; i <= 4; i++) p = reviewCard(p, a.id, "good", now + i * DAY);
     expect(difficultIds(p).has(a.id)).toBe(false);
   });
-  it("filters collections, caps counts, and never duplicates selected letters", () => {
-    const selected = selectLearnLetters(
-      emptyProgress(),
-      now,
-      "new",
-      20,
-      "chillu",
-    );
-    expect(selected.every((l) => l.category === "chillu")).toBe(true);
-    expect(selected.length).toBe(9);
-    expect(new Set(selected.map((l) => l.id)).size).toBe(selected.length);
-    expect(selectLearnLetters(emptyProgress(), now, "review", 5)).toEqual([]);
-    expect(selectLearnLetters(emptyProgress(), now, "difficult", 5)).toEqual(
-      [],
-    );
-    expect(selectLearnLetters(emptyProgress(), now, "new", 0)).toEqual([]);
-  });
   it("has no new candidates after every letter has been introduced", () => {
     const p = emptyProgress();
     p.introduced = letters.map((l) => l.id);
     expect(learnPools(p, now).new).toEqual([]);
     expect(learnPools(p, now).learned).toHaveLength(letters.length);
-  });
-  it("creates one scored question per letter; reviews omit reading introductions", () => {
-    const steps = learnSteps([a, b, a], "new");
-    expect(steps.filter((s) => s.kind === "read")).toHaveLength(2);
-    expect(steps.filter((s) => s.kind === "question")).toHaveLength(2);
-    expect(
-      learnSteps([a, b], "review").every((s) => s.kind === "question"),
-    ).toBe(true);
   });
   it("review answers extend the same scheduler and keep prior history", () => {
     const p = reviewCard(emptyProgress(), a.id, "good", now - 2 * DAY);

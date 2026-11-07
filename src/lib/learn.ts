@@ -1,35 +1,8 @@
 import { letters } from "@/data/alphabet";
 import { mastered } from "@/lib/progress";
-import { makeQuestion, type Question } from "@/lib/quiz";
 import type { Category, Letter, Progress } from "@/types";
 export type LearnMode = "new" | "review" | "difficult";
 export type LearnDeck = Category | "all";
-export const learnModes: {
-  id: LearnMode;
-  title: string;
-  description: string;
-}[] = [
-  {
-    id: "new",
-    title: "Learn new letters",
-    description: "Introduce letters you have not studied.",
-  },
-  {
-    id: "review",
-    title: "Review learned letters",
-    description: "Review previously studied letters, due cards first.",
-  },
-  {
-    id: "difficult",
-    title: "Practice difficult letters",
-    description:
-      "Practice letters with mistakes, lapses, or difficult ratings.",
-  },
-];
-export type StudyStep =
-  | { kind: "read"; letter: Letter }
-  | { kind: "question"; question: Question; retry?: boolean };
-
 export function encounteredIds(progress: Progress): Set<string> {
   return new Set([
     ...progress.introduced,
@@ -90,35 +63,4 @@ export function learnPools(
       .sort(dueFirst),
     difficult: learned.filter((l) => difficult.has(l.id)).sort(dueFirst),
   };
-}
-export function selectLearnLetters(
-  progress: Progress,
-  now: number,
-  mode: LearnMode,
-  count: number,
-  deck: LearnDeck = "all",
-  includeNotDue = false,
-): Letter[] {
-  const pools = learnPools(progress, now, deck);
-  const pool =
-    mode === "new"
-      ? pools.new
-      : mode === "difficult"
-        ? pools.difficult
-        : includeNotDue
-          ? pools.learned
-          : pools.due;
-  return pool.slice(0, Math.max(0, Math.floor(count)));
-}
-export function learnSteps(chosen: Letter[], mode: LearnMode): StudyStep[] {
-  // One scored question per letter. Reading introduces new forms; only explicit retries repeat questions.
-  return Array.from(new Map(chosen.map((l) => [l.id, l])).values()).flatMap(
-    (letter, index): StudyStep[] => [
-      ...(mode === "new" ? [{ kind: "read" as const, letter }] : []),
-      {
-        kind: "question",
-        question: makeQuestion(letter, index % 2 ? "reverse" : "recognition"),
-      },
-    ],
-  );
 }

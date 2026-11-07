@@ -6,29 +6,23 @@ export function Results({
   answers,
   onRetry,
   onRestart,
-  lesson = false,
-  sessionTitle,
 }: {
   answers: Answer[];
   onRetry: () => void;
   onRestart: () => void;
-  lesson?: boolean;
-  sessionTitle?: string;
 }) {
   const incorrect = answers.filter((a) => !a.correct);
   return (
     <div className="results">
       <div className="results-header panel">
-        <h2>
-          {lesson ? `${sessionTitle ?? "Learn"} results` : "Test results"}
-        </h2>
+        <h2>Test results</h2>
         <div className="result-score">
           {score(answers)}
           <span>%</span>
         </div>
         <p>
           {answers.filter((a) => a.correct).length} correct out of{" "}
-          {answers.length} attempts.
+          {answers.length} questions.
         </p>
         <div className="button-row">
           {incorrect.length > 0 && (
@@ -38,18 +32,11 @@ export function Results({
             </button>
           )}
           <button className="button secondary" onClick={onRestart}>
-            {lesson ? "Start another session" : "Start a new test"}{" "}
-            <ArrowRight size={17} />
+            Start a new test <ArrowRight size={17} />
           </button>
-          {lesson ? (
-            <button className="text-link" onClick={onRestart}>
-              Back to Learn
-            </button>
-          ) : (
-            <Link href="/" className="text-link">
-              Back to overview
-            </Link>
-          )}
+          <Link href="/" className="text-link">
+            Back home
+          </Link>
         </div>
       </div>
       <div className="results-breakdown panel">

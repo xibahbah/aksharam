@@ -16,7 +16,8 @@ import {
   localDay,
 } from "@/lib/progress";
 import { letterById } from "@/data/alphabet";
-import type { Progress, Rating } from "@/types";
+import { addXp, applyFreezes, XP } from "@/lib/habit";
+import type { LessonLog, Progress, Rating } from "@/types";
 interface Store {
   progress: Progress;
   ready: boolean;
@@ -26,6 +27,16 @@ interface Store {
   rate: (id: string, rating: Rating) => void;
   introduce: (id: string) => void;
   answer: (id: string, correct: boolean) => void;
+  /**
+   * Records an answer. `schedules` decides whether it moves the card's review
+   * date (first question per letter in a session) or only logs the attempt.
+   * Syllables earn XP only.
+   */
+  attempt: (id: string, correct: boolean, schedules: boolean) => void;
+  completeLesson: (log: Omit<LessonLog, "at">, passedIds?: string[]) => void;
+  claimMilestones: (ids: string[]) => void;
+  profile: (p: Pick<Progress, "onboarded" | "reason">) => void;
+  markBackup: () => void;
   favorite: (id: string) => void;
   replace: (p: Progress) => void;
   preferences: (p: Partial<Progress["preferences"]>) => void;
@@ -40,7 +51,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     try {
       const loaded = loadProgress(window.localStorage);
-      setProgress(loaded.progress);
+      setProgress(applyFreezes(loaded.progress));
       setError(loaded.error ?? "");
       setWritable(!loaded.readOnly);
     } catch {
@@ -72,7 +83,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
   }, []);
   const rate = useCallback(
     (id: string, rating: Rating) =>
-      setProgress((p) => reviewCard(p, id, rating)),
+      setProgress((p) => addXp(reviewCard(p, id, rating), XP.rating)),
     [],
   );
   const introduce = useCallback(
@@ -84,21 +95,74 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       ),
     [],
   );
-  const answer = useCallback(
-    (id: string, correct: boolean) =>
-      setProgress((p) => ({
-        ...reviewCard(p, id, correct ? "good" : "again"),
-        attempts: [
-          ...p.attempts,
+  const attempt = useCallback(
+    (id: string, correct: boolean, schedules: boolean) =>
+      setProgress((p) => {
+        const xp = XP.answer + (correct ? XP.correct : 0);
+        if (!letterById[id]) return addXp(p, xp);
+        const base = schedules
+          ? reviewCard(p, id, correct ? "good" : "again")
+          : p;
+        return addXp(
           {
-            at: Date.now(),
-            cardId: id,
-            correct,
-            category: letterById[id].category,
+            ...base,
+            attempts: [
+              ...p.attempts,
+              {
+                at: Date.now(),
+                cardId: id,
+                correct,
+                category: letterById[id].category,
+              },
+            ],
+            studyDays: Array.from(new Set([...base.studyDays, localDay()])),
           },
-        ],
-        studyDays: Array.from(new Set([...p.studyDays, localDay()])),
+          xp,
+        );
+      }),
+    [],
+  );
+  const answer = useCallback(
+    (id: string, correct: boolean) => attempt(id, correct, true),
+    [attempt],
+  );
+  const completeLesson = useCallback(
+    (log: Omit<LessonLog, "at">, passedIds: string[] = []) => {
+      setProgress((p) => {
+        const now = Date.now();
+        let next = passedIds.reduce(
+          (acc, id) =>
+            letterById[id] ? reviewCard(acc, id, "good", now) : acc,
+          p,
+        );
+        next = {
+          ...next,
+          lessons: [...(p.lessons ?? []), { ...log, at: now }],
+        };
+        const perfect = log.total > 0 && log.correct === log.total;
+        return addXp(next, XP.lesson + (perfect ? XP.perfect : 0), now);
+      });
+      // Ask the browser not to evict progress once there is something to keep.
+      void navigator.storage?.persist?.().catch(() => undefined);
+    },
+    [],
+  );
+  const claimMilestones = useCallback(
+    (ids: string[]) =>
+      ids.length &&
+      setProgress((p) => ({
+        ...p,
+        milestones: Array.from(new Set([...(p.milestones ?? []), ...ids])),
       })),
+    [],
+  );
+  const profile = useCallback(
+    (values: Pick<Progress, "onboarded" | "reason">) =>
+      setProgress((p) => ({ ...p, ...values })),
+    [],
+  );
+  const markBackup = useCallback(
+    () => setProgress((p) => ({ ...p, lastBackupAt: Date.now() })),
     [],
   );
   const favorite = useCallback(
@@ -122,6 +186,11 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
         rate,
         introduce,
         answer,
+        attempt,
+        completeLesson,
+        claimMilestones,
+        profile,
+        markBackup,
         favorite,
         replace: (p) => {
           setError("");

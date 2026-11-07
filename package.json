@@ -9,7 +9,10 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "check:export": "node scripts/check-export.mjs"
+    "check:export": "node scripts/check-export.mjs",
+    "audio:list": "tsx scripts/tts/list-clips.ts",
+    "audio:setup": "sh scripts/tts/setup.sh",
+    "audio:generate": "scripts/tts/.venv/bin/python scripts/tts/generate.py"
   },
   "dependencies": {
     "@fontsource-variable/dm-sans": "^5.3.0",
@@ -32,9 +35,10 @@
     "eslint-config-next": "^16.4.3",
     "jsdom": "^26.1.0",
     "tailwindcss": "^4.3.3",
+    "tsx": "^4.19.2",
     "typescript": "^6.0.3",
-    "vitest": "4.1.12",
-    "vite": "^6.4.1"
+    "vite": "^6.4.1",
+    "vitest": "4.1.12"
   },
   "engines": {
     "node": ">=22.13.0"

@@ -6,3 +6,6 @@ coverage/
 !.env.example
 *.tsbuildinfo
 .DS_Store
+scripts/tts/.venv/
+scripts/tts/tmp/
+__pycache__/

@@ -73,7 +73,7 @@ describe("learning interactions", () => {
       "wrong{Enter}",
     );
     expect(answer).toHaveBeenCalledWith("wrong", false);
-    expect(screen.getByRole("status")).toHaveTextContent("Incorrect");
+    expect(screen.getByRole("status")).toHaveTextContent("Not quite");
     expect(screen.getByRole("status")).toHaveTextContent(q.letter.romanization);
     expect(screen.getByRole("button", { name: /Continue/ })).toHaveFocus();
     expect(screen.getByLabelText("Your romanization")).toBeDisabled();
@@ -104,23 +104,52 @@ describe("learning interactions", () => {
           .history,
       ).toHaveLength(2),
     );
+    // The only card was rated, so the deck ends with a summary.
     expect(
-      screen.getByRole("button", { name: /Back of flashcard/ }),
+      screen.getByRole("heading", { name: "Deck complete" }),
+    ).toBeInTheDocument();
+  });
+  it("does not rate a flashcard before it is flipped", async () => {
+    const p = reviewCard(emptyProgress(), letters[0].id, "again", 100);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(p));
+    render(
+      <ProgressProvider>
+        <Flashcards />
+      </ProgressProvider>,
+    );
+    await screen.findByRole("button", { name: /Front of flashcard/ });
+    expect(screen.queryByRole("button", { name: /Good/ })).toBeNull();
+    fireEvent.keyDown(window, { key: "3" });
+    expect(
+      JSON.parse(localStorage.getItem(STORAGE_KEY)!).cards[letters[0].id]
+        .history,
+    ).toHaveLength(1);
+  });
+  it("only offers flashcards for letters that have been taught", async () => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(emptyProgress()));
+    render(
+      <ProgressProvider>
+        <Flashcards />
+      </ProgressProvider>,
+    );
+    expect(
+      await screen.findByRole("heading", { name: "Learn some letters first" }),
     ).toBeInTheDocument();
   });
   it("completes a test and offers a retry for only missed letters", async () => {
+    const p = emptyProgress();
+    p.introduced = letters.slice(0, 6).map((l) => l.id);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(p));
     render(
       <ProgressProvider>
         <Practice />
       </ProgressProvider>,
     );
     await userEvent.selectOptions(
-      screen.getByLabelText("Number of questions"),
+      await screen.findByLabelText("Number of questions"),
       "5",
     );
-    await userEvent.click(
-      screen.getByRole("button", { name: "Start practice" }),
-    );
+    await userEvent.click(screen.getByRole("button", { name: "Start test" }));
     for (let i = 0; i < 5; i++) {
       const options = screen
         .getAllByRole("button")
@@ -137,25 +166,5 @@ describe("learning interactions", () => {
     expect(
       JSON.parse(localStorage.getItem(STORAGE_KEY)!).attempts,
     ).toHaveLength(5);
-  });
-  it("retries a missed new-letter question once", async () => {
-    render(
-      <ProgressProvider>
-        <Practice lesson />
-      </ProgressProvider>,
-    );
-    await userEvent.click(
-      screen.getByRole("button", { name: "Start learning" }),
-    );
-    await userEvent.click(
-      screen.getByRole("button", { name: "Practice this letter" }),
-    );
-    const wrong = screen
-      .getAllByRole("button")
-      .filter((b) => b.classList.contains("answer-option"))
-      .find((b) => !b.textContent?.endsWith("a"))!;
-    await userEvent.click(wrong);
-    expect(screen.getByRole("status")).toHaveTextContent("Incorrect");
-    expect(screen.getByText(/Step 2 of 11/)).toBeInTheDocument();
   });
 });

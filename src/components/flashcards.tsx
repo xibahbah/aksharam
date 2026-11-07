@@ -33,21 +33,29 @@ function FlashcardsSession() {
   const initial = params.get("deck");
   const valid = (v: string | null): v is Deck =>
     v === "all" || v === "review" || categories.some((c) => c.id === v);
-  const [deck, setDeck] = useState<Deck>(valid(initial) ? initial : "vowels");
+  const [deck, setDeck] = useState<Deck>(valid(initial) ? initial : "all");
   const [index, setIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
   const [reverse, setReverse] = useState(false);
   const [includeRare, setIncludeRare] = useState(false);
   const [order, setOrder] = useState<string[]>([]);
   const [feedback, setFeedback] = useState("");
-  const { progress, rate, introduce, favorite } = useProgress();
+  const [tally, setTally] = useState<Record<Rating, number>>({
+    again: 0,
+    hard: 0,
+    good: 0,
+    easy: 0,
+  });
+  const [finished, setFinished] = useState(false);
+  const { progress, rate, favorite } = useProgress();
   // Freeze the custom review selection for this session, so rating a due card does not remove it mid-flip.
   const [reviewIds] = useState(() =>
     letters
       .filter(
         (l) =>
-          progress.favorites.includes(l.id) ||
-          (progress.cards[l.id]?.nextReview ?? Infinity) <= Date.now(),
+          progress.introduced.includes(l.id) &&
+          (progress.favorites.includes(l.id) ||
+            (progress.cards[l.id]?.nextReview ?? Infinity) <= Date.now()),
       )
       .sort(
         (a, b) =>
@@ -60,12 +68,14 @@ function FlashcardsSession() {
     () =>
       letters.filter(
         (l) =>
+          // Only taught letters: flashcards practise, Learn teaches.
+          progress.introduced.includes(l.id) &&
           (deck === "all" ||
             (deck === "review" && reviewIds.includes(l.id)) ||
             l.category === deck) &&
           (includeRare || l.usage === "core"),
       ),
-    [deck, includeRare, reviewIds],
+    [deck, includeRare, reviewIds, progress.introduced],
   );
   const cards = useMemo(
     () =>
@@ -87,21 +97,19 @@ function FlashcardsSession() {
     },
     [cards.length],
   );
-  const flip = useCallback(() => {
-    setFlipped((f) => !f);
-    if (letter) introduce(letter.id);
-  }, [letter, introduce]);
+  const flip = useCallback(() => setFlipped((f) => !f), []);
   const rating = useCallback(
     (value: Rating) => {
-      if (!letter) return;
+      // Rate only after seeing the answer.
+      if (!letter || !flipped) return;
       rate(letter.id, value);
+      setTally((t) => ({ ...t, [value]: t[value] + 1 }));
       setFeedback(`${letter.romanization} saved as ${value}.`);
-      if (index < cards.length - 1) {
-        setIndex((i) => i + 1);
-        setFlipped(false);
-      }
+      setFlipped(false);
+      if (index < cards.length - 1) setIndex((i) => i + 1);
+      else setFinished(true);
     },
-    [letter, rate, index, cards.length],
+    [letter, flipped, rate, index, cards.length],
   );
   useEffect(() => {
     function key(e: KeyboardEvent) {
@@ -143,6 +151,7 @@ function FlashcardsSession() {
     setFlipped(false);
     setOrder([]);
     setFeedback("");
+    setFinished(false);
   }
   return (
     <>
@@ -183,7 +192,32 @@ function FlashcardsSession() {
               </button>
             </div>
           </div>
-          {letter ? (
+          {finished ? (
+            <div className="empty-state" role="status">
+              <Check size={32} />
+              <h2>Deck complete</h2>
+              <p>
+                {tally.again + tally.hard + tally.good + tally.easy} cards rated
+                · {tally.good + tally.easy} known · {tally.again + tally.hard}{" "}
+                to see again soon.
+              </p>
+              <div className="button-row">
+                <button
+                  className="button secondary"
+                  onClick={() => {
+                    setFinished(false);
+                    setIndex(0);
+                    setTally({ again: 0, hard: 0, good: 0, easy: 0 });
+                  }}
+                >
+                  Go again
+                </button>
+                <Link className="button primary" href="/">
+                  Continue learning <ArrowRight size={17} />
+                </Link>
+              </div>
+            </div>
+          ) : letter ? (
             <>
               <div className="study-meta">
                 <span>
@@ -249,41 +283,56 @@ function FlashcardsSession() {
                 value={((index + 1) / cards.length) * 100}
                 label="Position in deck"
               />
-              <div className="rating-area">
-                <div className="section-caption">
-                  HOW WELL DID YOU KNOW THIS LETTER?
+              {flipped ? (
+                <div className="rating-area">
+                  <div className="section-caption">
+                    HOW WELL DID YOU KNOW THIS LETTER?
+                  </div>
+                  <div className="rating-grid">
+                    {(["again", "hard", "good", "easy"] as const).map(
+                      (r, i) => (
+                        <button
+                          key={r}
+                          onClick={() => rating(r)}
+                          className={`rating ${r}`}
+                        >
+                          <span>{i + 1}</span>
+                          {r[0].toUpperCase() + r.slice(1)}
+                        </button>
+                      ),
+                    )}
+                  </div>
+                  <p className="save-feedback" role="status">
+                    {feedback || "Ratings set the next review date."}
+                  </p>
                 </div>
-                <div className="rating-grid">
-                  {(["again", "hard", "good", "easy"] as const).map((r, i) => (
-                    <button
-                      key={r}
-                      onClick={() => rating(r)}
-                      className={`rating ${r}`}
-                    >
-                      <span>{i + 1}</span>
-                      {r[0].toUpperCase() + r.slice(1)}
-                    </button>
-                  ))}
-                </div>
+              ) : (
                 <p className="save-feedback" role="status">
-                  {feedback || "Ratings set the next review date."}
+                  {feedback || "Flip the card, then say how well you knew it."}
                 </p>
-              </div>
+              )}
             </>
           ) : (
             <div className="empty-state">
               <Check size={32} />
-              <h2>No review cards</h2>
+              <h2>
+                {progress.introduced.length
+                  ? "No cards here yet"
+                  : "Learn some letters first"}
+              </h2>
               <p>
-                No cards in this review deck. Bookmark letters or come back when
-                a review is due.
+                {progress.introduced.length
+                  ? deck === "review"
+                    ? "Nothing is due or bookmarked. Come back when a review is due."
+                    : "You have not learned letters in this collection yet."
+                  : "Flashcards practise letters you have learned. Lesson 1 takes about five minutes."}
               </p>
-              <button
-                className="button primary"
-                onClick={() => changeDeck("vowels")}
-              >
-                Study vowels <ArrowRight size={17} />
-              </button>
+              <Link className="button primary" href="/learn">
+                {progress.introduced.length
+                  ? "Continue learning"
+                  : "Start lesson 1"}{" "}
+                <ArrowRight size={17} />
+              </Link>
             </div>
           )}
           <label className="checkbox-label">
@@ -323,9 +372,9 @@ function FlashcardsSession() {
               <kbd>1</kbd>–<kbd>4</kbd> rate your recall
             </span>
           </div>
-          <Link href="/learn" className="quiet-link">
+          <Link href="/" className="quiet-link">
             <Layers size={16} />
-            Guided lessons <ArrowRight size={16} />
+            Back to your path <ArrowRight size={16} />
           </Link>
         </aside>
       </div>
