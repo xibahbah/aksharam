@@ -8,6 +8,8 @@ import { ThemeToggle } from "./appearance";
 import { useLayoutEffect, useRef, type CSSProperties } from "react";
 import { motionAllowed, ease } from "./motion";
 import { Bloom } from "./bloom";
+import { StudyPet } from "./study-pet";
+import { publicAssetPath } from "@/lib/paths";
 // Four destinations. Lesson and practice screens highlight their parent tab.
 const nav = [
   { href: "/", name: "Learn", icon: BookOpen, also: ["/learn"] },
@@ -76,6 +78,7 @@ function Layout({ children }: { children: React.ReactNode }) {
           ))}
         </nav>
         <div className="sidebar-bottom">
+          <a className="intro-replay" href={publicAssetPath("/#intro")}>Replay intro ↗</a>
           <span className="sidebar-note">A little, every day.</span>
           <ThemeToggle />
           <p className="sidebar-progress">{total} letters learned</p>
@@ -100,6 +103,7 @@ function Layout({ children }: { children: React.ReactNode }) {
           {children}
         </main>
       </div>
+      <StudyPet />
       <nav className="mobile-nav" aria-label="Mobile navigation">
         {nav.map((n) => (
           <Link

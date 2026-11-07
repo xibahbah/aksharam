@@ -4,6 +4,7 @@ import { Check, ArrowRight, X } from "lucide-react";
 import { almostCorrect, isCorrect, type Question } from "@/lib/quiz";
 import { motionAllowed, ease } from "./motion";
 import { AudioButton } from "./audio-button";
+import { reactPet } from "./study-pet";
 
 /** Every accented character used by the romanizations, for phones without an accent picker. */
 export const ACCENT_KEYS = [
@@ -80,6 +81,7 @@ export function QuizQuestion({
     const right = isCorrect(question, value);
     setResponse(value);
     onAnswer(value, right);
+    reactPet(right ? "cheer" : "oops");
     // A short tap for right, a double buzz for wrong (phones that support it).
     navigator.vibrate?.(right ? 12 : [20, 60, 20]);
   }

@@ -1,0 +1,20 @@
+import React from "react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
+import { afterEach, expect, it, vi } from "vitest";
+import { StudyPet, reactPet } from "@/components/study-pet";
+afterEach(() => vi.useRealTimers());
+it("reacts to answers without taking focus, resets, and can be quieted", () => {
+  vi.useFakeTimers();
+  render(<><button>Continue</button><StudyPet /></>);
+  const next = screen.getByText("Continue");
+  next.focus();
+  act(() => reactPet("oops"));
+  expect(screen.getByRole("status")).toHaveTextContent("Tricky letter");
+  expect(next).toHaveFocus();
+  act(() => vi.advanceTimersByTime(4300));
+  expect(screen.queryByRole("status")).not.toBeInTheDocument();
+  fireEvent.click(screen.getByText("Let her nap"));
+  act(() => reactPet("cheer"));
+  expect(screen.queryByRole("status")).not.toBeInTheDocument();
+  expect(screen.getByText("Show companion")).toBeInTheDocument();
+});

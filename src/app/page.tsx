@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Check, Lock, ShieldCheck } from "lucide-react";
 import { units, coreUnitCount } from "@/data/curriculum";
@@ -23,6 +23,11 @@ function HomeView({ firstVisit }: { firstVisit: boolean }) {
   const [intro, setIntro] = useState(
     () => firstVisit || window.location.hash === "#intro",
   );
+  useEffect(() => {
+    const replay = () => { if (window.location.hash === "#intro") setIntro(true); };
+    window.addEventListener("hashchange", replay);
+    return () => window.removeEventListener("hashchange", replay);
+  }, []);
   if (intro)
     return (
       <Intro

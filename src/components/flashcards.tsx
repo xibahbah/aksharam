@@ -2,6 +2,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { reactPet } from "./study-pet";
 import {
   ArrowLeft,
   ArrowRight,
@@ -102,6 +103,7 @@ function FlashcardsSession() {
       // Rate only after seeing the answer.
       if (!letter || !flipped) return;
       rate(letter.id, value);
+      reactPet(value === "again" || value === "hard" ? "oops" : "cheer");
       setTally((t) => ({ ...t, [value]: t[value] + 1 }));
       setFeedback(`${letter.romanization} saved as ${value}.`);
       setFlipped(false);

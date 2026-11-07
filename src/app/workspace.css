@@ -135,12 +135,11 @@
   .syllable-composition > span:first-child { animation: combine-left 560ms var(--ease-out) both; }
   .syllable-composition > span:nth-of-type(2) { animation: combine-right 560ms var(--ease-out) both; }
   .syllable-composition > span:nth-of-type(3) { color: var(--coral); animation: glyph-arrive 650ms 120ms var(--ease-out) both; }
-  .flashcard .card-inner, .flashcard.flipped .card-inner { transform: none; transition: none; }
-  .flashcard .card-face { backface-visibility: visible; transform: none; border: 1px solid var(--line); border-radius: 28px; }
-  .flashcard .card-back { clip-path: circle(0% at 50% 70%); opacity: 0; pointer-events: none; transition: clip-path 500ms var(--ease-out), opacity 250ms ease; }
-  .flashcard.flipped .card-back { clip-path: circle(150% at 50% 70%); opacity: 1; pointer-events: auto; }
-  .flashcard .card-front { opacity: 1; transition: opacity 300ms; }
-  .flashcard.flipped .card-front { opacity: 0; }
+  .flashcard .card-inner { transform: rotateY(0); transform-style: preserve-3d; transition: transform 550ms cubic-bezier(.22,1,.36,1); }
+  .flashcard.flipped .card-inner { transform: rotateY(180deg); }
+  .flashcard .card-face { backface-visibility: hidden; -webkit-backface-visibility: hidden; border: 1px solid var(--line); border-radius: 28px; }
+  .flashcard .card-front { transform: rotateY(0); }
+  .flashcard .card-back { transform: rotateY(180deg); }
   .bloom-celebrate .bloom-sector { transform-origin: 0 0; animation: petal-open 700ms var(--petal-delay) var(--ease-out) both; }
 }
 @keyframes workspace-arrive { from { opacity: 0; translate: 0 12px; } }
@@ -241,4 +240,17 @@
   .settings-grid { gap: 40px; }
   .settings-col { gap: 24px; }
   .settings-panel { padding-bottom: 20px; }
+}
+
+/* Companion occupies its own desktop gutter, outside lesson controls. */
+.study-pet { display: none; }
+.intro-replay { display: block; width: fit-content; font-size: 12px; color: var(--muted); margin-bottom: 16px; }
+@media (min-width: 1100px) {
+  .content-shell { padding-right: 148px; }
+  .study-pet { display: flex; position: fixed; right: 10px; bottom: 12px; width: 128px; z-index: 30; flex-direction: column; align-items: center; gap: 4px; }
+  .pet-character { border: 0; background: none; padding: 0; width: 128px; height: 128px; cursor: pointer; }
+  .pet-character img { display: block; width: 128px; height: 128px; object-fit: contain; }
+  .pet-toggle { font: inherit; font-size: 11px; color: var(--muted); background: none; border: 0; padding: 8px 4px; cursor: pointer; }
+  .pet-speech { font-size: 12px; line-height: 1.5; color: var(--ink); background: var(--paper); padding: 12px; margin: 0; border: 1px solid var(--line); border-radius: 17px 14px 5px 18px; overflow-wrap: anywhere; }
+  body:has([role="dialog"][aria-modal="true"]) .study-pet { display: none; }
 }
