@@ -249,7 +249,7 @@
   .sidebar-resize path { vector-effect: non-scaling-stroke; }
   .sidebar-resize .sidebar-pencil { opacity: .22; stroke-width: .75; }
   .sidebar-resize:hover svg, .sidebar-resize:focus-visible svg, .sidebar-resize[data-dragging] svg { opacity: .85; stroke: var(--coral); }
-  .sidebar-resize:focus-visible { outline: 1px dashed var(--coral); outline-offset: 2px; }
+  .sidebar-resize:focus-visible { outline: none; }
   .app-shell:has(.sidebar-resize[data-dragging]) { user-select: none; cursor: col-resize; }
 }
 /* Flex the ink itself; the resize target stays still and easy to grab. */
