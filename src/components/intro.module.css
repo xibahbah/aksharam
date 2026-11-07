@@ -1,0 +1,222 @@
+/* Opening animation. Timeline (seconds):
+   0.0–1.3 pookalam hops · 1.3–2.5 figures grow · 2.6–3.1 card drops ·
+   3.2–4.2 sparkles + ring · 4.3 Start */
+.stage {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background: #101e19;
+  color: #f5ecd8;
+  overflow: hidden;
+  cursor: pointer;
+  transition: opacity 0.45s ease;
+}
+.leaving {
+  opacity: 0;
+}
+.art {
+  width: min(100vw, 1100px);
+  height: min(100vh, 825px);
+  overflow: visible;
+}
+.cream {
+  fill: #f5ecd8;
+}
+
+/* 1. Loader hops: three landings, each a little bigger, then it shrinks away. */
+.hopper {
+  animation: hop 1.35s cubic-bezier(0.3, 1.4, 0.5, 1) both;
+}
+@keyframes hop {
+  0% {
+    transform: translate(560px, 110px) scale(0);
+  }
+  14% {
+    transform: translate(560px, 110px) scale(0.75);
+  }
+  30% {
+    transform: translate(330px, 440px) scale(0.95);
+  }
+  52% {
+    transform: translate(610px, 330px) scale(1.2);
+  }
+  78% {
+    transform: translate(400px, 300px) scale(1.5);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(400px, 300px) scale(0);
+    opacity: 0;
+  }
+}
+
+/* 2. Limbs draw on like growing vines; the goo filter melts them together. */
+.limb {
+  fill: none;
+  stroke: #f5ecd8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  animation: grow 0.75s cubic-bezier(0.55, 0, 0.25, 1) both;
+}
+.torso {
+  stroke-width: 78px;
+}
+.arm {
+  stroke-width: 38px;
+  animation-duration: 0.7s;
+}
+.finger {
+  stroke-width: 15px;
+  animation-duration: 0.3s;
+}
+@keyframes grow {
+  from {
+    stroke-dashoffset: 1;
+    opacity: 0;
+  }
+  2% {
+    opacity: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+.head {
+  fill: #f5ecd8;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pop 0.5s cubic-bezier(0.3, 1.6, 0.5, 1) both;
+}
+@keyframes pop {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+/* The whole tangle breathes gently once it has formed. */
+.figures {
+  transform-origin: 400px 380px;
+  animation: breathe 5s ease-in-out 3s infinite;
+}
+@keyframes breathe {
+  50% {
+    transform: scale(1.015) translateY(-3px);
+  }
+}
+
+/* 3. The card drops from above and settles with a bounce. */
+.cardDrop {
+  transform-origin: 401px 300px;
+  animation: drop 0.62s cubic-bezier(0.34, 1.45, 0.55, 1) 2.6s both;
+}
+@keyframes drop {
+  from {
+    transform: translateY(-560px) rotate(-14deg);
+  }
+  to {
+    transform: translateY(0) rotate(0deg);
+  }
+}
+.card {
+  fill: #8e1f2f;
+}
+.cardLine {
+  fill: none;
+  stroke: #c7a15c;
+  stroke-width: 3;
+}
+.letter {
+  fill: #f5ecd8;
+  font-family: "Noto Sans Malayalam Variable", sans-serif;
+  font-size: 56px;
+  font-weight: 600;
+  animation: fade 0.4s ease 3.05s both;
+}
+
+/* 4. Sparkles twinkle forever; the ring fades in and slowly orbits. */
+.sparkle {
+  animation:
+    pop 0.45s cubic-bezier(0.3, 1.6, 0.5, 1) both,
+    twinkle 2.4s ease-in-out infinite;
+  animation-delay: inherit;
+}
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+.ringWrap {
+  animation: fade 0.8s ease 3.4s both;
+}
+.ringSpin {
+  transform-origin: 400px 300px;
+  animation: spin 70s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.ringText {
+  fill: #c7a15c;
+  font-family: Georgia, "Noto Sans Malayalam Variable", serif;
+  font-size: 19px;
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.start {
+  position: absolute;
+  bottom: max(28px, env(safe-area-inset-bottom));
+  left: 50%;
+  translate: -50% 0;
+  animation: startIn 0.5s cubic-bezier(0.3, 1.6, 0.5, 1) 4.3s both;
+}
+@keyframes startIn {
+  from {
+    opacity: 0;
+    scale: 0.6;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+.skip {
+  position: absolute;
+  top: max(16px, env(safe-area-inset-top));
+  right: 16px;
+  font-size: 12px;
+  color: #c7a15c;
+  opacity: 0.7;
+}
+
+/* Reduced motion: no movement, show the finished picture straight away. */
+@media (prefers-reduced-motion: reduce) {
+  .stage *,
+  .stage {
+    animation-duration: 0.01s !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition: none !important;
+  }
+  .hopper {
+    display: none;
+  }
+}

@@ -14,14 +14,32 @@ import {
   type NextAction,
 } from "@/lib/lesson";
 import { PageHeading, ProgressBar } from "@/components/ui";
+import { Intro } from "@/components/intro";
 import type { LearningReason } from "@/types";
 
 export default function Home() {
   const { ready, progress } = useProgress();
   // Wait for saved progress so a returning learner never sees a zero streak flash.
   if (!ready) return <p role="status">Loading your progress…</p>;
-  if (!progress.onboarded && !progress.introduced.length) return <Welcome />;
-  return <Path />;
+  const firstVisit = !progress.onboarded && !progress.introduced.length;
+  return <HomeView firstVisit={firstVisit} />;
+}
+function HomeView({ firstVisit }: { firstVisit: boolean }) {
+  // The opening plays on a first visit; add #intro to the address to replay it.
+  const [intro, setIntro] = useState(
+    () => firstVisit || window.location.hash === "#intro",
+  );
+  if (intro)
+    return (
+      <Intro
+        onDone={() => {
+          if (window.location.hash === "#intro")
+            history.replaceState(null, "", window.location.pathname);
+          setIntro(false);
+        }}
+      />
+    );
+  return firstVisit ? <Welcome /> : <Path />;
 }
 
 const reasons: { id: LearningReason; label: string }[] = [

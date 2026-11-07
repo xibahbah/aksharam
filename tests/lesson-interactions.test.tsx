@@ -151,8 +151,14 @@ describe("Learn lessons", () => {
 describe("Home", () => {
   it("welcomes a new learner and saves their choices", async () => {
     view(emptyProgress(), <Home />);
+    // A first visit opens with the intro animation; Start leads to the welcome.
+    await userEvent.click(await screen.findByRole("button", { name: "Start" }));
     await userEvent.click(
-      await screen.findByRole("button", { name: /connect with family/ }),
+      await screen.findByRole(
+        "button",
+        { name: /connect with family/ },
+        { timeout: 2000 },
+      ),
     );
     await userEvent.click(screen.getByRole("button", { name: /Serious/ }));
     await userEvent.click(
