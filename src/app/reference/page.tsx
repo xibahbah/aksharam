@@ -1,5 +1,6 @@
 "use client";
-import { useRef, useState, useEffect } from "react";
+import { Suspense, useRef, useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Search, X, Bookmark, ArrowRight, Info } from "lucide-react";
 import { categories, letters, sources } from "@/data/alphabet";
@@ -12,8 +13,41 @@ import { SyllableBuilder } from "@/components/syllable-builder";
 import { unitOfLetter, units } from "@/data/curriculum";
 import { strength, strengthNames, unitStates } from "@/lib/lesson";
 export default function Reference() {
-  const [search, setSearch] = useState("");
-  const [category, setCategory] = useState<Category | "all">("all");
+  return (
+    <Suspense fallback={<p role="status">Loading the alphabet…</p>}>
+      <ReferenceView />
+    </Suspense>
+  );
+}
+const collections = new Set<string>(categories.map((c) => c.id));
+function ReferenceView() {
+  // Collection and search live in the address, so refresh and links keep them.
+  const params = useSearchParams();
+  const [search, setSearchState] = useState(params.get("q") ?? "");
+  const initial = params.get("collection") ?? "all";
+  const [category, setCategoryState] = useState<Category | "all">(
+    collections.has(initial) ? (initial as Category) : "all",
+  );
+  function syncUrl(next: { q?: string; collection?: string }) {
+    const url = new URLSearchParams(window.location.search);
+    for (const [k, v] of Object.entries(next))
+      if (v && v !== "all") url.set(k, v);
+      else url.delete(k);
+    const query = url.toString();
+    window.history.replaceState(
+      null,
+      "",
+      query ? `?${query}` : window.location.pathname,
+    );
+  }
+  const setSearch = (q: string) => {
+    setSearchState(q);
+    syncUrl({ q });
+  };
+  const setCategory = (c: Category | "all") => {
+    setCategoryState(c);
+    syncUrl({ collection: c });
+  };
   const [selected, setSelected] = useState<Letter | null>(null);
   const [rare, setRare] = useState(true);
   const dialog = useRef<HTMLDialogElement>(null);
@@ -34,8 +68,9 @@ export default function Reference() {
   );
   return (
     <>
-      <PageHeading title="Alphabet reference" />
-      <div className="reference-intro">
+      <PageHeading title="Alphabet" />
+      <details className="reference-intro">
+        <summary>How Malayalam letters combine</summary>
         <div>
           <h3>Inherent vowels and vowel signs</h3>
           <p>
@@ -59,7 +94,7 @@ export default function Reference() {
             കാ<small>kā</small>
           </span>
         </div>
-      </div>
+      </details>
       <SyllableBuilder />
       <div className="reference-controls">
         <div className="search-box">

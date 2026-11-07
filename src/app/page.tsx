@@ -2,17 +2,10 @@
 import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Check, Lock, ShieldCheck } from "lucide-react";
-import { coreLetters } from "@/data/alphabet";
 import { units, coreUnitCount } from "@/data/curriculum";
 import { useProgress } from "@/hooks/use-progress";
-import { mastered } from "@/lib/progress";
 import { currentStreak, needsBackup, xpToday } from "@/lib/habit";
-import {
-  nextAction,
-  strength,
-  unitStates,
-  type NextAction,
-} from "@/lib/lesson";
+import { nextAction, unitStates, type NextAction } from "@/lib/lesson";
 import { PageHeading, ProgressBar } from "@/components/ui";
 import { Intro } from "@/components/intro";
 import type { LearningReason } from "@/types";
@@ -205,13 +198,6 @@ function Path() {
   const goal = progress.preferences.dailyGoal;
   const today = xpToday(progress, at);
   const days = currentStreak(progress, at);
-  const learned = coreLetters.filter((l) =>
-    progress.introduced.includes(l.id),
-  ).length;
-  const strong = coreLetters.filter(
-    (l) => strength(progress, l.id) >= 3,
-  ).length;
-  const masteredCount = Object.values(progress.cards).filter(mastered).length;
   return (
     <>
       <PageHeading
@@ -232,18 +218,27 @@ function Path() {
             <p>{detail}</p>
           </div>
         </div>
-        <Link className="button primary" href="/learn">
-          {progress.introduced.length ? "Continue" : "Start lesson 1"}
-          <ArrowRight size={18} />
-        </Link>
-        {next.kind === "unit" && progress.introduced.length > 0 && (
-          <Link
-            className="text-link"
-            href={`/learn?mode=placement&unit=${next.unit.id}`}
-          >
-            Already know these? Test out
+        <div className="button-row">
+          <Link className="button primary" href="/learn">
+            {progress.introduced.length ? "Continue" : "Start lesson 1"}
+            <ArrowRight size={18} />
           </Link>
-        )}
+          {next.kind === "unit" && progress.introduced.length > 0 && (
+            <Link
+              className="text-link"
+              href={`/learn?mode=placement&unit=${next.unit.id}`}
+            >
+              Already know these? Test out
+            </Link>
+          )}
+        </div>
+        <div className="goal-inline" aria-label="Daily goal">
+          <span className="muted">
+            Today {today} / {goal} XP
+            {today >= goal ? " · goal reached" : ""}
+          </span>
+          <ProgressBar value={(today / goal) * 100} label="Daily goal" />
+        </div>
       </section>
       {needsBackup(progress, at) && (
         <div className="notice" role="note">
@@ -252,33 +247,6 @@ function Path() {
           lost.
         </div>
       )}
-      <section className="daily-goal panel" aria-label="Daily goal">
-        <div>
-          <h2>Daily goal</h2>
-          <p>
-            {today} / {goal} XP{today >= goal ? " · Goal reached" : ""}
-          </p>
-        </div>
-        <ProgressBar value={(today / goal) * 100} label="Daily goal" />
-      </section>
-      <div className="stats-grid" aria-label="Learning statistics">
-        {[
-          ["Learned", `${learned}`, `/ ${coreLetters.length}`],
-          ["Strong", `${strong}`, ""],
-          ["Mastered", `${masteredCount}`, ""],
-          ["Streak", `${days}`, days === 1 ? " day" : " days"],
-        ].map(([label, value, small]) => (
-          <div className="stat" key={label}>
-            <div>
-              <span>{label}</span>
-              <strong>
-                {value}
-                {small && <small> {small}</small>}
-              </strong>
-            </div>
-          </div>
-        ))}
-      </div>
       <section className="alphabet-section" aria-label="Learning path">
         <div className="section-header">
           <h2>Your path</h2>

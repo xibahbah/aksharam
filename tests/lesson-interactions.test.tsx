@@ -84,15 +84,14 @@ describe("Learn lessons", () => {
       await screen.findByRole("button", { name: /Got it/ }),
     );
     await userEvent.click(screen.getByRole("button", { name: /Got it/ }));
-    const total = Number(
-      screen.getByText(/Step \d+ of \d+/).textContent!.match(/of (\d+)/)![1],
-    );
+    const step = () => document.querySelector(".lesson-step")!.textContent!;
+    const total = Number(step().match(/\/ (\d+)/)![1]);
     const wrong = optionButtons().find(
       (b) => !b.textContent?.endsWith(units[0].items[0].romanization),
     )!;
     await userEvent.click(wrong);
     expect(screen.getByRole("status")).toHaveTextContent("Not quite");
-    expect(screen.getByText(new RegExp(`of ${total + 1}`))).toBeInTheDocument();
+    expect(step()).toContain(`/ ${total + 1}`);
   });
   it("finishes unit 1 with what you can read, XP, a lesson log and milestones", async () => {
     view();

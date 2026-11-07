@@ -30,14 +30,13 @@ export function QuizQuestion({
   question,
   onAnswer,
   onNext,
-  number,
-  total,
 }: {
   question: Question;
   onAnswer: (response: string, correct: boolean) => void;
   onNext: () => void;
-  number: number;
-  total: number;
+  /** Position in the session; shown by the session header, not here. */
+  number?: number;
+  total?: number;
 }) {
   const [response, setResponse] = useState<string | null>(null);
   const [typed, setTyped] = useState("");
@@ -98,9 +97,6 @@ export function QuizQuestion({
               : question.type === "typing"
                 ? "RECALL THE SOUND"
                 : "RECOGNIZE THE SOUND"}
-        </span>
-        <span>
-          {number} / {total}
         </span>
       </div>
       <h2>

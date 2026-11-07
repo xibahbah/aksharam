@@ -35,6 +35,7 @@ function download(name: string, type: string, text: string) {
 export default function SettingsPage() {
   const { progress, preferences, replace, markBackup, now } = useProgress();
   const [time, setTime] = useState("19:00");
+  const [allMilestones, setAllMilestones] = useState(false);
   const [persisted, setPersisted] = useState<boolean | null>(null);
   useEffect(() => {
     void navigator.storage
@@ -95,6 +96,11 @@ export default function SettingsPage() {
     : null;
   const totalXp = Object.values(progress.xp ?? {}).reduce((a, b) => a + b, 0);
   const earned = new Set(progress.milestones ?? []);
+  // Earned milestones plus the next two to aim for; the rest on request.
+  const upcoming = milestones.filter((m) => !earned.has(m.id));
+  const shownMilestones = allMilestones
+    ? milestones
+    : [...milestones.filter((m) => earned.has(m.id)), ...upcoming.slice(0, 2)];
   async function importData(file: File | undefined) {
     if (!file) return;
     try {
@@ -121,232 +127,248 @@ export default function SettingsPage() {
     <>
       <PageHeading title="Me" />
       <div className="settings-grid">
-        <section className="panel settings-panel" aria-label="Your progress">
-          <div className="settings-title">
-            <Trophy size={22} />
-            <h2>Your progress</h2>
-          </div>
-          <dl className="learn-counts">
-            {[
-              ["Learned", `${learned} / ${coreLetters.length}`],
-              ["Strong", strong],
-              ["Mastered", masteredCount],
-              ["Streak", `${currentStreak(progress, at)} days`],
-              ["Rest days", `${progress.freezes ?? 0} / ${MAX_FREEZES}`],
-              ["Lessons", progress.lessons?.length ?? 0],
-              ["Total XP", totalXp],
-              ["Accuracy", accuracy === null ? "—" : `${accuracy}%`],
-            ].map(([k, v]) => (
-              <div key={k}>
-                <dt>{k}</dt>
-                <dd>{v}</dd>
-              </div>
-            ))}
-          </dl>
-          <p className="muted">
-            Every {FREEZE_EVERY} days in a row earns a rest day (up to{" "}
-            {MAX_FREEZES}). A rest day covers a missed day so your streak
-            survives.
-          </p>
-          <h3>Milestones</h3>
-          <ul className="milestone-list">
-            {milestones.map((m) => (
-              <li key={m.id} data-earned={earned.has(m.id) || undefined}>
-                {earned.has(m.id) ? (
-                  <Check size={16} aria-label="Earned" />
-                ) : (
-                  <span aria-hidden="true" />
-                )}
-                <span>
-                  <strong>{m.title}</strong>
-                  {m.detail}
-                </span>
-                {earned.has(m.id) ? (
-                  <button
-                    className="text-link"
-                    onClick={() => void share(m.title, m.detail)}
-                    aria-label={`Share ${m.title}`}
-                  >
-                    <Share2 size={14} /> Share
-                  </button>
-                ) : (
-                  <span />
-                )}
-              </li>
-            ))}
-          </ul>
-        </section>
-        <section className="panel settings-panel" aria-label="Daily reminder">
-          <div className="settings-title">
-            <Bell size={22} />
-            <h2>Daily reminder</h2>
-          </div>
-          <p>
-            Add a repeating five-minute event to your calendar, with an alert.
-          </p>
-          <label className="setting-row" htmlFor="reminder-time">
-            <span>
-              <strong>Reminder time</strong>
-            </span>
-            <input
-              id="reminder-time"
-              type="time"
-              value={time}
-              onChange={(e) => setTime(e.target.value || "19:00")}
-            />
-          </label>
-          <button className="button primary" onClick={addReminder}>
-            <Bell size={17} /> Add to my calendar
-          </button>
-        </section>
-        <AppearanceSettings />
-        <section className="panel settings-panel">
-          <div className="settings-title">
-            <Settings size={22} />
-            <h2>Study preferences</h2>
-          </div>
-          <label className="setting-row" htmlFor="goal">
-            <span>
-              <strong>Daily goal</strong>
-              <small>XP per day. A lesson earns about 15 XP.</small>
-            </span>
-            <select
-              id="goal"
-              value={progress.preferences.dailyGoal}
-              onChange={(e) =>
-                preferences({ dailyGoal: Number(e.target.value) })
-              }
-            >
-              {Array.from(
-                new Set([10, 15, 30, 50, progress.preferences.dailyGoal]),
-              )
-                .sort((a, b) => a - b)
-                .map((n) => (
-                  <option key={n} value={n}>
-                    {n} XP
-                  </option>
-                ))}
-            </select>
-          </label>
-          <label className="setting-row" htmlFor="lesson-size">
-            <span>
-              <strong>Review size</strong>
-              <small>Letters per review or Keep sharp session.</small>
-            </span>
-            <select
-              id="lesson-size"
-              value={progress.preferences.lessonSize}
-              onChange={(e) =>
-                preferences({ lessonSize: Number(e.target.value) })
-              }
-            >
-              {Array.from(
-                new Set([5, 10, 15, 20, progress.preferences.lessonSize]),
-              )
-                .sort((a, b) => a - b)
-                .map((n) => (
-                  <option key={n} value={n}>
-                    {n} letters
-                  </option>
-                ))}
-            </select>
-          </label>
-        </section>
-        <section className="panel settings-panel" id="backup">
-          <div className="settings-title">
-            <ShieldCheck size={22} />
-            <h2>Keep your progress safe</h2>
-          </div>
-          <p>
-            Progress lives only in this browser. Safari can clear a site&apos;s
-            data after a week without a visit, so save a backup now and then.
-            The same file moves your progress to another device. Importing
-            replaces this browser&apos;s progress.
-          </p>
-          <p className="muted">
-            {progress.lastBackupAt
-              ? `Last backup: ${new Date(progress.lastBackupAt).toLocaleDateString()}.`
-              : "No backup saved yet."}{" "}
-            {persisted === true
-              ? "This browser has agreed to keep the data."
-              : persisted === false
-                ? "This browser may clear the data when space runs low."
-                : ""}
-          </p>
-          <p className="muted">
-            Tip: add Aksharam to your home screen (Share → Add to Home Screen)
-            to use it like an app. On iPhone the home-screen app keeps its own
-            progress, so export here and import there once.
-          </p>
-          <div className="button-row">
-            <button className="button primary" onClick={exportData}>
-              <Download size={17} />
-              Export progress
+        <div className="settings-col">
+          <section className="panel settings-panel" aria-label="Your progress">
+            <div className="settings-title">
+              <Trophy size={22} />
+              <h2>Your progress</h2>
+            </div>
+            <dl className="learn-counts">
+              {[
+                ["Learned", `${learned} / ${coreLetters.length}`],
+                ["Strong", strong],
+                ["Mastered", masteredCount],
+                ["Streak", `${currentStreak(progress, at)} days`],
+                ["Rest days", `${progress.freezes ?? 0} / ${MAX_FREEZES}`],
+                ["Lessons", progress.lessons?.length ?? 0],
+                ["Total XP", totalXp],
+                ["Accuracy", accuracy === null ? "—" : `${accuracy}%`],
+              ].map(([k, v]) => (
+                <div key={k}>
+                  <dt>{k}</dt>
+                  <dd>{v}</dd>
+                </div>
+              ))}
+            </dl>
+            <p className="muted">
+              Every {FREEZE_EVERY} days in a row earns a rest day (up to{" "}
+              {MAX_FREEZES}). A rest day covers a missed day so your streak
+              survives.
+            </p>
+            <h3>Milestones</h3>
+            <ul className="milestone-list">
+              {shownMilestones.map((m) => (
+                <li key={m.id} data-earned={earned.has(m.id) || undefined}>
+                  {earned.has(m.id) ? (
+                    <Check size={16} aria-label="Earned" />
+                  ) : (
+                    <span aria-hidden="true" />
+                  )}
+                  <span>
+                    <strong>{m.title}</strong>
+                    {m.detail}
+                  </span>
+                  {earned.has(m.id) ? (
+                    <button
+                      className="text-link"
+                      onClick={() => void share(m.title, m.detail)}
+                      aria-label={`Share ${m.title}`}
+                    >
+                      <Share2 size={14} /> Share
+                    </button>
+                  ) : (
+                    <span />
+                  )}
+                </li>
+              ))}
+            </ul>
+            {upcoming.length > 2 && (
+              <button
+                className="text-link"
+                onClick={() => setAllMilestones(!allMilestones)}
+                aria-expanded={allMilestones}
+              >
+                {allMilestones
+                  ? "Show fewer milestones"
+                  : `Show all ${milestones.length} milestones`}
+              </button>
+            )}
+          </section>
+        </div>
+        <div className="settings-col">
+          <section className="panel settings-panel" aria-label="Daily reminder">
+            <div className="settings-title">
+              <Bell size={22} />
+              <h2>Daily reminder</h2>
+            </div>
+            <p>
+              Add a repeating five-minute event to your calendar, with an alert.
+            </p>
+            <label className="setting-row" htmlFor="reminder-time">
+              <span>
+                <strong>Reminder time</strong>
+              </span>
+              <input
+                id="reminder-time"
+                type="time"
+                value={time}
+                onChange={(e) => setTime(e.target.value || "19:00")}
+              />
+            </label>
+            <button className="button primary" onClick={addReminder}>
+              <Bell size={17} /> Add to my calendar
             </button>
-            <button
-              className="button secondary"
-              onClick={() => input.current?.click()}
-            >
-              <Upload size={17} />
-              Import JSON
-            </button>
-            <input
-              ref={input}
-              type="file"
-              accept=".json,application/json"
-              className="sr-only"
-              aria-label="Import progress JSON"
-              onChange={(e) => void importData(e.target.files?.[0])}
-            />
-          </div>
-        </section>
-        <section className="panel settings-panel">
-          <h2>How reviews work</h2>
-          <p>
-            Lessons and reviews schedule letters automatically: a right answer
-            pushes a letter further out, a miss brings it back soon. Flashcard
-            ratings work the same way. Again returns in 10 minutes. Hard waits
-            at least a day. Good starts at a day and doubles the previous
-            interval. Easy starts at 3 days and multiplies by 2.5. Hard grows a
-            previous interval by 1.2.
-          </p>
-          <p>
-            A letter is mastered after at least 3 consecutive Good or Easy
-            reviews and an interval of 7 days or more. Again and Hard reset that
-            streak. Only Again counts as a lapse. This is a lightweight
-            deterministic scheduler, not SM-2 or FSRS.
-          </p>
-          <p>
-            Continue clears a review backlog before teaching new letters, and
-            every lesson mixes in a few due reviews. Only the first question
-            about a letter in a session changes its schedule. Accuracy uses
-            answered questions; flashcard self-ratings are excluded.
-          </p>
-        </section>
-        <section className="panel settings-panel reset-panel">
-          <h2>Reset progress</h2>
-          <p>
-            Reset all reviews, bookmarks, quiz history, and preferences on this
-            browser. Export a backup first if you’d like to return to them.
-          </p>
-          <button
-            className="button danger"
-            onClick={() => {
-              if (
-                window.confirm(
-                  "Permanently reset all Aksharam progress in this browser? This cannot be undone without an export.",
+          </section>
+          <AppearanceSettings />
+          <section className="panel settings-panel">
+            <div className="settings-title">
+              <Settings size={22} />
+              <h2>Study preferences</h2>
+            </div>
+            <label className="setting-row" htmlFor="goal">
+              <span>
+                <strong>Daily goal</strong>
+                <small>XP per day. A lesson earns about 15 XP.</small>
+              </span>
+              <select
+                id="goal"
+                value={progress.preferences.dailyGoal}
+                onChange={(e) =>
+                  preferences({ dailyGoal: Number(e.target.value) })
+                }
+              >
+                {Array.from(
+                  new Set([10, 15, 30, 50, progress.preferences.dailyGoal]),
                 )
-              ) {
-                replace(emptyProgress());
-                setError(false);
-                setStatus("Progress has been reset.");
-              }
-            }}
-          >
-            <Trash2 size={17} />
-            Reset progress
-          </button>
-        </section>
+                  .sort((a, b) => a - b)
+                  .map((n) => (
+                    <option key={n} value={n}>
+                      {n} XP
+                    </option>
+                  ))}
+              </select>
+            </label>
+            <label className="setting-row" htmlFor="lesson-size">
+              <span>
+                <strong>Review size</strong>
+                <small>Letters per review or Keep sharp session.</small>
+              </span>
+              <select
+                id="lesson-size"
+                value={progress.preferences.lessonSize}
+                onChange={(e) =>
+                  preferences({ lessonSize: Number(e.target.value) })
+                }
+              >
+                {Array.from(
+                  new Set([5, 10, 15, 20, progress.preferences.lessonSize]),
+                )
+                  .sort((a, b) => a - b)
+                  .map((n) => (
+                    <option key={n} value={n}>
+                      {n} letters
+                    </option>
+                  ))}
+              </select>
+            </label>
+          </section>
+          <section className="panel settings-panel" id="backup">
+            <div className="settings-title">
+              <ShieldCheck size={22} />
+              <h2>Keep your progress safe</h2>
+            </div>
+            <p>
+              Progress lives only in this browser. Safari can clear a
+              site&apos;s data after a week without a visit, so save a backup
+              now and then. The same file moves your progress to another device.
+              Importing replaces this browser&apos;s progress.
+            </p>
+            <p className="muted">
+              {progress.lastBackupAt
+                ? `Last backup: ${new Date(progress.lastBackupAt).toLocaleDateString()}.`
+                : "No backup saved yet."}{" "}
+              {persisted === true
+                ? "This browser has agreed to keep the data."
+                : persisted === false
+                  ? "This browser may clear the data when space runs low."
+                  : ""}
+            </p>
+            <p className="muted">
+              Tip: add Aksharam to your home screen (Share → Add to Home Screen)
+              to use it like an app. On iPhone the home-screen app keeps its own
+              progress, so export here and import there once.
+            </p>
+            <div className="button-row">
+              <button className="button primary" onClick={exportData}>
+                <Download size={17} />
+                Export progress
+              </button>
+              <button
+                className="button secondary"
+                onClick={() => input.current?.click()}
+              >
+                <Upload size={17} />
+                Import JSON
+              </button>
+              <input
+                ref={input}
+                type="file"
+                accept=".json,application/json"
+                className="sr-only"
+                aria-label="Import progress JSON"
+                onChange={(e) => void importData(e.target.files?.[0])}
+              />
+            </div>
+          </section>
+          <section className="panel settings-panel">
+            <h2>How reviews work</h2>
+            <p>
+              Lessons and reviews schedule letters automatically: a right answer
+              pushes a letter further out, a miss brings it back soon. Flashcard
+              ratings work the same way. Again returns in 10 minutes. Hard waits
+              at least a day. Good starts at a day and doubles the previous
+              interval. Easy starts at 3 days and multiplies by 2.5. Hard grows
+              a previous interval by 1.2.
+            </p>
+            <p>
+              A letter is mastered after at least 3 consecutive Good or Easy
+              reviews and an interval of 7 days or more. Again and Hard reset
+              that streak. Only Again counts as a lapse. This is a lightweight
+              deterministic scheduler, not SM-2 or FSRS.
+            </p>
+            <p>
+              Continue clears a review backlog before teaching new letters, and
+              every lesson mixes in a few due reviews. Only the first question
+              about a letter in a session changes its schedule. Accuracy uses
+              answered questions; flashcard self-ratings are excluded.
+            </p>
+          </section>
+          <section className="panel settings-panel reset-panel">
+            <h2>Reset progress</h2>
+            <p>
+              Reset all reviews, bookmarks, quiz history, and preferences on
+              this browser. Export a backup first if you’d like to return to
+              them.
+            </p>
+            <button
+              className="button danger"
+              onClick={() => {
+                if (
+                  window.confirm(
+                    "Permanently reset all Aksharam progress in this browser? This cannot be undone without an export.",
+                  )
+                ) {
+                  replace(emptyProgress());
+                  setError(false);
+                  setStatus("Progress has been reset.");
+                }
+              }}
+            >
+              <Trash2 size={17} />
+              Reset progress
+            </button>
+          </section>
+        </div>
       </div>
       {status && (
         <div

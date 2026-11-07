@@ -27,7 +27,7 @@ import {
 } from "@/lib/habit";
 import type { Answer } from "@/lib/quiz";
 import type { Letter, Progress } from "@/types";
-import { PageHeading, ProgressBar } from "./ui";
+import { ProgressBar } from "./ui";
 import { QuizQuestion } from "./quiz-question";
 import { AudioButton } from "./audio-button";
 
@@ -188,17 +188,20 @@ function Runner() {
   const total = steps.length;
   return (
     <>
-      <PageHeading title={plan.title} description={plan.unit?.goal} />
       <div className="session-wrap">
-        <div className="session-heading">
+        <header className="lesson-top">
           <Link className="text-link" href="/">
             Exit
           </Link>
-          <span>
-            Step {index + 1} of {total}
+          <div className="lesson-title">
+            <h1>{plan.title}</h1>
+            {plan.unit?.goal && <span className="muted">{plan.unit.goal}</span>}
+          </div>
+          <span className="lesson-step">
+            {index + 1} / {total}
             {combo >= 3 ? ` · ${combo} in a row!` : ""}
           </span>
-        </div>
+        </header>
         <ProgressBar value={(index / total) * 100} label="Lesson progress" />
         {step?.kind === "teach" ? (
           <TeachCard
