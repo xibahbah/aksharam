@@ -55,7 +55,7 @@ export function SidebarResize() {
       if (next !== null) { event.preventDefault(); update(next, true); }
     }}>
     <svg viewBox="0 0 24 800" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M13 3 C3 53 20 97 10 158 S20 249 12 308 S3 389 14 453 S20 532 10 602 S18 711 11 797" />
+      <path d="M12 3 C12 53 12 97 12 158 S12 249 12 308 S12 389 12 453 S12 532 12 602 S12 711 12 797" />
       <path className="sidebar-pencil" d="M15 23 C7 66 18 108 12 140 M13 328 Q5 380 15 425 M12 622 Q18 671 13 708" />
     </svg>
   </div>;

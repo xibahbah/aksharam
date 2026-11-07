@@ -247,7 +247,7 @@
   .sidebar-resize { display: block; position: fixed; left: calc(var(--sidebar-width, 208px) - 12px); top: calc(25% + 8px); bottom: calc(25% + 8px); width: 24px; z-index: 25; cursor: col-resize; touch-action: none; user-select: none; border-radius: 12px; }
   .sidebar-resize svg { display: block; width: 100%; height: 100%; fill: none; stroke: var(--muted); stroke-width: 1.35; stroke-linecap: round; opacity: .5; transition: opacity 240ms ease, stroke 240ms ease; }
   .sidebar-resize path { vector-effect: non-scaling-stroke; }
-  .sidebar-resize .sidebar-pencil { opacity: .22; stroke-width: .75; }
+  .sidebar-resize .sidebar-pencil { opacity: 0; stroke-width: .75; }
   .sidebar-resize:hover svg, .sidebar-resize:focus-visible svg, .sidebar-resize[data-dragging] svg { opacity: .85; stroke: var(--coral); }
   .sidebar-resize:focus-visible { outline: none; }
   .app-shell:has(.sidebar-resize[data-dragging]) { user-select: none; cursor: col-resize; }
@@ -255,21 +255,21 @@
 /* Flex the ink itself; the resize target stays still and easy to grab. */
 @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
   .sidebar:hover + .sidebar-resize:not([data-dragging]) path:first-child,
-  .sidebar-resize:is(:hover, :focus-visible):not([data-dragging]) path:first-child {
+  .sidebar-resize:hover:not([data-dragging]) path:first-child {
     animation: sidebar-ink-wave 2.8s ease-in-out infinite;
   }
   .sidebar:hover + .sidebar-resize:not([data-dragging]) .sidebar-pencil,
-  .sidebar-resize:is(:hover, :focus-visible):not([data-dragging]) .sidebar-pencil {
+  .sidebar-resize:hover:not([data-dragging]) .sidebar-pencil {
     animation: sidebar-pencil-drift 2.8s ease-in-out infinite;
   }
 }
 @keyframes sidebar-ink-wave {
-  0%, 100% { d: path("M13 3 C3 53 20 97 10 158 S20 249 12 308 S3 389 14 453 S20 532 10 602 S18 711 11 797"); }
+  0%, 100% { d: path("M12 3 C12 53 12 97 12 158 S12 249 12 308 S12 389 12 453 S12 532 12 602 S12 711 12 797"); }
   35% { d: path("M13 3 C8 53 15 97 13 158 S23 249 9 308 S8 389 17 453 S15 532 8 602 S22 711 11 797"); }
   70% { d: path("M13 3 C1 53 23 97 8 158 S15 249 15 308 S1 389 11 453 S23 532 13 602 S14 711 11 797"); }
 }
 @keyframes sidebar-pencil-drift {
-  0%, 100% { transform: translateX(0); opacity: .22; }
+  0%, 100% { transform: translateX(0); opacity: 0; }
   35% { transform: translateX(1.5px); opacity: .32; }
   70% { transform: translateX(-1px); opacity: .18; }
 }
