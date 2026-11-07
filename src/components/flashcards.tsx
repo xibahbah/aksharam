@@ -9,7 +9,6 @@ import {
   Shuffle,
   ArrowLeftRight,
   Check,
-  Layers,
   Keyboard,
 } from "lucide-react";
 import { letters, categories } from "@/data/alphabet";
@@ -155,10 +154,7 @@ function FlashcardsSession() {
   }
   return (
     <>
-      <PageHeading
-        title="Flashcards"
-        description="Tap a card to flip. Swipe left or right to change cards."
-      />
+      <PageHeading title="Flashcards" />
       <div className="study-layout">
         <section className="study-main" aria-label="Flashcard study">
           <div className="study-toolbar">
@@ -220,11 +216,7 @@ function FlashcardsSession() {
           ) : letter ? (
             <>
               <div className="study-meta">
-                <span>
-                  {order.length ? "Shuffled" : "Alphabet order"}{" "}
-                  <span className="small-dot">·</span>{" "}
-                  {reverse ? "English → Malayalam" : "Malayalam → English"}
-                </span>
+                <span />
                 <button
                   className={`bookmark-button ${progress.favorites.includes(letter.id) ? "selected" : ""}`}
                   aria-label={
@@ -285,9 +277,6 @@ function FlashcardsSession() {
               />
               {flipped ? (
                 <div className="rating-area">
-                  <div className="section-caption">
-                    HOW WELL DID YOU KNOW THIS LETTER?
-                  </div>
                   <div className="rating-grid">
                     {(["again", "hard", "good", "easy"] as const).map(
                       (r, i) => (
@@ -302,15 +291,12 @@ function FlashcardsSession() {
                       ),
                     )}
                   </div>
-                  <p className="save-feedback" role="status">
-                    {feedback || "Ratings set the next review date."}
-                  </p>
                 </div>
-              ) : (
-                <p className="save-feedback" role="status">
-                  {feedback || "Flip the card, then say how well you knew it."}
-                </p>
-              )}
+              ) : null}
+              {/* Announced to screen readers only; sighted users see the card move on. */}
+              <p className="sr-only" role="status">
+                {feedback}
+              </p>
             </>
           ) : (
             <div className="empty-state">
@@ -347,36 +333,12 @@ function FlashcardsSession() {
             />{" "}
             Include uncommon, historic & scholarly forms
           </label>
+          <p className="keyboard-guide">
+            <Keyboard size={16} aria-hidden="true" />
+            <kbd>space</kbd> flip · <kbd>←</kbd>
+            <kbd>→</kbd> move · <kbd>1</kbd>–<kbd>4</kbd> rate
+          </p>
         </section>
-        <aside className="study-aside">
-          <div className="panel study-tip">
-            <div className="section-caption">VOWEL LENGTH</div>
-            <h3>Short and long vowels</h3>
-            <div className="tip-glyphs" lang="ml">
-              അ <span>→</span> ആ
-            </div>
-            <p>
-              Vowel length matters in Malayalam. A short sound and its longer
-              partner can change a word’s meaning.
-            </p>
-            <Link href="/reference">
-              Alphabet reference <ArrowRight size={15} />
-            </Link>
-          </div>
-          <div className="keyboard-guide">
-            <Keyboard size={18} />
-            <span>
-              <kbd>space</kbd> flip <kbd>←</kbd>
-              <kbd>→</kbd> navigate
-              <br />
-              <kbd>1</kbd>–<kbd>4</kbd> rate your recall
-            </span>
-          </div>
-          <Link href="/" className="quiet-link">
-            <Layers size={16} />
-            Back to your path <ArrowRight size={16} />
-          </Link>
-        </aside>
       </div>
     </>
   );

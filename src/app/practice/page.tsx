@@ -54,10 +54,7 @@ export default function PracticePage() {
   ];
   return (
     <>
-      <PageHeading
-        title="Practice"
-        description="Extra practice on letters you have already learned."
-      />
+      <PageHeading title="Practice" />
       {!learned ? (
         <div className="empty-state">
           <h2>Nothing to practise yet</h2>

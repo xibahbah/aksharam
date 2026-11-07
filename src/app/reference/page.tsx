@@ -148,9 +148,7 @@ function ReferenceView() {
           </button>
         ))}
       </div>
-      <div className="reference-count">
-        {filtered.length} entries · select a letter for details
-      </div>
+      <div className="reference-count">{filtered.length} entries</div>
       {!filtered.length && (
         <div className="empty-state">
           <Search size={28} />

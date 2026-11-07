@@ -54,10 +54,7 @@ function TestSession() {
   const step = questions[index];
   return (
     <>
-      <PageHeading
-        title="Test"
-        description="Check the letters you have learned. No Malayalam keyboard needed."
-      />
+      <PageHeading title="Test" />
       {phase === "setup" ? (
         taught.length < 3 ? (
           <div className="empty-state">

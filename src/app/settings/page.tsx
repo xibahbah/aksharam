@@ -320,29 +320,6 @@ export default function SettingsPage() {
               />
             </div>
           </section>
-          <section className="panel settings-panel">
-            <h2>How reviews work</h2>
-            <p>
-              Lessons and reviews schedule letters automatically: a right answer
-              pushes a letter further out, a miss brings it back soon. Flashcard
-              ratings work the same way. Again returns in 10 minutes. Hard waits
-              at least a day. Good starts at a day and doubles the previous
-              interval. Easy starts at 3 days and multiplies by 2.5. Hard grows
-              a previous interval by 1.2.
-            </p>
-            <p>
-              A letter is mastered after at least 3 consecutive Good or Easy
-              reviews and an interval of 7 days or more. Again and Hard reset
-              that streak. Only Again counts as a lapse. This is a lightweight
-              deterministic scheduler, not SM-2 or FSRS.
-            </p>
-            <p>
-              Continue clears a review backlog before teaching new letters, and
-              every lesson mixes in a few due reviews. Only the first question
-              about a letter in a session changes its schedule. Accuracy uses
-              answered questions; flashcard self-ratings are excluded.
-            </p>
-          </section>
           <section className="panel settings-panel reset-panel">
             <h2>Reset progress</h2>
             <p>

@@ -160,9 +160,6 @@ export function QuizQuestion({
               </button>
             ))}
           </div>
-          <p className="muted">
-            Accents show vowel length and sound: ā is longer than a.
-          </p>
           <button
             className="button primary"
             disabled={response !== null || !typed.trim()}

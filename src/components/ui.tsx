@@ -17,7 +17,13 @@ export function ProgressBar({
       aria-valuemax={100}
       aria-valuenow={Math.round(value)}
     >
-      <div style={{ width: `${Math.min(100, Math.max(0, value))}%` }} />
+      {/* A full-width fill slid left, not a width change: it animates on
+          the GPU and keeps its rounded end. */}
+      <div
+        style={{
+          transform: `translateX(${Math.min(100, Math.max(0, value)) - 100}%)`,
+        }}
+      />
     </div>
   );
 }

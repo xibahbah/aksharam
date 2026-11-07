@@ -2710,3 +2710,146 @@ details.reference-intro > summary {
 details.reference-intro[open] > summary {
   margin-bottom: 12px;
 }
+
+/* ---------- Flashcards: one calm column, no side panel ---------- */
+.study-layout,
+.study-layout:has(.study-main) {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 880px;
+  margin-inline: auto;
+}
+@media (hover: hover) and (pointer: fine) {
+  .keyboard-guide {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+}
+
+/* Ratings: one palette, light to deep — the better you knew it, the deeper. */
+:root {
+  --rate-again-bg: #ee5f5a;
+  --rate-again-text: #1a1a1a;
+  --rate-hard-bg: #f8cbc7;
+  --rate-hard-text: #1a1a1a;
+  --rate-good-bg: #e3e6cc;
+  --rate-good-text: #1a1a1a;
+  --rate-easy-bg: #1a1a1a;
+  --rate-easy-text: #f5f8e2;
+}
+:root[data-theme="dark"] {
+  --rate-again-bg: #ee5f5a;
+  --rate-again-text: #1a1a1a;
+  --rate-hard-bg: #5c302d;
+  --rate-hard-text: #f5f8e2;
+  --rate-good-bg: #3a3b32;
+  --rate-good-text: #f5f8e2;
+  --rate-easy-bg: #f5f8e2;
+  --rate-easy-text: #1a1a1a;
+}
+.rating {
+  border: none;
+  border-radius: 999px;
+  font-family: var(--display);
+  font-size: 16px;
+}
+.rating > span {
+  border-color: currentColor;
+  opacity: 0.7;
+}
+.rating.again {
+  background: var(--rate-again-bg);
+  color: var(--rate-again-text);
+}
+.rating.hard {
+  background: var(--rate-hard-bg);
+  color: var(--rate-hard-text);
+}
+.rating.good {
+  background: var(--rate-good-bg);
+  color: var(--rate-good-text);
+}
+.rating.easy {
+  background: var(--rate-easy-bg);
+  color: var(--rate-easy-text);
+}
+
+/* ---------- Motion: quick, interruptible, transform/opacity only ---------- */
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+}
+/* State indication: progress glides to its new value. */
+.progress-track > div {
+  width: 100%;
+  transition: transform 300ms var(--ease-out);
+}
+/* Feedback: colours ease, presses give a small squeeze. */
+.button,
+.rating,
+.answer-option,
+.nav-item,
+.mobile-nav a,
+.learn-mode,
+.deck-card,
+.letter-tile,
+.icon-button,
+.round-button,
+.filter-tabs button,
+.text-link {
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease,
+    transform 160ms var(--ease-out);
+}
+.button:active:not(:disabled),
+.rating:active,
+.answer-option:active:not(:disabled),
+.icon-button:active,
+.round-button:active,
+.filter-tabs button:active {
+  transform: scale(0.97);
+}
+@media (hover: hover) and (pointer: fine) {
+  a.deck-card:hover,
+  a.learn-mode:hover,
+  button.learn-mode:hover,
+  .letter-tile:hover {
+    transform: translateY(-2px);
+  }
+}
+/* Preventing jarring changes: new content settles in instead of popping. */
+@keyframes settle-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+main > * {
+  animation: fade-in 180ms var(--ease-out) both;
+}
+.quiz-panel,
+.reading-card,
+.results-header {
+  animation: settle-in 220ms var(--ease-out) both;
+}
+.answer-feedback {
+  animation: settle-in 200ms var(--ease-out) both;
+}
+/* Cards change often (and by keyboard): a fade only, no movement. */
+.flashcard {
+  animation: fade-in 160ms var(--ease-out) both;
+}
+.card-inner {
+  transition: transform 450ms var(--ease-in-out);
+}
