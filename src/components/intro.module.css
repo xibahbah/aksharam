@@ -1,12 +1,16 @@
 /* Opening animation. Timeline (seconds):
-   0.0–1.3 pookalam hops · 1.3–2.5 figures grow · 2.6–3.1 card drops ·
-   3.2–4.2 sparkles + ring · 4.3 Start */
+   0.0–1.35 pookalam hops · 1.3–2.1 figures lean in · 2.2–2.7 arm reaches ·
+   2.5–3.1 card drops · 3.1 letter · 3.3 text + flowers · 4.0 Start */
 .stage {
   position: fixed;
   inset: 0;
   z-index: 100;
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 3vh, 32px);
+  padding: 24px 16px max(24px, env(safe-area-inset-bottom));
   background: #101e19;
   color: #f5ecd8;
   overflow: hidden;
@@ -17,8 +21,8 @@
   opacity: 0;
 }
 .art {
-  width: min(100vw, 1100px);
-  height: min(100vh, 825px);
+  width: min(100%, 1100px);
+  max-height: calc(100vh - 140px);
   overflow: visible;
 }
 .cream {
@@ -31,46 +35,86 @@
 }
 @keyframes hop {
   0% {
-    transform: translate(560px, 110px) scale(0);
+    transform: translate(640px, 130px) scale(0);
   }
   14% {
-    transform: translate(560px, 110px) scale(0.75);
+    transform: translate(640px, 130px) scale(0.8);
   }
-  30% {
-    transform: translate(330px, 440px) scale(0.95);
+  32% {
+    transform: translate(380px, 450px) scale(1);
   }
-  52% {
-    transform: translate(610px, 330px) scale(1.2);
+  54% {
+    transform: translate(700px, 360px) scale(1.25);
   }
   78% {
-    transform: translate(400px, 300px) scale(1.5);
+    transform: translate(500px, 310px) scale(1.6);
     opacity: 1;
   }
   100% {
-    transform: translate(400px, 300px) scale(0);
+    transform: translate(500px, 310px) scale(0);
     opacity: 0;
   }
 }
 
-/* 2. Limbs draw on like growing vines; the goo filter melts them together. */
+/* 2. Each figure swings in from its side, pivoting at its base. */
+.figure {
+  fill: #f5ecd8;
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+}
+.left {
+  animation: leanLeft 0.8s cubic-bezier(0.3, 1.35, 0.5, 1) 1.3s both;
+}
+.right {
+  animation: leanRight 0.8s cubic-bezier(0.3, 1.35, 0.5, 1) 1.42s both;
+}
+@keyframes leanLeft {
+  from {
+    transform: translateX(-260px) rotate(-16deg) scale(0.86);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+@keyframes leanRight {
+  from {
+    transform: translateX(260px) rotate(16deg) scale(0.86);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+/* Gentle breathing once they have met. */
+.left,
+.right {
+  will-change: transform;
+}
+
+/* The reaching arm grows like a stroke being drawn. */
 .limb {
   fill: none;
   stroke: #f5ecd8;
   stroke-linecap: round;
-  stroke-linejoin: round;
   stroke-dasharray: 1;
-  animation: grow 0.75s cubic-bezier(0.55, 0, 0.25, 1) both;
+  animation: grow 0.55s cubic-bezier(0.55, 0, 0.25, 1) both;
 }
-.torso {
-  stroke-width: 78px;
-}
-.arm {
-  stroke-width: 38px;
-  animation-duration: 0.7s;
+.reach {
+  stroke-width: 36px;
+  animation-delay: 2.15s;
 }
 .finger {
   stroke-width: 15px;
-  animation-duration: 0.3s;
+  animation-duration: 0.25s;
 }
 @keyframes grow {
   from {
@@ -85,11 +129,51 @@
     opacity: 1;
   }
 }
-.head {
-  fill: #f5ecd8;
+
+/* 3. The card drops into their hands and settles with a bounce. */
+.cardDrop {
+  animation: drop 0.62s cubic-bezier(0.34, 1.45, 0.55, 1) 2.5s both;
+}
+@keyframes drop {
+  from {
+    transform: translateY(-620px) rotate(-10deg);
+  }
+  to {
+    transform: none;
+  }
+}
+.cardDrop > g {
   transform-box: fill-box;
-  transform-origin: center;
-  animation: pop 0.5s cubic-bezier(0.3, 1.6, 0.5, 1) both;
+}
+.card {
+  fill: #f0624d;
+}
+.cardLine {
+  fill: none;
+  stroke: #f5ecd8;
+  stroke-opacity: 0.55;
+  stroke-width: 2.5;
+}
+.letter {
+  fill: #f5ecd8;
+  font-family: "Noto Sans Malayalam Variable", sans-serif;
+  font-size: 84px;
+  font-weight: 700;
+  animation: fade 0.45s ease 3.05s both;
+}
+
+/* 4. Text and flowers. */
+.arcText {
+  fill: #c7a15c;
+  font-family: "Noto Sans Malayalam Variable", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  animation: fade 0.8s ease 3.3s both;
+}
+.sparkle {
+  animation:
+    pop 0.45s cubic-bezier(0.3, 1.6, 0.5, 1) both,
+    twinkle 2.6s ease-in-out infinite;
 }
 @keyframes pop {
   from {
@@ -99,78 +183,14 @@
     transform: scale(1);
   }
 }
-/* The whole tangle breathes gently once it has formed. */
-.figures {
-  transform-origin: 400px 380px;
-  animation: breathe 5s ease-in-out 3s infinite;
-}
-@keyframes breathe {
-  50% {
-    transform: scale(1.015) translateY(-3px);
-  }
-}
-
-/* 3. The card drops from above and settles with a bounce. */
-.cardDrop {
-  transform-origin: 401px 300px;
-  animation: drop 0.62s cubic-bezier(0.34, 1.45, 0.55, 1) 2.6s both;
-}
-@keyframes drop {
-  from {
-    transform: translateY(-560px) rotate(-14deg);
-  }
-  to {
-    transform: translateY(0) rotate(0deg);
-  }
-}
-.card {
-  fill: #8e1f2f;
-}
-.cardLine {
-  fill: none;
-  stroke: #c7a15c;
-  stroke-width: 3;
-}
-.letter {
-  fill: #f5ecd8;
-  font-family: "Noto Sans Malayalam Variable", sans-serif;
-  font-size: 56px;
-  font-weight: 600;
-  animation: fade 0.4s ease 3.05s both;
-}
-
-/* 4. Sparkles twinkle forever; the ring fades in and slowly orbits. */
-.sparkle {
-  animation:
-    pop 0.45s cubic-bezier(0.3, 1.6, 0.5, 1) both,
-    twinkle 2.4s ease-in-out infinite;
-  animation-delay: inherit;
-}
 @keyframes twinkle {
   0%,
   100% {
     opacity: 1;
   }
   50% {
-    opacity: 0.35;
+    opacity: 0.4;
   }
-}
-.ringWrap {
-  animation: fade 0.8s ease 3.4s both;
-}
-.ringSpin {
-  transform-origin: 400px 300px;
-  animation: spin 70s linear infinite;
-}
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-.ringText {
-  fill: #c7a15c;
-  font-family: Georgia, "Noto Sans Malayalam Variable", serif;
-  font-size: 19px;
 }
 @keyframes fade {
   from {
@@ -182,11 +202,8 @@
 }
 
 .start {
-  position: absolute;
-  bottom: max(28px, env(safe-area-inset-bottom));
-  left: 50%;
-  translate: -50% 0;
-  animation: startIn 0.5s cubic-bezier(0.3, 1.6, 0.5, 1) 4.3s both;
+  font-family: "Noto Sans Malayalam Variable", sans-serif;
+  animation: startIn 0.5s cubic-bezier(0.3, 1.6, 0.5, 1) 4s both;
 }
 @keyframes startIn {
   from {
@@ -199,6 +216,7 @@
   }
 }
 .skip {
+  font-family: "Noto Sans Malayalam Variable", sans-serif;
   position: absolute;
   top: max(16px, env(safe-area-inset-top));
   right: 16px;
