@@ -22,7 +22,7 @@
 .stage h1 span { display: block; }
 .description { font-size: 13px; line-height: 1.6; opacity: .55; margin: 18px 0 0; }
 .start { position: absolute; right: 40px; top: 41%; min-width: 180px; min-height: 76px; display: inline-flex; gap: 36px; align-items: center; justify-content: space-between; padding: 18px 28px; border: 0; border-radius: 100px; color: #f5f3dc; background: transparent; cursor: pointer; font: inherit; font-size: 26px; }
-.startOutline { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; fill: none; stroke: #f5f3dc; stroke-width: 1; opacity: .5; transition: opacity .2s; }
+.startOutline { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; fill: none; stroke: #f5f3dc; stroke-width: 1.8; opacity: .65; transition: opacity .2s; }
 .startOutline path { vector-effect: non-scaling-stroke; }
 .startLabel { position: relative; }
 .start:hover .startOutline { opacity: .85; }
