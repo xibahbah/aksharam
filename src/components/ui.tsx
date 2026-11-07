@@ -33,7 +33,7 @@ export function PageHeading({
   action?: ReactNode;
 }) {
   return (
-    <header className="page-heading kerala-heading">
+    <header className="page-heading">
       <div className="heading-content">
         <div className="heading-copy">
           {eyebrow && <div className="eyebrow">{eyebrow}</div>}
@@ -46,7 +46,6 @@ export function PageHeading({
         {action}
       </div>
       <Backwaters className="heading-backwaters" />
-      <div className="kasavu-band" aria-hidden="true" />
     </header>
   );
 }

@@ -1,130 +1,132 @@
 @import url("@fontsource-variable/noto-sans-malayalam");
+@import url("@fontsource/anonymous-pro/400.css");
+@import url("@fontsource/anonymous-pro/700.css");
 @import "tailwindcss";
 
 :root {
-  --bg: #f6ecd5;
-  --gold: #96701f;
-  --gold-light: #d6b66a;
-  --gold-soft: #eddfb5;
-  --gold-muted: #c5af75;
-  --water: #dee4ce;
-  --landscape-ink: #345440;
-  --roof: #f0e3c0;
-  --paper: #fff8e8;
-  --ink: #173d2c;
-  --muted: #5d604a;
-  --line: #d6c9a8;
-  --sage-dark: #24553c;
-  --on-accent: #fff8e8;
-  --accent-hover: #163d2a;
-  --glyph: #16412f;
-  --focus: #650f24;
-  --surface-muted: #eee2c7;
-  --card-back: #eee4cd;
-  --input-bg: #fff8e8;
-  --input-border: #827859;
-  --dialog-bg: #fff8e8;
-  --dialog-overlay: #142e24a6;
-  --selected-bg: #e3e6d3;
-  --hover-bg: #ecdfc3;
-  --hover-border: #64754d;
-  --progress-track: #dfd1b0;
-  --progress-fill: #24553c;
-  --card-shadow: #492b1a0d;
-  --danger-bg: #f2dfe0;
-  --correct-bg: #e1e8d4;
-  --correct-text: #214a30;
-  --correct-border: #7c9874;
-  --incorrect-bg: #f2dfe0;
-  --incorrect-text: #762339;
-  --incorrect-border: #a46c79;
-  --warning-bg: #f1e3bf;
-  --warning-text: #66521d;
-  --warning-border: #a78f55;
-  --easy-bg: #d6e2ca;
-  --sage: #e1e8d4;
-  --sage-text: #214a30;
-  --peach: #f0dce0;
-  --peach-text: #650f24;
-  --yellow: #f1e3bf;
-  --yellow-text: #66521d;
-  --lavender: #ead8dc;
-  --lavender-text: #650f24;
-  --blue: #dfe7d8;
-  --blue-text: #214a30;
-  --pink: #eddbe0;
-  --pink-text: #650f24;
-  --radius: 16px;
+  --bg: #f5f8e2;
+  --gold: #8a8b7a;
+  --gold-light: #c9cbb6;
+  --gold-soft: #e6e9cf;
+  --gold-muted: #c9cbb6;
+  --water: #e6e9cf;
+  --landscape-ink: #1a1a1a;
+  --roof: #e6e9cf;
+  --paper: #fcfcf5;
+  --ink: #1a1a1a;
+  --muted: #55564b;
+  --line: #cfd1bb;
+  --sage-dark: #1a1a1a;
+  --on-accent: #f5f8e2;
+  --accent-hover: #333333;
+  --glyph: #1a1a1a;
+  --focus: #b3322e;
+  --surface-muted: #eceed8;
+  --card-back: #eceed8;
+  --input-bg: #fcfcf5;
+  --input-border: #6b6c5e;
+  --dialog-bg: #fcfcf5;
+  --dialog-overlay: #1a1a1aa6;
+  --selected-bg: #e6e9cf;
+  --hover-bg: #eceed8;
+  --hover-border: #1a1a1a;
+  --progress-track: #dcdfc6;
+  --progress-fill: #1a1a1a;
+  --card-shadow: #00000000;
+  --danger-bg: #fbdedb;
+  --correct-bg: #dcefd5;
+  --correct-text: #1e5130;
+  --correct-border: #5f8f62;
+  --incorrect-bg: #fbdedb;
+  --incorrect-text: #8f2420;
+  --incorrect-border: #d16a62;
+  --warning-bg: #fbeac0;
+  --warning-text: #6b4e00;
+  --warning-border: #b48a1c;
+  --easy-bg: #dcefd5;
+  --sage: #e3ecd0;
+  --sage-text: #1e5130;
+  --peach: #fde0dc;
+  --peach-text: #8f2420;
+  --yellow: #fbeec2;
+  --yellow-text: #6b4e00;
+  --lavender: #ece3f2;
+  --lavender-text: #4c2d6b;
+  --blue: #dde9ec;
+  --blue-text: #1d4a55;
+  --pink: #fbe0e6;
+  --pink-text: #8a2240;
+  --radius: 22px;
   --mobile-nav-height: 72px;
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: "Noto Sans Malayalam Variable", system-ui, sans-serif;
   font-size: 16px;
   color: var(--ink);
   background: var(--bg);
-  --burgundy: #650f24;
-  --burgundy-ink: #650f24;
-  --on-burgundy: #fff8e8;
-  --burgundy-hover: #4a0919;
-  --burgundy-soft: #f0dce0;
+  --burgundy: #ee5f5a;
+  --burgundy-ink: #b3322e;
+  --on-burgundy: #1a1a1a;
+  --burgundy-hover: #f47c77;
+  --burgundy-soft: #fde0dc;
   color-scheme: light;
 }
 :root[data-theme="dark"] {
-  --bg: #101e19;
-  --gold: #c7a15c;
-  --gold-light: #e0c387;
-  --gold-soft: #5c4a2c;
-  --gold-muted: #7d6c43;
-  --water: #1c3b30;
-  --landscape-ink: #a4b898;
-  --roof: #5c5234;
-  --paper: #192c24;
-  --ink: #f5ecd8;
-  --muted: #c4bda9;
-  --line: #4b5a45;
-  --sage-dark: #a9c4aa;
-  --on-accent: #1c241b;
-  --accent-hover: #c2d5ba;
-  --glyph: #e8d8b1;
-  --focus: #f2d9a5;
-  --surface-muted: #14261e;
-  --card-back: #21362b;
-  --input-bg: #14261e;
-  --input-border: #8c967a;
-  --dialog-bg: #1c3026;
-  --dialog-overlay: #0c1814d9;
-  --selected-bg: #2c4030;
-  --hover-bg: #2a3c2e;
-  --hover-border: #9ead85;
-  --progress-track: #3c4c37;
-  --progress-fill: #b5c9a2;
-  --card-shadow: #08120e40;
-  --danger-bg: #40252d;
-  --correct-bg: #243d2a;
-  --correct-text: #d1e2bd;
-  --correct-border: #7f9974;
-  --incorrect-bg: #40252d;
-  --incorrect-text: #efbdc7;
-  --incorrect-border: #b47c8b;
-  --warning-bg: #37311f;
-  --warning-text: #e4d5ab;
-  --warning-border: #a59361;
-  --easy-bg: #2b452e;
-  --sage: #273e2e;
-  --sage-text: #d1e2bd;
-  --peach: #402a32;
-  --peach-text: #edc3cd;
-  --yellow: #37311f;
-  --yellow-text: #e4d5ab;
-  --lavender: #3c2630;
-  --lavender-text: #edc3cd;
-  --blue: #263d2e;
-  --blue-text: #d1e2bd;
-  --pink: #402a32;
-  --pink-text: #edc3cd;
-  --burgundy: #741c31;
-  --burgundy-ink: #f3e7ce;
-  --on-burgundy: #fff8e8;
-  --burgundy-hover: #8c2940;
-  --burgundy-soft: #402a32;
+  --bg: #1a1a1a;
+  --gold: #8f907f;
+  --gold-light: #5a5b50;
+  --gold-soft: #2c2c29;
+  --gold-muted: #3f403a;
+  --water: #2c2c29;
+  --landscape-ink: #f5f8e2;
+  --roof: #2c2c29;
+  --paper: #232323;
+  --ink: #f5f8e2;
+  --muted: #b9bba8;
+  --line: #3f403a;
+  --sage-dark: #f5f8e2;
+  --on-accent: #1a1a1a;
+  --accent-hover: #dfe2cb;
+  --glyph: #f5f8e2;
+  --focus: #ee5f5a;
+  --surface-muted: #202020;
+  --card-back: #2c2c29;
+  --input-bg: #202020;
+  --input-border: #8f907f;
+  --dialog-bg: #232323;
+  --dialog-overlay: #000000cc;
+  --selected-bg: #33342c;
+  --hover-bg: #2c2c29;
+  --hover-border: #f5f8e2;
+  --progress-track: #3a3a36;
+  --progress-fill: #f5f8e2;
+  --card-shadow: #00000000;
+  --danger-bg: #3a2321;
+  --correct-bg: #1f3324;
+  --correct-text: #b6e3b9;
+  --correct-border: #5f8f62;
+  --incorrect-bg: #3a2321;
+  --incorrect-text: #ffb4ad;
+  --incorrect-border: #d16a62;
+  --warning-bg: #3a3014;
+  --warning-text: #f3d27a;
+  --warning-border: #b48a1c;
+  --easy-bg: #1f3324;
+  --sage: #24301f;
+  --sage-text: #cfe5c0;
+  --peach: #3a2523;
+  --peach-text: #ffc0b8;
+  --yellow: #383018;
+  --yellow-text: #f3d98c;
+  --lavender: #2f2638;
+  --lavender-text: #d9c6f0;
+  --blue: #1f2f33;
+  --blue-text: #bfe0e8;
+  --pink: #38232a;
+  --pink-text: #f7bfcd;
+  --burgundy: #ee5f5a;
+  --burgundy-ink: #f4877f;
+  --on-burgundy: #1a1a1a;
+  --burgundy-hover: #f47c77;
+  --burgundy-soft: #3a2321;
   color-scheme: dark;
 }
 
@@ -1398,13 +1400,13 @@ input[type="checkbox"] {
   color: var(--glyph);
 }
 .intro-example > b {
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: "Noto Sans Malayalam Variable", sans-serif;
   font-weight: 400;
   font-size: 18px;
 }
 .intro-example small {
   display: block;
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: "Noto Sans Malayalam Variable", sans-serif;
   font-size: 12px;
   text-align: center;
 }
@@ -2066,216 +2068,23 @@ select,
   }
 }
 
-/* Kerala-inspired cream, burgundy and green; Malayalam remains upright. */
+/* Titles: upright, ink-coloured; coral is kept for actions and progress. */
 h1,
 h2,
 h3,
 .brand,
 .mobile-brand {
-  font-family: Georgia, "Times New Roman", serif;
-  font-style: italic;
-  font-weight: 700;
-  color: var(--burgundy-ink);
+  font-style: normal;
+  color: var(--ink);
 }
 .brand-sub,
 .mobile-brand [lang="ml"] {
-  color: var(--ink);
-  font-style: normal;
+  color: var(--muted);
 }
-.roman-large,
-.question-roman {
-  font-family: Georgia, "Times New Roman", serif;
-  font-style: italic;
-}
-.learn-mode strong {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 18px;
-  font-style: italic;
-  font-weight: 700;
-}
-.learn-mode.selected {
-  border-color: var(--burgundy-ink);
-  box-shadow: inset 0 0 0 1px var(--burgundy-ink);
-}
-.learn-mode.selected strong {
-  color: var(--burgundy-ink);
+.deck-card[aria-current="step"] h3 {
+  color: inherit;
 }
 
-/* Kasavu-inspired framing, pookalam rosettes and backwater linework. */
-.kerala-heading {
-  position: relative;
-  isolation: isolate;
-  display: block;
-  min-width: 0;
-  padding: 24px 18px 68px;
-  background: var(--paper);
-  border: 1px solid var(--gold-muted);
-  border-top: 3px solid var(--gold);
-  border-radius: 14px 14px 4px 4px;
-  overflow: hidden;
-}
-.heading-content {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
-  min-width: 0;
-}
-.heading-copy {
-  min-width: 0;
-}
-.heading-title {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  min-width: 0;
-}
-.heading-title h1 {
-  min-width: 0;
-}
-.heading-pookalam {
-  width: 30px;
-  height: 30px;
-  flex-shrink: 0;
-}
-.heading-content p {
-  max-width: 44ch;
-}
-.heading-content > .streak-chip {
-  margin-top: 4px;
-  border-color: var(--gold-muted);
-}
-.heading-backwaters {
-  position: absolute;
-  right: 0;
-  bottom: 10px;
-  width: min(100%, 350px);
-  height: 56px;
-  pointer-events: none;
-  z-index: 0;
-}
-.kasavu-band {
-  position: absolute;
-  inset: auto 0 0;
-  height: 10px;
-  border-block: 1px solid var(--gold);
-  background: repeating-linear-gradient(
-    90deg,
-    var(--gold-soft) 0 3px,
-    var(--gold-light) 3px 4px,
-    var(--paper) 4px 7px
-  );
-  opacity: 0.85;
-  pointer-events: none;
-}
-.kerala-heading::before {
-  content: "";
-  position: absolute;
-  inset: 6px 6px 16px;
-  border: 1px solid var(--gold-soft);
-  border-radius: 7px 7px 2px 2px;
-  pointer-events: none;
-}
-.sidebar-backwaters {
-  display: block;
-  width: 100%;
-  height: auto;
-  margin: 8px 0 18px;
-  pointer-events: none;
-  border-bottom: 1px solid var(--gold-muted);
-}
-.sidebar {
-  border-right-color: var(--gold-muted);
-}
-.brand-icon {
-  border: 1px solid var(--gold);
-  box-shadow:
-    inset 0 0 0 3px var(--sage-dark),
-    inset 0 0 0 4px var(--gold);
-}
-.mobile-header {
-  border-bottom: 3px double var(--gold);
-}
-.mobile-nav {
-  border-top: 3px double var(--gold);
-}
-.button.primary {
-  border-color: var(--gold);
-  box-shadow:
-    inset 0 0 0 1px var(--burgundy),
-    inset 0 0 0 2px var(--gold-muted);
-}
-.section-header h2 {
-  border-bottom: 2px solid var(--gold-muted);
-  padding-bottom: 6px;
-}
-.card-face {
-  border-color: var(--gold-muted);
-}
-.card-face::before {
-  content: "";
-  position: absolute;
-  inset: 6px;
-  border: 1px solid var(--gold-soft);
-  border-radius: 10px;
-  pointer-events: none;
-}
-.deck-card {
-  border-color: var(--gold-muted);
-  border-top: 3px solid var(--gold-muted);
-}
-.daily-goal {
-  border-left: 3px solid var(--gold);
-}
-@media (min-width: 600px) {
-  .kerala-heading {
-    padding: 28px 240px 30px 24px;
-    min-height: 170px;
-  }
-  .heading-backwaters {
-    width: 220px;
-    height: 100px;
-    bottom: 12px;
-    right: 10px;
-  }
-  .heading-pookalam {
-    width: 40px;
-    height: 40px;
-  }
-  .heading-content {
-    flex-wrap: wrap;
-  }
-}
-@media (min-width: 1024px) {
-  .kerala-heading {
-    padding-right: 310px;
-  }
-  .heading-backwaters {
-    width: 280px;
-    height: 120px;
-    right: 14px;
-  }
-}
-@media (max-width: 374px) {
-  .kerala-heading {
-    padding-inline: 14px;
-  }
-  .heading-content {
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .heading-content > .streak-chip {
-    margin: 0 0 0 40px;
-  }
-}
-
-@media (min-width: 1024px) and (max-height: 720px) {
-  .sidebar-backwaters {
-    display: none;
-  }
-}
 /* Learning path: a unit shows 3–4 glyphs in one row instead of one tile glyph. */
 .deck-symbol.path-glyphs {
   display: flex;
@@ -2287,4 +2096,443 @@ h3,
   padding: 0;
   font-size: 26px;
   line-height: 1.2;
+}
+
+/* ================================================================
+   Design layer — charcoal / cream / coral (docs/design-guideline.yaml)
+   Flat surfaces, thin ink rules, pill buttons, rounded display type
+   (Baloo Chettan) for titles, monospace (Anonymous Pro) for small print.
+   Romanization stays in Noto Sans: the display face lacks ṁ and the
+   combining marks used for vocalic r/l.
+   ================================================================ */
+:root {
+  --display: var(--font-baloo), "Noto Sans Malayalam Variable", sans-serif;
+  --mono: "Anonymous Pro", ui-monospace, Menlo, monospace;
+  --coral: #ee5f5a;
+  --rule: 1.5px solid var(--ink);
+}
+body {
+  background: var(--bg);
+  color: var(--ink);
+}
+h1,
+h2,
+h3 {
+  font-family: var(--display);
+  font-weight: 400;
+}
+
+/* Page headings: huge uppercase display type over a single ink rule. */
+.page-heading {
+  position: relative;
+  align-items: flex-end;
+  margin-bottom: 28px;
+  padding: 4px 0 16px;
+  border-bottom: var(--rule);
+}
+.heading-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  width: 100%;
+}
+.heading-title {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.heading-title h1 {
+  font-size: clamp(40px, 7.5vw, 84px);
+  line-height: 0.95;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+/* Kerala motifs stay: pookalam before the title, backwaters with the boat
+   bottom-right of the heading and in the sidebar. */
+.heading-pookalam {
+  flex: none;
+  width: clamp(30px, 4vw, 44px);
+  height: auto;
+}
+.heading-copy {
+  min-width: 0;
+  position: relative;
+  z-index: 1;
+}
+.heading-backwaters {
+  position: absolute;
+  right: 0;
+  bottom: 8px;
+  width: min(46%, 300px);
+  height: auto;
+  pointer-events: none;
+  z-index: 0;
+}
+.sidebar-backwaters {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 8px 0 18px;
+  pointer-events: none;
+}
+@media (max-width: 599px) {
+  .heading-backwaters {
+    display: none;
+  }
+}
+@media (min-width: 600px) {
+  .page-heading {
+    padding-right: min(46%, 310px);
+    min-height: 130px;
+  }
+}
+@media (min-width: 1024px) and (max-height: 720px) {
+  .sidebar-backwaters {
+    display: none;
+  }
+}
+.page-heading p,
+.heading-content p {
+  max-width: 60ch;
+  margin-top: 10px;
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Small print speaks in monospace. */
+.eyebrow,
+.section-caption,
+.stat span,
+.reference-count,
+.save-feedback,
+.muted,
+.deck-progress,
+.unicode-note,
+.sidebar-progress,
+.keyboard-guide,
+.select-field label {
+  font-family: var(--mono);
+  letter-spacing: 0.02em;
+}
+.eyebrow,
+.section-caption,
+.stat span {
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+/* Surfaces: flat, generous radius, thin rules, no shadows or gold. */
+.panel,
+.deck-card,
+.stat,
+.letter-tile,
+.learn-mode,
+.answer-option,
+.card-face,
+.letter-dialog,
+.notice {
+  box-shadow: none;
+}
+.panel,
+.deck-card,
+.learn-mode {
+  border: 1.5px solid var(--line);
+  border-radius: 24px;
+  background: var(--paper);
+}
+a.deck-card:hover,
+a.learn-mode:hover,
+button.learn-mode:hover {
+  border-color: var(--ink);
+}
+.deck-card[aria-current="step"] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--bg);
+}
+.deck-card[aria-current="step"] p,
+.deck-card[aria-current="step"] .muted {
+  color: inherit;
+  opacity: 0.75;
+}
+.deck-card[aria-current="step"] .progress-track {
+  background: #ffffff33;
+}
+.deck-card h3,
+.learn-mode strong {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 19px;
+}
+.learn-mode.selected {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
+}
+
+/* Buttons: pills. Coral is the one accent; secondary is an ink outline. */
+.button {
+  border-radius: 999px;
+  padding: 11px 24px;
+  font-family: var(--display);
+  font-size: 16px;
+  letter-spacing: 0.02em;
+}
+.button.primary {
+  background: var(--burgundy);
+  color: var(--on-burgundy);
+  border: none;
+  box-shadow: none;
+}
+.button.primary:hover {
+  background: var(--burgundy-hover);
+}
+.button.secondary {
+  background: transparent;
+  border: var(--rule);
+  color: var(--ink);
+}
+.button.secondary:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+.icon-button,
+.round-button {
+  border: var(--rule);
+  border-radius: 999px;
+  background: transparent;
+}
+.icon-button.selected {
+  background: var(--ink);
+  color: var(--bg);
+}
+.text-link,
+.quiet-link {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1.5px;
+}
+.streak-chip {
+  background: var(--ink);
+  color: var(--bg);
+  border: none;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-weight: 700;
+}
+
+/* Progress: thick rounded bars, coral fill. */
+.progress-track {
+  height: 8px;
+  border-radius: 999px;
+}
+.progress-track > div {
+  background: var(--burgundy);
+  border-radius: 999px;
+}
+
+/* Navigation: flat, ink rules, the active tab is a coral pill. */
+.sidebar {
+  background: var(--bg);
+  border-right: var(--rule);
+}
+.brand,
+.mobile-brand {
+  font-family: var(--display);
+  font-weight: 400;
+}
+.brand-icon {
+  border: none;
+  border-radius: 999px;
+  background: var(--coral);
+  color: var(--on-burgundy);
+  box-shadow: none;
+}
+.nav-item {
+  border-radius: 999px;
+}
+.nav-item.active {
+  background: var(--burgundy);
+  color: var(--on-burgundy);
+}
+.nav-item.active .nav-dot {
+  display: none;
+}
+.mobile-header {
+  border-bottom: var(--rule);
+  background: var(--bg);
+}
+.mobile-nav {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: var(--rule);
+  background: var(--bg);
+}
+.mobile-nav a {
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-weight: 700;
+}
+.mobile-nav a.active {
+  background: var(--burgundy);
+  color: var(--on-burgundy);
+}
+
+/* Section titles: big uppercase display type. */
+.section-header h2 {
+  font-size: clamp(26px, 4vw, 42px);
+  text-transform: uppercase;
+  border: none;
+  padding: 0;
+}
+.section-header > a {
+  font-family: var(--mono);
+}
+
+/* Stats: big numbers. */
+.stat strong {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(34px, 5vw, 52px);
+}
+.daily-goal {
+  border-left: none;
+}
+
+/* Learning surfaces. */
+.card-face {
+  border: var(--rule);
+  border-radius: 28px;
+}
+.card-face::before {
+  display: none;
+}
+.answer-option {
+  border: 1.5px solid var(--line);
+  border-radius: 20px;
+}
+.answer-option:hover:not(:disabled) {
+  border-color: var(--ink);
+}
+.letter-tile {
+  border: 1.5px solid var(--line);
+  border-radius: 20px;
+}
+.letter-tile:hover {
+  border-color: var(--ink);
+}
+.rating {
+  border-radius: 18px;
+}
+.reading-card h2,
+.letter-dialog h2,
+.roman-large,
+.question-roman,
+.answer-option,
+.letter-tile strong,
+.review-row strong {
+  font-family: "Noto Sans Malayalam Variable", system-ui, sans-serif;
+  text-transform: none;
+}
+.letter-dialog {
+  border: var(--rule);
+  border-radius: 28px;
+}
+.results-header h2,
+.quiz-panel h2 {
+  font-size: clamp(26px, 4vw, 38px);
+}
+.result-score {
+  font-family: var(--display);
+}
+
+/* Headings never break inside a word; the streak chip wraps below instead. */
+.heading-content {
+  flex-wrap: wrap;
+}
+.heading-title h1 {
+  overflow-wrap: normal;
+  word-break: keep-all;
+}
+
+/* Inline notes (e.g. the backup reminder) read as one sentence. */
+.notice[role="note"] {
+  display: block;
+  border-radius: 20px;
+  line-height: 1.6;
+}
+.notice[role="note"] svg {
+  display: inline-block;
+  vertical-align: -3px;
+  margin-right: 6px;
+}
+.notice[role="note"] a {
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Count grids: two columns on phones, display numbers. */
+.learn-counts > div {
+  border: 1.5px solid var(--line);
+  border-radius: 18px;
+}
+.learn-counts dt {
+  font-family: var(--mono);
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.learn-counts dd {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 28px;
+}
+@media (max-width: 599px) {
+  .learn-counts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Milestones on Me: one row each — mark, title and detail, share. */
+.milestone-list {
+  display: grid;
+  gap: 0;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.milestone-list li {
+  display: grid;
+  grid-template-columns: 22px 1fr auto;
+  align-items: start;
+  gap: 4px 10px;
+  padding: 12px 0;
+  border-top: 1.5px solid var(--line);
+  color: var(--muted);
+  line-height: 1.45;
+}
+.milestone-list li > svg {
+  margin-top: 3px;
+  color: var(--burgundy-ink);
+}
+.milestone-list li strong {
+  display: block;
+  color: var(--ink);
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 17px;
+}
+.milestone-list .text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--mono);
+  font-size: 13px;
+}
+.milestone-list li:not([data-earned]) {
+  opacity: 0.55;
 }

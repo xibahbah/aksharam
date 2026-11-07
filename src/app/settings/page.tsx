@@ -151,12 +151,17 @@ export default function SettingsPage() {
           <h3>Milestones</h3>
           <ul className="milestone-list">
             {milestones.map((m) => (
-              <li key={m.id}>
+              <li key={m.id} data-earned={earned.has(m.id) || undefined}>
                 {earned.has(m.id) ? (
                   <Check size={16} aria-label="Earned" />
-                ) : null}
-                <strong>{m.title}</strong> — {m.detail}
-                {earned.has(m.id) && (
+                ) : (
+                  <span aria-hidden="true" />
+                )}
+                <span>
+                  <strong>{m.title}</strong>
+                  {m.detail}
+                </span>
+                {earned.has(m.id) ? (
                   <button
                     className="text-link"
                     onClick={() => void share(m.title, m.detail)}
@@ -164,6 +169,8 @@ export default function SettingsPage() {
                   >
                     <Share2 size={14} /> Share
                   </button>
+                ) : (
+                  <span />
                 )}
               </li>
             ))}
