@@ -36,7 +36,9 @@ intact.
   Reactions include celebration, surprise after a mistake, encouragement
   after repeated misses, and relief when an answer is right again.
   **Try reactions** previews all twelve; clicking her makes her wave,
-  and the nap control lets her rest. Messages are preset, not AI chat,
+  and the nap control plays a standing-to-seated transition before a quiet
+  sleeping loop. Waking reverses the transition back to standing.
+  Messages are preset, not AI chat,
   and reactions never change scores or advance a lesson.
 - **Quieter motion when requested.** Reduced-motion preferences disable
   nonessential movement and give the companion a still image. Text-ribbon

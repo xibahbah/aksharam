@@ -29,3 +29,34 @@ while its replacement loads and decodes, then switches visibility in one
 render while preserving the incoming image node. This avoids the blank flash
 caused by unmounting the old GIF immediately. A failed replacement leaves the
 current drawing in place; reduced motion continues to use the still image.
+
+## Sleep transition and loop
+
+Assets in `public/companion/sleep-v1` were generated with the built-in imagegen
+using `v3/still.png` as the character identity reference. The companion now
+finishes an active reaction before settling from standing into seated sleep.
+A 12-frame, 2.2-second settle plays once, then a ten-frame, six-second breathing
+loop. Waking reverses the settle over two seconds, ending on the existing neutral
+standing drawing. Both joins reuse the same endpoint images. `scripts/build-sleep.py`
+assembles the GIFs with one palette, a shared physical scale, and fixed ground
+baseline; seated poses are not enlarged to standing height. Minor differences
+between generated drawings remain.
+
+Phase timers start only after the image decodes. Answers do not wake her, and
+wake/nap controls are disabled during the sit/stand transitions. Reduced motion
+uses standing/seated still images instead. The existing twelve reaction previews
+remain available; sleeping is controlled with Let her nap / Wake her up.
+
+Generation prompt set (built-in tool):
+- Sleep loop: exactly ten drawings in a transparent 5×2 sheet, same Malayali girl,
+  same brown skin, black pigtails, coral blouse, cream gold-hem skirt and bare feet;
+  seated with knees to one side, hands supporting cheek, both eyes closed;
+  tiny gradual inhale/exhale only, fixed camera and scale, no props or lettering.
+- Settle: exactly ten sequential drawings in a transparent 5×2 sheet, using the
+  standing reference as the start and the sleeping sheet as the end; stand at
+  rest, relax shoulders, bend knees, half squat, deep squat, sit, raise hands,
+  rest cheek on hands, close both eyes, settle asleep. Maintain physical head
+  size and ground baseline; do not enlarge the seated pose. No text or props.
+
+Sidebar motion now plays once per hover and settles back to a straight line,
+rather than looping for as long as the pointer stays over the sidebar.

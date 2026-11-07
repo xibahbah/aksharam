@@ -256,11 +256,11 @@
 @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
   .sidebar:hover + .sidebar-resize:not([data-dragging]) path:first-child,
   .sidebar-resize:hover:not([data-dragging]) path:first-child {
-    animation: sidebar-ink-wave 2.8s ease-in-out infinite;
+    animation: sidebar-ink-wave 2.8s ease-in-out 1;
   }
   .sidebar:hover + .sidebar-resize:not([data-dragging]) .sidebar-pencil,
   .sidebar-resize:hover:not([data-dragging]) .sidebar-pencil {
-    animation: sidebar-pencil-drift 2.8s ease-in-out infinite;
+    animation: sidebar-pencil-drift 2.8s ease-in-out 1;
   }
 }
 @keyframes sidebar-ink-wave {

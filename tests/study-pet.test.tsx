@@ -4,9 +4,9 @@ import { afterEach, expect, it, vi } from "vitest";
 import { StudyPet, reactPet } from "@/components/study-pet";
 import { companionAnswer, type AnswerRun } from "@/lib/companion";
 afterEach(() => vi.useRealTimers());
-it("finishes gestures, queues recovery without taking focus, and naps", () => {
+it("finishes gestures, queues recovery without taking focus, and naps", async () => {
  vi.useFakeTimers();
- render(<><button>Continue</button><StudyPet /></>);
+ const {container}=render(<><button>Continue</button><StudyPet /></>);
  const next=screen.getByText("Continue");next.focus();
  act(()=>reactPet("oops"));
  expect(screen.getByRole("status")).toHaveTextContent("Tricky letter");
@@ -18,11 +18,20 @@ it("finishes gestures, queues recovery without taking focus, and naps", () => {
  act(()=>vi.advanceTimersByTime(2300));
  expect(screen.queryByRole("status")).not.toBeInTheDocument();
  fireEvent.click(screen.getByText("Let her nap"));
- act(()=>vi.advanceTimersByTime(2300));
+ expect(screen.getByText("Settling down…")).toBeDisabled();
+ act(()=>vi.advanceTimersByTime(10000));
+ expect(screen.getByText("Settling down…")).toBeInTheDocument();
+ await act(async()=>{fireEvent.load(container.querySelector('img[src$="/settling.gif"]')!);});
+ act(()=>vi.advanceTimersByTime(2200));
+ expect(container.querySelector('img[src$="/sleeping.gif"]')).toBeInTheDocument();
  act(()=>reactPet("cheer"));
  expect(screen.queryByRole("status")).not.toBeInTheDocument();
- fireEvent.click(screen.getByText("Show companion"));
- expect(screen.getByRole("status")).toHaveTextContent("Hello");
+ fireEvent.click(screen.getByText("Wake her up"));
+ expect(screen.getByText("Waking up…")).toBeDisabled();
+ await act(async()=>{fireEvent.load(container.querySelector('img[src$="/waking.gif"]')!);});
+ act(()=>vi.advanceTimersByTime(2000));
+ expect(screen.getByText("Let her nap")).toBeEnabled();
+ expect(container.querySelector('img[src$="/idle.gif"]')).toBeInTheDocument();
 });
 it("distinguishes right/wrong streaks and recovery in actual answer order",()=>{
  let run:AnswerRun={right:0,wrong:0};
@@ -66,4 +75,16 @@ it("retains the current drawing when an incoming image fails", async()=>{
  await act(async()=>{fireEvent.load(incoming);});
  expect(idle.parentElement).toHaveStyle({visibility:'visible'});
  expect(incoming.parentElement).toHaveStyle({visibility:'hidden'});
+});
+
+it("waits for an active reaction to finish before settling down",()=>{
+ vi.useFakeTimers();
+ render(<StudyPet/>);
+ act(()=>reactPet('cheer'));
+ fireEvent.click(screen.getByText('Let her nap'));
+ expect(screen.queryByText('Settling down…')).not.toBeInTheDocument();
+ act(()=>reactPet('oops'));
+ act(()=>vi.advanceTimersByTime(2000));
+ expect(screen.getByText('Settling down…')).toBeDisabled();
+ expect(screen.queryByRole('status')).not.toBeInTheDocument();
 });

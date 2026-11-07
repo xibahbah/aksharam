@@ -4,19 +4,25 @@ import { usePathname } from "next/navigation";
 import { publicAssetPath } from "@/lib/paths";
 import { companionAnswer, companionScenes, type CompanionMood, type AnswerRun } from "@/lib/companion";
 import durations from "../../public/companion/v3/timing.json";
+import sleepDurations from "../../public/companion/sleep-v1/timing.json";
+type SleepPhase = "awake" | "settling" | "sleeping" | "waking";
+type AnimationMood = CompanionMood | Exclude<SleepPhase, "awake">;
+const sleepMood = (mood: AnimationMood) => mood === "settling" || mood === "sleeping" || mood === "waking";
+const animationPath = (mood: AnimationMood) => publicAssetPath(`/companion/${sleepMood(mood) ? "sleep-v1" : "v3"}/${mood}.gif`);
 export type PetReaction = "cheer" | "oops";
 export function reactPet(reaction: PetReaction) {
   window.dispatchEvent(new CustomEvent("aksharam:pet", { detail: reaction }));
 }
 // Keep the outgoing drawing painted until the replacement has decoded.
 // Stable keys preserve the incoming GIF's DOM node when it becomes visible.
-function PetAnimation({ mood, serial }: { mood: CompanionMood; serial: number }) {
-  const requested = { id: `${serial}-${mood}`, src: publicAssetPath(`/companion/v3/${mood}.gif`) };
+function PetAnimation({ mood, serial, onReady }: { mood: AnimationMood; serial: number; onReady?: () => void }) {
+  const requested = { id: `${serial}-${mood}`, src: animationPath(mood) };
   const [visible, setVisible] = useState({ id: "still", src: publicAssetPath("/companion/v3/still.png") });
   useEffect(() => {
-    const images = Object.keys(companionScenes).map(scene => {
+    const scenes: AnimationMood[] = [...Object.keys(companionScenes) as CompanionMood[], "settling", "sleeping", "waking"];
+    const images = scenes.map(scene => {
       const image = new Image();
-      image.src = publicAssetPath(`/companion/v3/${scene}.gif`);
+      image.src = animationPath(scene);
       return image;
     });
     return () => { images.forEach(image => { image.onload = null; }); };
@@ -24,13 +30,13 @@ function PetAnimation({ mood, serial }: { mood: CompanionMood; serial: number })
   const frames = visible.id === requested.id ? [visible] : [visible, requested];
   return <span className="pet-animation">
     {frames.map(frame => <picture key={frame.id} style={{ visibility: frame.id === visible.id ? "visible" : "hidden" }}>
-      <source media="(prefers-reduced-motion: reduce)" srcSet={publicAssetPath("/companion/v3/still.png")} />
+      <source media="(prefers-reduced-motion: reduce)" srcSet={publicAssetPath(`/companion/${mood === "sleeping" || mood === "settling" ? "sleep-v1" : "v3"}/still.png`)} />
       <img src={frame.src} width="128" height="128" alt="" onLoad={async event => {
         const image = event.currentTarget;
         if (frame.id === visible.id) return;
         try { await image.decode?.(); } catch { return; }
         // A newer request or unmount can supersede a slow decode.
-        if (image.isConnected) setVisible(frame);
+        if (image.isConnected) { setVisible(frame); onReady?.(); }
       }} />
     </picture>)}
   </span>;
@@ -39,27 +45,41 @@ export function StudyPet() {
   const path = usePathname();
   const [mood, setMood] = useState<CompanionMood>("idle");
   const [message, setMessage] = useState("");
-  const [quiet, setQuiet] = useState(false);
+  const [sleepPhase, setSleepPhase] = useState<SleepPhase>("awake");
+  const quiet = sleepPhase !== "awake";
   const [gallery, setGallery] = useState(false);
   const [serial, setSerial] = useState(0);
   const run = useRef<AnswerRun>({ right: 0, wrong: 0 });
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const busy = useRef(false);
   const napping = useRef(false);
-  const playRef = useRef<(m: CompanionMood, nap?: boolean) => void>(() => {});
+  const napRequested = useRef(false);
+  const napRef = useRef<() => void>(() => {});
+  const playRef = useRef<(m: CompanionMood) => void>(() => {});
   useEffect(() => {
     run.current = { right: 0, wrong: 0 };
   }, [path]);
   useEffect(() => {
     let pending: CompanionMood | null = null;
-    const play = (next: CompanionMood, nap = false) => {
-      if (busy.current) { if (!nap) pending = next; return; }
+    const beginNap = () => {
+      pending = null; napRequested.current = false;
+      setMessage(""); setGallery(false); setSleepPhase("settling");
+    };
+    napRef.current = () => {
+      napping.current = true;
+      napRequested.current = true;
+      pending = null;
+      if (!busy.current) beginNap();
+    };
+    const play = (next: CompanionMood) => {
+      if (napping.current) return;
+      if (busy.current) { pending = next; return; }
       if (timer.current) clearTimeout(timer.current);
       busy.current = true;
       setMood(next); setSerial(s => s + 1); setMessage(companionScenes[next].message);
       timer.current = setTimeout(() => {
         busy.current = false;
-        if (nap) { napping.current = true; pending = null; setQuiet(true); }
+        if (napRequested.current) { beginNap(); return; }
         if (pending && !napping.current) { const queued = pending; pending = null; play(queued); }
         else { setMood("idle"); setMessage(""); }
       }, next === "idle" ? 2200 : durations[next]);
@@ -79,6 +99,20 @@ export function StudyPet() {
       busy.current = false;
     };
   }, []);
+  const wake = () => {
+    if (sleepPhase !== "sleeping") return;
+    setSleepPhase("waking");
+  };
+  // Start phase timers only once the new drawing is decoded and visible.
+  const sleepReady = () => {
+    if (sleepPhase !== "settling" && sleepPhase !== "waking") return;
+    if (timer.current) clearTimeout(timer.current);
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    timer.current = setTimeout(() => {
+      if (sleepPhase === "settling") setSleepPhase("sleeping");
+      else { napping.current = false; setMood("idle"); setMessage(""); setSerial(s => s + 1); setSleepPhase("awake"); }
+    }, reduce ? 0 : sleepDurations[sleepPhase]);
+  };
   return <aside className={`study-pet ${quiet ? "pet-quiet" : ""}`} aria-label="Learning companion">
     {!quiet && <>
       {gallery && <div className="pet-gallery" role="group" aria-label="Preview companion reactions">
@@ -87,18 +121,20 @@ export function StudyPet() {
         }}>{companionScenes[scene].label}</button>)}
       </div>}
       {message && <p className="pet-speech" role="status">{message}</p>}
-      <button className="pet-character" aria-label="Say hello to your companion" onClick={() => playRef.current("wave")}>
-        <PetAnimation mood={mood} serial={serial} />
-      </button>
-      <button className="pet-toggle" aria-expanded={gallery} onClick={() => setGallery(!gallery)}>Try reactions</button>
     </>}
+      <button className="pet-character" aria-label={quiet ? "Wake companion" : "Say hello to your companion"}
+        disabled={sleepPhase === "settling" || sleepPhase === "waking"}
+        onClick={() => quiet ? wake() : playRef.current("wave")}>
+        <PetAnimation mood={quiet ? sleepPhase : mood} serial={serial} onReady={sleepReady} />
+      </button>
+      <button className="pet-toggle" style={{ visibility: quiet ? "hidden" : "visible" }}
+        disabled={quiet} aria-hidden={quiet} aria-expanded={gallery}
+        onClick={() => setGallery(!gallery)}>Try reactions</button>
     <button className="pet-toggle" onClick={() => {
       setGallery(false);
-      if (!quiet) {
-        if (timer.current) clearTimeout(timer.current);
-        busy.current = false;
-        playRef.current("sleepy", true);
-      } else { napping.current = false; setQuiet(false); playRef.current("wave"); }
-    }}>{quiet ? "Show companion" : "Let her nap"}</button>
+      if (!quiet) napRef.current(); else wake();
+    }} disabled={sleepPhase === "settling" || sleepPhase === "waking"}>
+      {sleepPhase === "settling" ? "Settling down…" : sleepPhase === "waking" ? "Waking up…" : quiet ? "Wake her up" : "Let her nap"}
+    </button>
   </aside>;
 }
