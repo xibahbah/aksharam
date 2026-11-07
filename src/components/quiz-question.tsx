@@ -140,6 +140,7 @@ export function QuizQuestion({
             ref={input}
             id="typed-answer"
             autoComplete="off"
+            spellCheck={false}
             autoCapitalize="off"
             value={typed}
             onChange={(e) => setTyped(e.target.value)}

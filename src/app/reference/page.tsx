@@ -69,7 +69,11 @@ export default function Reference() {
           </label>
           <input
             id="letter-search"
-            placeholder="Search glyph, sound, or romanization"
+            name="letter-search"
+            type="search"
+            autoComplete="off"
+            spellCheck={false}
+            placeholder="Search: ക, ṇa, retroflex…"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />

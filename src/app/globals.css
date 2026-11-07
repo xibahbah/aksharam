@@ -58,7 +58,13 @@
   --pink-text: #8a2240;
   --radius: 22px;
   --mobile-nav-height: 72px;
-  font-family: "Noto Sans Malayalam Variable", system-ui, sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    "Noto Sans Malayalam Variable",
+    sans-serif;
   font-size: 16px;
   color: var(--ink);
   background: var(--bg);
@@ -1400,13 +1406,25 @@ input[type="checkbox"] {
   color: var(--glyph);
 }
 .intro-example > b {
-  font-family: "Noto Sans Malayalam Variable", sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    "Noto Sans Malayalam Variable",
+    sans-serif;
   font-weight: 400;
   font-size: 18px;
 }
 .intro-example small {
   display: block;
-  font-family: "Noto Sans Malayalam Variable", sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    "Noto Sans Malayalam Variable",
+    sans-serif;
   font-size: 12px;
   text-align: center;
 }
@@ -2106,7 +2124,9 @@ h3,
    combining marks used for vocalic r/l.
    ================================================================ */
 :root {
-  --display: var(--font-baloo), "Noto Sans Malayalam Variable", sans-serif;
+  --display:
+    var(--font-baloo), system-ui, -apple-system, "Segoe UI",
+    "Noto Sans Malayalam Variable", sans-serif;
   --mono: "Anonymous Pro", ui-monospace, Menlo, monospace;
   --coral: #ee5f5a;
   --rule: 1.5px solid var(--ink);
@@ -2434,7 +2454,13 @@ button.learn-mode:hover {
 .answer-option,
 .letter-tile strong,
 .review-row strong {
-  font-family: "Noto Sans Malayalam Variable", system-ui, sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    "Noto Sans Malayalam Variable",
+    sans-serif;
   text-transform: none;
 }
 .letter-dialog {
@@ -2545,4 +2571,34 @@ button.learn-mode:hover {
 }
 .alphabet-section > .button.secondary {
   margin-top: 16px;
+}
+
+/* Romanization needs a Latin face with proper combining diacritics (ā, ṇ,
+   r̥). System UI fonts have them; Noto Sans Malayalam's Latin subset
+   misplaces macrons. Malayalam glyphs fall through to Noto. */
+:root {
+  --latin:
+    system-ui, -apple-system, "Segoe UI", Roboto,
+    "Noto Sans Malayalam Variable", sans-serif;
+}
+
+/* Web interface guidelines: steady numbers, balanced headings, no tap delay. */
+.stat strong,
+.learn-counts dd,
+.result-score,
+.streak-chip,
+.session-heading,
+.card-navigation {
+  font-variant-numeric: tabular-nums;
+}
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+/* Not .flashcard: it keeps pan-y so horizontal swipes change cards. */
+a,
+.answer-option,
+button:not(.flashcard) {
+  touch-action: manipulation;
 }
