@@ -21,3 +21,11 @@ The builder extracts all 30 drawings to individual PNGs, aligns their feet and n
 Answer history is transient and scoped to the current route. Three correct answers trigger proud; a miss after a correct answer triggers surprised; two consecutive misses trigger puzzled; three or more trigger determined; success after any miss triggers relieved. These states never modify scoring. Events received during a gesture update history and replace a single pending reaction, which plays after the current gesture ends. Preview menu exposes all twelve animations without changing history. Clicking the character waves. Nap plays the yawn and then hides the companion; waking waves. No random constant animation rotation is used.
 
 The landing ticker now measures a hidden plain SVG text node containing the complete string instead of measuring text already on a path. Both reduced-motion and animated ticker copies receive the measured spacing after fonts are ready.
+
+### Reaction handoff
+
+Reaction GIFs are preloaded. The renderer keeps the outgoing image visible
+while its replacement loads and decodes, then switches visibility in one
+render while preserving the incoming image node. This avoids the blank flash
+caused by unmounting the old GIF immediately. A failed replacement leaves the
+current drawing in place; reduced motion continues to use the still image.

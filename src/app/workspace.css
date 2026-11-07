@@ -250,6 +250,8 @@
   .study-pet { display: flex; position: fixed; right: 10px; bottom: 12px; width: 128px; z-index: 30; flex-direction: column; align-items: center; gap: 4px; }
   .pet-character { border: 0; background: none; padding: 0; width: 128px; height: 128px; cursor: pointer; }
   .pet-character img { display: block; width: 128px; height: 128px; object-fit: contain; }
+  .pet-animation { display: block; position: relative; width: 128px; height: 128px; }
+  .pet-animation picture { position: absolute; inset: 0; }
   .pet-toggle { font: inherit; font-size: 11px; color: var(--muted); background: none; border: 0; padding: 8px 4px; cursor: pointer; }
   .pet-speech { font-size: 12px; line-height: 1.5; color: var(--ink); background: var(--paper); padding: 12px; margin: 0; border: 1px solid var(--line); border-radius: 17px 14px 5px 18px; overflow-wrap: anywhere; }
   body:has([role="dialog"][aria-modal="true"]) .study-pet { display: none; }

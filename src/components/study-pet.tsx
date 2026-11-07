@@ -8,6 +8,33 @@ export type PetReaction = "cheer" | "oops";
 export function reactPet(reaction: PetReaction) {
   window.dispatchEvent(new CustomEvent("aksharam:pet", { detail: reaction }));
 }
+// Keep the outgoing drawing painted until the replacement has decoded.
+// Stable keys preserve the incoming GIF's DOM node when it becomes visible.
+function PetAnimation({ mood, serial }: { mood: CompanionMood; serial: number }) {
+  const requested = { id: `${serial}-${mood}`, src: publicAssetPath(`/companion/v3/${mood}.gif`) };
+  const [visible, setVisible] = useState({ id: "still", src: publicAssetPath("/companion/v3/still.png") });
+  useEffect(() => {
+    const images = Object.keys(companionScenes).map(scene => {
+      const image = new Image();
+      image.src = publicAssetPath(`/companion/v3/${scene}.gif`);
+      return image;
+    });
+    return () => { images.forEach(image => { image.onload = null; }); };
+  }, []);
+  const frames = visible.id === requested.id ? [visible] : [visible, requested];
+  return <span className="pet-animation">
+    {frames.map(frame => <picture key={frame.id} style={{ visibility: frame.id === visible.id ? "visible" : "hidden" }}>
+      <source media="(prefers-reduced-motion: reduce)" srcSet={publicAssetPath("/companion/v3/still.png")} />
+      <img src={frame.src} width="128" height="128" alt="" onLoad={async event => {
+        const image = event.currentTarget;
+        if (frame.id === visible.id) return;
+        try { await image.decode?.(); } catch { return; }
+        // A newer request or unmount can supersede a slow decode.
+        if (image.isConnected) setVisible(frame);
+      }} />
+    </picture>)}
+  </span>;
+}
 export function StudyPet() {
   const path = usePathname();
   const [mood, setMood] = useState<CompanionMood>("idle");
@@ -61,9 +88,7 @@ export function StudyPet() {
       </div>}
       {message && <p className="pet-speech" role="status">{message}</p>}
       <button className="pet-character" aria-label="Say hello to your companion" onClick={() => playRef.current("wave")}>
-        <picture><source media="(prefers-reduced-motion: reduce)" srcSet={publicAssetPath("/companion/v3/still.png")} />
-          <img key={serial + mood} src={publicAssetPath(`/companion/v3/${mood}.gif`)} width="128" height="128" alt="" />
-        </picture>
+        <PetAnimation mood={mood} serial={serial} />
       </button>
       <button className="pet-toggle" aria-expanded={gallery} onClick={() => setGallery(!gallery)}>Try reactions</button>
     </>}
