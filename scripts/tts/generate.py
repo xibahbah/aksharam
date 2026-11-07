@@ -40,6 +40,7 @@ def write_manifest(voice: str) -> int:
 def trim(audio, rate):
     import numpy as np
 
+    audio = np.atleast_1d(audio)
     level = np.abs(audio)
     threshold = max(level.max() * 0.03, 1e-4)
     voiced = np.where(level > threshold)[0]
@@ -59,6 +60,12 @@ def main() -> None:
     parser.add_argument("--all", action="store_true")
     parser.add_argument("--test", action="store_true", help="5 clips into scripts/tts/tmp")
     parser.add_argument("--voice", default="Anjali", help="Malayalam voices: Anjali, Anju, Harish")
+    parser.add_argument(
+        "--max-seconds", type=float, default=1.6,
+        help="Longer output is treated as babble and retried (one syllable is ~0.5–1.5 s)",
+    )
+    parser.add_argument("--temperature", type=float, default=0.7, help="Lower = steadier output")
+    parser.add_argument("--attempts", type=int, default=6)
     args = parser.parse_args()
 
     import soundfile as sf
@@ -91,18 +98,35 @@ def main() -> None:
     )
     desc = describer(description, return_tensors="pt").to(device)
 
-    started = time.time()
-    for i, clip in enumerate(todo, 1):
-        # A full stop helps the model end cleanly on very short inputs.
-        prompt = tokenizer(clip["text"] + ".", return_tensors="pt").to(device)
+    def synthesize(text):
+        prompt = tokenizer(text, return_tensors="pt").to(device)
         with torch.no_grad():
             audio = model.generate(
                 input_ids=desc.input_ids,
                 attention_mask=desc.attention_mask,
                 prompt_input_ids=prompt.input_ids,
                 prompt_attention_mask=prompt.attention_mask,
+                do_sample=True,
+                temperature=args.temperature,
             )
-        samples = trim(audio.cpu().numpy().squeeze(), rate)
+        return trim(audio.cpu().numpy().squeeze(), rate)
+
+    started = time.time()
+    skipped = []
+    for i, clip in enumerate(todo, 1):
+        # Output is sampled, so a very short input sometimes yields silence.
+        # Retry, alternating with/without a full stop, before giving up.
+        samples = None
+        for attempt in range(args.attempts):
+            text = clip["text"] + ("." if attempt % 2 == 0 else "")
+            candidate = synthesize(text)
+            if 0.25 * rate <= len(candidate) <= args.max_seconds * rate:
+                samples = candidate
+                break
+        if samples is None:
+            skipped.append(clip["text"])
+            print(f"[{i}/{len(todo)}] {clip['text']} skipped (no clean audio)", flush=True)
+            continue
         wav = TMP / f"{clip['key']}.wav"
         TMP.mkdir(parents=True, exist_ok=True)
         sf.write(wav, samples, rate)
@@ -118,6 +142,8 @@ def main() -> None:
         left = per * (len(todo) - i) / 60
         print(f"[{i}/{len(todo)}] {clip['text']} ({clip['label']}) · ~{left:.0f} min left", flush=True)
 
+    if skipped:
+        print(f"Skipped {len(skipped)}: {' '.join(skipped)} (run again to retry)")
     if args.test:
         print(f"Listen to the test clips in {TMP}, then run without --test.")
     else:

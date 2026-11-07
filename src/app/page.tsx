@@ -239,14 +239,14 @@ function Path() {
             Alphabet <ArrowRight size={16} />
           </Link>
         </div>
-        <div className="deck-grid" role="list">
+        <div className="deck-grid">
           {units.map((u, i) => {
             const state = states[u.id];
             const taught = u.items.filter((l) =>
               progress.introduced.includes(l.id),
             ).length;
             const glyphs = (
-              <span className="deck-symbol" lang="ml">
+              <span className="deck-symbol path-glyphs" lang="ml">
                 {u.items.map((l) => l.display).join(" ")}
               </span>
             );
@@ -270,23 +270,19 @@ function Path() {
                 />
               </>
             );
-            return (
-              <div
-                role="listitem"
+            return state === "locked" ? (
+              <div className="deck-card" key={u.id}>
+                {body}
+              </div>
+            ) : (
+              <Link
+                className="deck-card"
                 key={u.id}
+                href={`/learn?mode=unit&unit=${u.id}`}
                 aria-current={state === "current" ? "step" : undefined}
               >
-                {state === "locked" ? (
-                  <div className="deck-card">{body}</div>
-                ) : (
-                  <Link
-                    className="deck-card"
-                    href={`/learn?mode=unit&unit=${u.id}`}
-                  >
-                    {body}
-                  </Link>
-                )}
-              </div>
+                {body}
+              </Link>
             );
           })}
         </div>

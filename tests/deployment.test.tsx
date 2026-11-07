@@ -58,6 +58,41 @@ describe("GitHub project Pages", () => {
     }
   });
 
+  it("replays slowly when tapped again within five seconds", async () => {
+    const made: Record<string, unknown>[] = [];
+    vi.stubGlobal(
+      "Audio",
+      vi.fn(function () {
+        const a = {
+          play: vi.fn().mockResolvedValue(undefined),
+          pause: vi.fn(),
+        };
+        made.push(a);
+        return a;
+      }),
+    );
+    const now = vi.spyOn(Date, "now");
+    try {
+      render(
+        <AudioButton letter={{ ...letters[0], audioUrl: "/audio/a.mp3" }} />,
+      );
+      const button = screen.getByRole("button", { name: "Play pronunciation" });
+      now.mockReturnValue(1_000);
+      await userEvent.click(button);
+      now.mockReturnValue(4_000);
+      await userEvent.click(button);
+      expect(screen.getByRole("button")).toHaveTextContent("Slow 0.6×");
+      now.mockReturnValue(5_000);
+      await userEvent.click(button);
+      now.mockReturnValue(20_000);
+      await userEvent.click(button);
+      expect(made.map((a) => a.playbackRate)).toEqual([1, 0.6, 1, 1]);
+    } finally {
+      now.mockRestore();
+      vi.unstubAllGlobals();
+    }
+  });
+
   it("restores ratings, bookmarks and preferences after the provider remounts", async () => {
     function Probe() {
       const { progress, ready, rate, favorite, preferences } = useProgress();
