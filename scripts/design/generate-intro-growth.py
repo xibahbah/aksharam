@@ -63,11 +63,18 @@ envelope=field(envelope_paths)
 
 def pose(t):
     # Expansion and opening overlap, so the intermediate never pauses as a slab.
-    u=min(1,t/.72)
-    u=u*u*(3-2*u)
+    # Carry the star's outward motion into the figure envelope immediately.
+    # The old smoothstep started at zero speed, creating a second take-off.
+    u=min(1,t/.82)
+    u=1-(1-u)**2
     expanding=start*(1-u)+envelope*u
     clearance=310*(1-t)**4
-    return np.minimum(expanding,end+clearance)
+    # Smooth the meeting of expanding silhouettes and opening negative space.
+    # A hard minimum changes boundary velocity abruptly where the fields meet.
+    target=end+clearance
+    k=max(.001, 10*math.sin(math.pi*t))
+    blend=np.clip(.5+.5*(target-expanding)/k,0,1)
+    return target*(1-blend)+expanding*blend-k*blend*(1-blend)
 
 x=np.arange(W)*STEP;y=np.arange(H)*STEP
 

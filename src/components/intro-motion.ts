@@ -6,7 +6,10 @@ import { GROWTH_FRAMES } from "./intro-growth-frames";
 
 gsap.registerPlugin(MorphSVGPlugin);
 export const PRELUDE_DURATION = 1.65;
-const MORPH_SPEED = 1.15;
+// Shorten only the morph section by 30%; retain the opening words/stars.
+const MORPH_SPEED = 1.15 / .7;
+const GROWTH_START = 1.15;
+const GROWTH_END = 4.05;
 export const INTRO_DURATION = PRELUDE_DURATION + 4.8 / MORPH_SPEED;
 
 export function createIntroTimeline(el: HTMLElement) {
@@ -23,17 +26,18 @@ export function createIntroTimeline(el: HTMLElement) {
   });
   master.fromTo(q("[data-scene]"), { opacity: 0, y: 35 }, { opacity: 1, y: 0, duration: .38, ease: "power3.out" }, PRELUDE_DURATION);
   const tl = gsap.timeline({ defaults: { ease: "power3.inOut" } });
-  tl.addLabel("seed", 0).addLabel("nested", 1.5).addLabel("unfold", 1.65).addLabel("settled", 4.2);
+  tl.addLabel("seed", 0).addLabel("unfold", GROWTH_START).addLabel("settled", 4.2);
   // White geometry is a predesigned sequence of planar boundary contours.
   // No point matching, rotation, or interpolation across concave limbs.
   let lastFrame = "";
   const renderWhite = () => {
     const time = tl.time();
-    const p = Math.max(0, Math.min(1, (time - 1.65) / 2.4));
+    const p = Math.max(0, Math.min(1, (time - GROWTH_START) / (GROWTH_END - GROWTH_START)));
     let paths: string[];
     let key: string;
-    if (time < 1.65) {
-      const swell = gsap.parseEase("power3.inOut")(Math.max(0, Math.min(1, (time - .35) / 1.3)));
+    if (time < GROWTH_START) {
+      // Keep outward momentum into the unfolding instead of braking at the star.
+      const swell = gsap.parseEase("power1.in")(Math.max(0, Math.min(1, (time - .12) / (GROWTH_START - .12))));
       const radius = 86 + 194 * swell;
       paths = [star(radius, 600, 410), "", ""];
       key = `star-${radius.toFixed(3)}`;
@@ -56,22 +60,22 @@ export function createIntroTimeline(el: HTMLElement) {
   renderWhite();
   [174, 115, 69].forEach((radius, i) => {
     tl.fromTo(petals[i], { attr: { d: star(.01) } }, {
-      attr: { d: coloredSeed(radius) }, duration: .78, ease: "power3.out",
-    }, .65 + i * .12);
+      attr: { d: coloredSeed(radius) }, duration: .6, ease: "sine.in",
+    }, .34 + i * .08);
   });
   // One uninterrupted interpolation: no intermediate target at which each
   // layer brakes to zero and then accelerates again.
   petals.slice(0, 3).forEach((petal, i) => {
     tl.to(petal, {
       morphSVG: { shape: FINAL_FLOWER[i], shapeIndex: "auto" },
-      duration: 2.5, ease: "sine.inOut",
-    }, 1.48 + i * .06);
+      duration: 3.04, ease: "sine.inOut",
+    }, .94 + i * .08);
   });
   tl.to(petals[3], {
     morphSVG: { shape: FINAL_FLOWER[3], shapeIndex: "auto" },
     duration: 1.15, ease: "power2.inOut",
   }, 3.02);
-  tl.to(q("[data-flower-position]"), { x: -30, y: 0, duration: 2.4, ease: "sine.inOut" }, 1.65);
+  tl.to(q("[data-flower-position]"), { x: -30, y: 0, duration: GROWTH_END - GROWTH_START, ease: "sine.inOut" }, GROWTH_START);
   tl.fromTo(q("[data-caption]"), { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: .6, ease: "power2.out" }, 4.2);
   tl.fromTo(q("[data-orbit]"), { opacity: 0 }, { opacity: 1, duration: .5 }, 4.1);
   master.add(tl, PRELUDE_DURATION);

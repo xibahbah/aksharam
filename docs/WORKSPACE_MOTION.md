@@ -25,3 +25,12 @@ learner's path. This prevents the workspace flashing before the landing.
 Hovering the desktop sidebar or its divider gently morphs the divider's ink
 curve and drifts the faint pencil strokes. The shortened, centered drag target
 stays fixed. Dragging suspends the effect; reduced-motion preferences disable it.
+
+The star-to-figures/boat morph section is now 30% shorter (opening words and
+flying stars retain their timing). Unfolding starts at child time 1.15 instead
+of 1.65, allocating more of the shortened section to the growing contours.
+The star swell carries outward momentum into the growth frames; the colored
+layers begin unfolding as soon as they appear. The authored distance fields
+use immediate envelope expansion and a smooth minimum at the boundary handoff,
+removing the previous stop/start feel without rotating limbs. Final silhouettes
+and the landing composition are unchanged.
