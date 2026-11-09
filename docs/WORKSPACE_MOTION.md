@@ -42,13 +42,15 @@ the growth contours. The flying prelude stars and final artwork are unchanged.
 
 `studies/morph-comparison.html` provides four replayable desktop previews, with
 an optional normalized scrubber enabled by `study=1`:
-- `motion=original`: exact animation/growth source from `bab35b0` (pre-speed-up).
+- `motion=original` or no parameter (default): exact animation/growth source from `bab35b0` (pre-speed-up).
 - `motion=faster`: exact animation/growth source from `21d0861` (30% shorter).
 - `motion=rounded`: the rounded-first-frame behavior from `146b68e`.
-- `motion=latest` or no parameter: original sharp small star, progressively
+- `motion=latest`: original sharp small star, progressively
   rounded during expansion, then the rounded growth contours.
 
-Archive code and baked frames are loaded only for requested old variants.
+The original-speed timeline is the main-site default and initializes synchronously.
+The comparison page also starts with this version; all four remain available.
+The faster archive is loaded only when requested.
 The current opening subdivides the sharp quadratic segments into matching cubic
 segments before blending their controls toward the rounded seed, retaining the
 exact original first frame and exact rounded handoff. Final artwork stays shared.

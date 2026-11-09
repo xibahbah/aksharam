@@ -4,16 +4,16 @@
 *{box-sizing:border-box}body{margin:0;background:#1a1a1a;color:#f5f3dc;font:14px/1.5 system-ui,sans-serif}header{padding:16px 24px;border-bottom:1px solid #f5f3dc30;display:flex;gap:16px;align-items:center;flex-wrap:wrap}h1{font-size:17px;margin:0 12px 0 0}nav{display:flex;gap:8px;flex-wrap:wrap}button,a{font:inherit;color:inherit}button{border:1px solid #f5f3dc50;border-radius:24px;padding:8px 15px;background:none;cursor:pointer}button[aria-pressed=true]{background:#f5f3dc;color:#1a1a1a}button:hover{border-color:#f16559}button:focus-visible,a:focus-visible{outline:2px solid #f16559;outline-offset:3px}p{margin:0;padding:10px 24px;color:#b9baa9}iframe{display:block;width:100%;height:calc(100vh - 140px);min-height:560px;border:0}a{margin-left:auto;text-underline-offset:4px}
 </style></head><body>
 <header><h1>Morph 版本对比</h1><nav aria-label="动画版本">
-<button data-version="original" aria-pressed="false">① 原速 · 尖角</button>
+<button data-version="original" aria-pressed="true">① 原速 · 尖角</button>
 <button data-version="faster" aria-pressed="false">② 提速 30% · 尖角</button>
 <button data-version="rounded" aria-pressed="false">③ 圆润开场</button>
-<button data-version="latest" aria-pressed="true">④ 尖角 → 圆润 · 新版</button>
-</nav><button id="replay">重播当前版 ↻</button><a id="open" href="../?motion=latest#intro" target="_blank" rel="noopener">独立打开 ↗</a></header>
-<p id="description" aria-live="polite">④ 新版：保留尖角小星星第一帧，随展开逐渐变圆，再生长成人物和船。拖动预览左侧进度条可停帧查看。</p>
-<iframe title="当前动画版本预览" src="../?motion=latest&amp;study=1#intro"></iframe>
+<button data-version="latest" aria-pressed="false">④ 尖角 → 圆润 · 新版</button>
+</nav><button id="replay">重播当前版 ↻</button><a id="open" href="../?motion=original#intro" target="_blank" rel="noopener">独立打开 ↗</a></header>
+<p id="description" aria-live="polite">① 原速版：当前主站使用此版本。拖动预览左侧进度条可停帧查看。</p>
+<iframe title="当前动画版本预览" src="../?motion=original&amp;study=1#intro"></iframe>
 <script>
 const descriptions={original:'① 原速版：提速前的尖角星形与原始形变节奏。',faster:'② 提速版：形变段缩短 30%，提前展开，开场仍是尖角。',rounded:'③ 上一版：一开始就是圆润的轮廓，之后展开成人物和船。',latest:'④ 新版：保留尖角小星星第一帧，随展开逐渐变圆，再生长成人物和船。'};
-let selected='latest';
+let selected='original';
 function show(version){selected=version;document.querySelectorAll('[data-version]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.version===version)));document.getElementById('description').textContent=descriptions[version]+' 拖动预览左侧进度条可停帧查看。';document.querySelector('iframe').src='../?motion='+version+'&study=1&replay='+Date.now()+'#intro';document.getElementById('open').href='../?motion='+version+'#intro';}
 document.querySelectorAll('[data-version]').forEach(button=>button.addEventListener('click',()=>show(button.dataset.version)));
 document.getElementById('replay').addEventListener('click',()=>show(selected));

@@ -3,6 +3,7 @@ import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { CREAM, COLORS, star } from "./intro-art";
 import { createIntroTimeline } from "./intro-motion";
+import { createIntroTimeline as createOriginalTimeline } from "./intro-archive/original";
 import styles from "./intro.module.css";
 
 const WAVE_SLOGANS = [
@@ -129,7 +130,7 @@ export function Intro({ onDone }: { onDone: () => void }) {
     });
     };
     const variant = new URLSearchParams(window.location.search).get("motion");
-    if (variant === "original") void import("./intro-archive/original").then(m => startMotion(m.createIntroTimeline)).catch(() => startMotion(createIntroTimeline));
+    if (!variant || variant === "original") startMotion(createOriginalTimeline);
     else if (variant === "faster") void import("./intro-archive/faster").then(m => startMotion(m.createIntroTimeline)).catch(() => startMotion(createIntroTimeline));
     else startMotion(variant === "rounded" ? el => createIntroTimeline(el, true) : createIntroTimeline);
     return () => { mounted = false; media.revert(); };
