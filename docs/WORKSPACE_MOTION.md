@@ -34,3 +34,8 @@ layers begin unfolding as soon as they appear. The authored distance fields
 use immediate envelope expansion and a smooth minimum at the boundary handoff,
 removing the previous stop/start feel without rotating limbs. Final silhouettes
 and the landing composition are unchanged.
+
+The central cream seed now uses a rounded eight-lobed outline rather than sharp
+star points. Runtime and the baked growth authoring script use the same polar
+curve and cubic tangent construction, so the rounded swell feeds directly into
+the growth contours. The flying prelude stars and final artwork are unchanged.

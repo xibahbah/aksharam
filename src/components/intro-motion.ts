@@ -1,6 +1,6 @@
 import { gsap } from "gsap";
 import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
-import { BOAT, LEFT_FIGURE, RIGHT_FIGURE, FINAL_FLOWER, star, coloredSeed } from "./intro-art";
+import { BOAT, LEFT_FIGURE, RIGHT_FIGURE, FINAL_FLOWER, star, roundedSeed, coloredSeed } from "./intro-art";
 
 import { GROWTH_FRAMES } from "./intro-growth-frames";
 
@@ -39,7 +39,7 @@ export function createIntroTimeline(el: HTMLElement) {
       // Keep outward momentum into the unfolding instead of braking at the star.
       const swell = gsap.parseEase("power1.in")(Math.max(0, Math.min(1, (time - .12) / (GROWTH_START - .12))));
       const radius = 86 + 194 * swell;
-      paths = [star(radius, 600, 410), "", ""];
+      paths = [roundedSeed(radius, 600, 410), "", ""];
       key = `star-${radius.toFixed(3)}`;
     } else if (p >= 1) {
       paths = [LEFT_FIGURE, RIGHT_FIGURE, BOAT];

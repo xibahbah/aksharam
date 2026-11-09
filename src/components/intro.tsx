@@ -1,7 +1,7 @@
 "use client";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { gsap } from "gsap";
-import { CREAM, COLORS, star } from "./intro-art";
+import { CREAM, COLORS, star, roundedSeed } from "./intro-art";
 import { createIntroTimeline, INTRO_DURATION } from "./intro-motion";
 import styles from "./intro.module.css";
 
@@ -157,7 +157,7 @@ export function Intro({ onDone }: { onDone: () => void }) {
           </g>
           <g transform="translate(600 774) scale(1.18) translate(-600 -774)">
           <g fill={CREAM}>
-            {[0, 1, 2].map(i => <path key={i} data-body d={star(86, 600, 410)} />)}
+            {[0, 1, 2].map(i => <path key={i} data-body d={roundedSeed(86, 600, 410)} />)}
           </g>
           <g transform="translate(600 410)">
             <g data-flower-position>

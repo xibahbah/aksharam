@@ -21,6 +21,25 @@ export function star(radius: number, cx = 0, cy = 0) {
   }
   return `${d} Z`;
 }
+// A continuous rounded boundary, with matching tangents at every lobe.
+// Keep the separate flying stars sharp; this seed feeds the silhouette growth.
+export function roundedSeed(radius: number, cx = 0, cy = 0) {
+  const step = Math.PI * 2 / 64;
+  const at = (a: number) => {
+    const r = radius * (.8 + .2 * Math.cos(8 * a));
+    const dr = -1.6 * radius * Math.sin(8 * a);
+    return { x: cx + r * Math.cos(a), y: cy + r * Math.sin(a),
+      dx: dr * Math.cos(a) - r * Math.sin(a), dy: dr * Math.sin(a) + r * Math.cos(a) };
+  };
+  const pair = (x: number, y: number) => `${x.toFixed(3)} ${y.toFixed(3)}`;
+  const first = at(-Math.PI / 2);
+  let d = `M ${pair(first.x, first.y)}`;
+  for (let i = 0; i < 64; i++) {
+    const a = at(-Math.PI / 2 + i * step), b = at(-Math.PI / 2 + (i + 1) * step);
+    d += ` C ${pair(a.x + a.dx * step / 3, a.y + a.dy * step / 3)} ${pair(b.x - b.dx * step / 3, b.y - b.dy * step / 3)} ${pair(b.x, b.y)}`;
+  }
+  return `${d} Z`;
+}
 // These paths use only coordinate commands (no arc flags).
 export const scaleOutline = (d: string, scale: number) =>
   d.replace(/-?\d*\.?\d+/g, n => String(Number((Number(n) * scale).toFixed(3))));

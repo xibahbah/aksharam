@@ -38,11 +38,17 @@ def flatten(d):
     return np.array(points)
 
 def star():
-    def at(r,a):
-        return [600+r*math.cos(math.radians(a)),410+r*math.sin(math.radians(a))]
-    d='M '+' '.join(map(str,at(280,-90)))
-    for i in range(8):
-        d+=' Q '+' '.join(map(str,at(280*.38,-90+i*45+22.5)+at(280,-90+(i+1)*45)))
+    # Match intro-art.ts roundedSeed exactly, including cubic tangents.
+    radius=280
+    step=2*math.pi/64
+    def at(a):
+        r=radius*(.8+.2*math.cos(8*a));dr=-1.6*radius*math.sin(8*a)
+        return np.array([600+r*math.cos(a),410+r*math.sin(a)]), np.array([dr*math.cos(a)-r*math.sin(a),dr*math.sin(a)+r*math.cos(a)])
+    def pair(p): return f'{p[0]:.3f} {p[1]:.3f}'
+    d='M '+pair(at(-math.pi/2)[0])
+    for i in range(64):
+        a,da=at(-math.pi/2+i*step);b,db=at(-math.pi/2+(i+1)*step)
+        d+=' C '+pair(a+da*step/3)+' '+pair(b-db*step/3)+' '+pair(b)
     return d+' Z'
 
 def field(paths):
