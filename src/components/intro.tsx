@@ -1,8 +1,8 @@
 "use client";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { gsap } from "gsap";
-import { CREAM, COLORS, star, roundedSeed } from "./intro-art";
-import { createIntroTimeline, INTRO_DURATION } from "./intro-motion";
+import { CREAM, COLORS, star } from "./intro-art";
+import { createIntroTimeline } from "./intro-motion";
 import styles from "./intro.module.css";
 
 const WAVE_SLOGANS = [
@@ -20,6 +20,7 @@ export function Intro({ onDone }: { onDone: () => void }) {
   const timeline = useRef<gsap.core.Timeline | null>(null);
   const exitTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [leaving, setLeaving] = useState(false);
+  const [study] = useState(() => typeof window !== "undefined" && new URLSearchParams(window.location.search).has("study"));
   const titleId = useId();
   const orbitId = useId();
 
@@ -91,8 +92,11 @@ export function Intro({ onDone }: { onDone: () => void }) {
     const el = root.current;
     if (!el) return;
     const media = gsap.matchMedia();
-    media.add({ reduce: "(prefers-reduced-motion: reduce)", motion: "(prefers-reduced-motion: no-preference)" }, (context) => {
-      const tl = createIntroTimeline(el);
+    let mounted = true;
+    const startMotion = (create: typeof createIntroTimeline) => {
+      if (!mounted) return;
+      media.add({ reduce: "(prefers-reduced-motion: reduce)", motion: "(prefers-reduced-motion: no-preference)" }, (context) => {
+      const tl = create(el);
       timeline.current = tl;
       if (context.conditions?.reduce) tl.progress(1).pause();
       let active = true;
@@ -123,7 +127,12 @@ export function Intro({ onDone }: { onDone: () => void }) {
       });
       return () => { active = false; timeline.current = null; };
     });
-    return () => media.revert();
+    };
+    const variant = new URLSearchParams(window.location.search).get("motion");
+    if (variant === "original") void import("./intro-archive/original").then(m => startMotion(m.createIntroTimeline)).catch(() => startMotion(createIntroTimeline));
+    else if (variant === "faster") void import("./intro-archive/faster").then(m => startMotion(m.createIntroTimeline)).catch(() => startMotion(createIntroTimeline));
+    else startMotion(variant === "rounded" ? el => createIntroTimeline(el, true) : createIntroTimeline);
+    return () => { mounted = false; media.revert(); };
   }, []);
 
   return (
@@ -157,7 +166,7 @@ export function Intro({ onDone }: { onDone: () => void }) {
           </g>
           <g transform="translate(600 774) scale(1.18) translate(-600 -774)">
           <g fill={CREAM}>
-            {[0, 1, 2].map(i => <path key={i} data-body d={roundedSeed(86, 600, 410)} />)}
+            {[0, 1, 2].map(i => <path key={i} data-body d={star(86, 600, 410)} />)}
           </g>
           <g transform="translate(600 410)">
             <g data-flower-position>
@@ -177,9 +186,9 @@ export function Intro({ onDone }: { onDone: () => void }) {
           <span className={styles.startLabel}>Start</span>
           <span className={styles.startLabel} aria-hidden="true">↗</span>
         </button>
-      {process.env.NODE_ENV === "development" && <label className={styles.scrubber}>
-        Motion study
-        <input aria-label="Animation progress" type="range" min="0" max={INTRO_DURATION} step="0.01" defaultValue="0" onChange={(event) => timeline.current?.pause().time(Number(event.target.value))} />
+      {(study || process.env.NODE_ENV === "development") && <label className={styles.scrubber}>
+        Motion study · drag to inspect
+        <input aria-label="Animation progress" type="range" min="0" max="1" step="0.001" defaultValue="0" onChange={(event) => timeline.current?.pause().progress(Number(event.target.value))} />
       </label>}
     </div>
   );

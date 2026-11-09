@@ -40,6 +40,29 @@ export function roundedSeed(radius: number, cx = 0, cy = 0) {
   }
   return `${d} Z`;
 }
+// Subdivide each original quadratic into eight exact cubics, then blend its
+// corresponding controls toward the rounded contour. No point reordering.
+export function openingSeed(radius: number, rounding: number, cx = 0, cy = 0) {
+  if (rounding <= 0) return star(radius, cx, cy);
+  if (rounding >= 1) return roundedSeed(radius, cx, cy);
+  const rounded = roundedSeed(radius, cx, cy).match(/-?\d+(?:\.\d+)?/g)!.map(Number);
+  const sharp: number[] = [cx, cy - radius];
+  const point = (r: number, a: number) => [cx + r * Math.cos(a), cy + r * Math.sin(a)];
+  for (let lobe = 0; lobe < 8; lobe++) {
+    const angle = -Math.PI / 2 + lobe * Math.PI / 4;
+    const a = point(radius, angle), b = point(radius * .38, angle + Math.PI / 8), c = point(radius, angle + Math.PI / 4);
+    const at = (t: number) => a.map((v, i) => (1-t)**2*v + 2*(1-t)*t*b[i] + t*t*c[i]);
+    const tangent = (t: number) => a.map((v, i) => 2*((1-t)*(b[i]-v)+t*(c[i]-b[i])));
+    for (let j = 0; j < 8; j++) {
+      const p = at(j/8), q = at((j+1)/8), dp = tangent(j/8), dq = tangent((j+1)/8);
+      sharp.push(p[0]+dp[0]/24, p[1]+dp[1]/24, q[0]-dq[0]/24, q[1]-dq[1]/24, ...q);
+    }
+  }
+  const mixed = sharp.map((v, i) => (v + (rounded[i]-v)*rounding).toFixed(3));
+  let d = `M ${mixed[0]} ${mixed[1]}`;
+  for (let i = 2; i < mixed.length; i += 6) d += ` C ${mixed.slice(i, i+6).join(" ")}`;
+  return `${d} Z`;
+}
 // These paths use only coordinate commands (no arc flags).
 export const scaleOutline = (d: string, scale: number) =>
   d.replace(/-?\d*\.?\d+/g, n => String(Number((Number(n) * scale).toFixed(3))));

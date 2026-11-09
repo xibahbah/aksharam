@@ -2,7 +2,7 @@ import React from "react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { Intro } from "@/components/intro";
-import { LEFT_FIGURE, RIGHT_FIGURE, BOAT, roundedSeed } from "@/components/intro-art";
+import { LEFT_FIGURE, RIGHT_FIGURE, BOAT, star, roundedSeed, openingSeed } from "@/components/intro-art";
 
 afterEach(() => vi.restoreAllMocks());
 
@@ -29,7 +29,7 @@ describe("landing accessibility", () => {
   it("starts as a star and skipping reveals the approved figure paths", () => {
     const { container } = render(<Intro onDone={() => undefined} />);
     const bodies = container.querySelectorAll("[data-body]");
-    expect(bodies[0]).toHaveAttribute("d", roundedSeed(86, 600, 410));
+    expect(bodies[0]).toHaveAttribute("d", star(86, 600, 410));
     expect(screen.getByRole("button", { name: "Start" })).toHaveStyle({ opacity: "0" });
     expect(screen.getByText("Letters")).toBeInTheDocument();
     expect(container.querySelectorAll("[data-cross]")).toHaveLength(2);
@@ -63,4 +63,14 @@ describe("landing accessibility", () => {
     expect(background).toHaveFocus();
     background.remove();
   });
+});
+
+it("preserves the sharp opening and smoothly rounds to the growth seed",()=>{
+ expect(openingSeed(86,0,600,410)).toBe(star(86,600,410));
+ expect(openingSeed(280,1,600,410)).toBe(roundedSeed(280,600,410));
+ for(const t of [.1,.3,.5,.7,.9]) {
+  const path=openingSeed(150,t,600,410);
+  expect(path).not.toMatch(/NaN|undefined|Infinity/);
+  expect(path.match(/ C /g)).toHaveLength(64);
+ }
 });
